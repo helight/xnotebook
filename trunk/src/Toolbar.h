@@ -19,22 +19,25 @@ create_toolbar(GtkWidget *main_window, GtkWidget *vbox,
 				struct clist_struct *clist);
 
 void
-on_new_folder_clicked (GtkButton *button, gpointer user_data);
+on_button_nf_clicked (GtkButton *button, gpointer user_data);
 void
-on_new_note_clicked (GtkButton *button, gpointer user_data);
+on_button_nn_clicked (GtkButton *button, gpointer user_data);
 void
-on_edit_clicked (GtkButton *button, gpointer user_data);
+on_button_edit_clicked (GtkButton *button, gpointer user_data);
 
 void
-on_save_note_clicked (GtkButton *button, gpointer user_data);
+on_button_save_clicked (GtkButton *button, gpointer user_data);
 
 void
-on_del_folder_clicked (GtkButton *button, gpointer user_data);
+on_button_df_clicked (GtkButton *button, gpointer user_data);
 
 void
-on_del_note_clicked (GtkButton *button, gpointer user_data);
+on_button_dn_clicked (GtkButton *button, gpointer user_data);
 
 void
-on_about_note_clicked (GtkButton *button, gpointer user_data);
+on_button_about_clicked (GtkButton *button, gpointer user_data);
+
+void
+on_button_quit_clicked (GtkButton *button, gpointer user_data);
 
 #endif /* TOOLBAR_H_ */

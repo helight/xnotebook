@@ -31,7 +31,8 @@ void init_global_clist(struct clist_struct *clist)
 	clist->note_text = NULL;
 	clist->other.window = NULL;
 	clist->other.entry_name = NULL;
-	
+	clist->dialog.dialog = NULL;
+	clist->dialog.label_text = NULL;
 }
 
 

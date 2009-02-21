@@ -27,8 +27,7 @@
 #include "About.h"
 
 void
-on_new_folder_clicked                    (GtkButton       *button,
-                                        gpointer         user_data)
+on_button_nf_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist=(struct clist_struct *)user_data;	
 	printf("root_path:%s \n", cclist->root_path);
@@ -40,8 +39,7 @@ on_new_folder_clicked                    (GtkButton       *button,
 }
 
 void
-on_new_note_clicked                    (GtkButton       *button,
-                                        gpointer         user_data)
+on_button_nn_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist=(struct clist_struct *)user_data;	
 	printf("root_path:%s \n", cclist->root_path);
@@ -52,8 +50,7 @@ on_new_note_clicked                    (GtkButton       *button,
 }
 
 void
-on_edit_clicked                        (GtkButton       *button,
-                                        gpointer         user_data)
+on_button_edit_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
 	if(cclist->note_row >= 0){
@@ -66,7 +63,7 @@ on_edit_clicked                        (GtkButton       *button,
 
 
 void
-on_save_note_clicked (GtkButton *button, gpointer  user_data)
+on_button_save_clicked (GtkButton *button, gpointer  user_data)
 {
 	gchar *text = NULL;
 	gint len = 0;
@@ -98,29 +95,47 @@ on_save_note_clicked (GtkButton *button, gpointer  user_data)
 
 
 void
-on_del_folder_clicked (GtkButton  *button, gpointer user_data)
+on_button_df_clicked (GtkButton  *button, gpointer user_data)
 {
 	GtkWidget *dialog_del;
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
+	if(cclist->folder_row < 0)
+		cclist->del = NOTHING;
+	else
+		cclist->del = FOLDER;
+	debug_p("folder_row:%d \n", cclist->folder_row);
 	dialog_del = create_dialog_del(cclist);
 	gtk_widget_show (dialog_del);
 }
 
-
 void
-on_del_note_clicked (GtkButton *button, gpointer user_data)
+on_button_dn_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *dialog_del;
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
+	if(cclist->note_row < 0)
+		cclist->del = NOTHING;
+	else
+		cclist->del = NOTEFILE;
+	
 	dialog_del = create_dialog_del(cclist);
 	gtk_widget_show (dialog_del);
+	debug_p("del note\n");
 }
 
 
 void
-on_about_note_clicked (GtkButton *button, gpointer user_data)
+on_button_about_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *dialog_about;
 	dialog_about = create_dialog_about ();
 	gtk_widget_show (dialog_about);
+}
+
+void
+on_button_quit_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkWidget *main_windown = (GtkWidget *)user_data;
+	gtk_widget_destroy(GTK_WIDGET(main_windown));
+	gtk_main_quit();
 }

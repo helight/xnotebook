@@ -19,260 +19,335 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
 {
 	GtkWidget *toolbar;
 	GtkIconSize tmp_toolbar_icon_size;
-	GtkWidget *toolitem4;
-	GtkWidget *new_note;
-	GtkWidget *alignment7;
-	GtkWidget *hbox7;
-	GtkWidget *image_new;
-	GtkWidget *label_new;
-	GtkWidget *toolitem_folder;
-	GtkWidget *new_folder;
-	GtkWidget *alignment_folder;
-	GtkWidget *hbox_folder;
-	GtkWidget *image_fnew;
-	GtkWidget *label_fnew;
-	GtkWidget *toolitem5;
-	GtkWidget *edit;
-	GtkWidget *alignment8;
-	GtkWidget *hbox8;
-	GtkWidget *image_edit;
-	GtkWidget *toolitem6;
-	GtkWidget *save_note;
-	GtkWidget *toolitem7;
-	GtkWidget *del_folder;
-	GtkWidget *alignment9;
-	GtkWidget *hbox9;
-	GtkWidget *image_cut;
-	GtkWidget *label_cut;
-	GtkWidget *toolitem8;
-	GtkWidget *del_note;
-	GtkWidget *alignment10;
-	GtkWidget *hbox10;
-	GtkWidget *image_copy;
-	GtkWidget *label_copy;
-	GtkWidget *toolitem9;
-	GtkWidget *about_note;
-	GtkWidget *alignment11;
-	GtkWidget *hbox11;
-	GtkWidget *image_paste;
-	GtkWidget *label_paste;
+/*-----------------button_nf-----------------------*/
+        GtkWidget *toolitem1;                                                                                                                                                                                                                                                                                             
+        GtkWidget *button_nf;
+        GtkWidget *alignment6;
+        GtkWidget *hbox7;
+        GtkWidget *image_nf;
+        GtkWidget *label_nf;
+/*-----------------button_nn-----------------------*/
+        GtkWidget *toolitem2;
+        GtkWidget *button_nn;
+        GtkWidget *alignment7;
+        GtkWidget *hbox8;
+        GtkWidget *image_nn;
+        GtkWidget *label_nn;
+/*-----------------button_edit-----------------------*/
+        GtkWidget *toolitem3;
+        GtkWidget *button_edit;
+        GtkWidget *alignment8;
+        GtkWidget *hbox9;
+        GtkWidget *image_edit;
+        GtkWidget *label_edit;
+/*-----------------button_save-----------------------*/
+        GtkWidget *toolitem4;
+        GtkWidget *button_save;
+        GtkWidget *alignment9;
+        GtkWidget *hbox10;
+        GtkWidget *image_save;
+        GtkWidget *label_save;
+/*-----------------button_df-----------------------*/
+        GtkWidget *toolitem5;
+        GtkWidget *button_df;
+        GtkWidget *alignment10;
+        GtkWidget *hbox11;
+        GtkWidget *image_df;
+        GtkWidget *label1_df;
+/*-----------------button_dn-----------------------*/
+        GtkWidget *toolitem6;
+        GtkWidget *button_dn;
+        GtkWidget *alignment11;
+        GtkWidget *hbox12;
+        GtkWidget *image_dn;
+        GtkWidget *label_dn;
+/*-----------------button_about-----------------------*/
+        GtkWidget *toolitem7;
+        GtkWidget *button_about;
+        GtkWidget *alignment12;
+        GtkWidget *hbox13;
+        GtkWidget *image_about;
+        GtkWidget *label_about;
+/*-----------------button_quit-----------------------*/
+        GtkWidget *toolitem8;
+        GtkWidget *button_quit;
+        GtkWidget *alignment13;
+        GtkWidget *hbox14;
+        GtkWidget *image_quit;
+        GtkWidget *label_quit;
+
+        toolbar = gtk_toolbar_new ();
+        gtk_widget_show (toolbar);
+        gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, FALSE, 0);
+        gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_TEXT);
+        tmp_toolbar_icon_size = gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar));
+
+        toolitem1 = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem1);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem1);
+
+        button_nf = gtk_button_new ();
+        gtk_widget_show (button_nf);
+        gtk_container_add (GTK_CONTAINER (toolitem1), button_nf);
+
+        alignment6 = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment6);
+        gtk_container_add (GTK_CONTAINER (button_nf), alignment6);
+
+        hbox7 = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox7);
+        gtk_container_add (GTK_CONTAINER (alignment6), hbox7);
+
+        image_nf = gtk_image_new_from_stock ("gtk-new", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image_nf);
+        gtk_box_pack_start (GTK_BOX (hbox7), image_nf, FALSE, FALSE, 0);
+
+        label_nf = gtk_label_new_with_mnemonic (_("New Folder"));
+        gtk_widget_show (label_nf);
+        gtk_box_pack_start (GTK_BOX (hbox7), label_nf, FALSE, FALSE, 0);
+
+        toolitem2 = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem2);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem2);
+
+        button_nn = gtk_button_new ();
+        gtk_widget_show (button_nn);
+        gtk_container_add (GTK_CONTAINER (toolitem2), button_nn);
+
+        alignment7 = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment7);
+        gtk_container_add (GTK_CONTAINER (button_nn), alignment7);
+
+        hbox8 = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox8);
+        gtk_container_add (GTK_CONTAINER (alignment7), hbox8);
+
+        image_nn = gtk_image_new_from_stock ("gtk-new", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image_nn);
+        gtk_box_pack_start (GTK_BOX (hbox8), image_nn, FALSE, FALSE, 0);
+
+        label_nn = gtk_label_new_with_mnemonic (_("New Note"));
+        gtk_widget_show (label_nn);
+        gtk_box_pack_start (GTK_BOX (hbox8), label_nn, FALSE, FALSE, 0);
+
+        toolitem3 = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem3);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem3);
+
+        button_edit = gtk_button_new ();
+        gtk_widget_show (button_edit);
+        gtk_container_add (GTK_CONTAINER (toolitem3), button_edit);
+
+        alignment8 = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment8);
+        gtk_container_add (GTK_CONTAINER (button_edit), alignment8);
+
+        hbox9 = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox9);
+        gtk_container_add (GTK_CONTAINER (alignment8), hbox9);
+
+        image_edit = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image_edit);
+        gtk_box_pack_start (GTK_BOX (hbox9), image_edit, FALSE, FALSE, 0);
+
+        label_edit = gtk_label_new_with_mnemonic (_("Edit"));
+        gtk_widget_show (label_edit);
+        gtk_box_pack_start (GTK_BOX (hbox9), label_edit, FALSE, FALSE, 0);
+
+        toolitem4 = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem4);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem4);
+
+        button_save = gtk_button_new ();
+        gtk_widget_show (button_save);
+        gtk_container_add (GTK_CONTAINER (toolitem4), button_save);
+
+        alignment9 = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment9);
+        gtk_container_add (GTK_CONTAINER (button_save), alignment9);
+
+        hbox10 = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox10);
+        gtk_container_add (GTK_CONTAINER (alignment9), hbox10);
+
+        image_save = gtk_image_new_from_stock ("gtk-save", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image_save);
+        gtk_box_pack_start (GTK_BOX (hbox10), image_save, FALSE, FALSE, 0);
+
+        label_save = gtk_label_new_with_mnemonic (_("Save"));
+        gtk_widget_show (label_save);
+        gtk_box_pack_start (GTK_BOX (hbox10), label_save, FALSE, FALSE, 0);
+
+        toolitem5 = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem5);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem5);
+
+        button_df = gtk_button_new ();
+        gtk_widget_show (button_df);
+        gtk_container_add (GTK_CONTAINER (toolitem5), button_df);
+
+        alignment10 = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment10);
+        gtk_container_add (GTK_CONTAINER (button_df), alignment10);
+
+        hbox11 = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox11);
+        gtk_container_add (GTK_CONTAINER (alignment10), hbox11);
+
+        image_df = gtk_image_new_from_stock ("gtk-delete", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image_df);
+        gtk_box_pack_start (GTK_BOX (hbox11), image_df, FALSE, FALSE, 0);
+
+        label1_df = gtk_label_new_with_mnemonic (_("Del Folder"));
+        gtk_widget_show (label1_df);
+        gtk_box_pack_start (GTK_BOX (hbox11), label1_df, FALSE, FALSE, 0);
+
+        toolitem6 = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem6);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem6);
+
+        button_dn = gtk_button_new ();
+        gtk_widget_show (button_dn);
+        gtk_container_add (GTK_CONTAINER (toolitem6), button_dn);
+
+        alignment11 = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment11);
+        gtk_container_add (GTK_CONTAINER (button_dn), alignment11);
+
+        hbox12 = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox12);
+        gtk_container_add (GTK_CONTAINER (alignment11), hbox12);
+
+        image_dn = gtk_image_new_from_stock ("gtk-delete", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image_dn);
+        gtk_box_pack_start (GTK_BOX (hbox12), image_dn, FALSE, FALSE, 0);
+
+        label_dn = gtk_label_new_with_mnemonic (_("Del Note"));
+        gtk_widget_show (label_dn);
+        gtk_box_pack_start (GTK_BOX (hbox12), label_dn, FALSE, FALSE, 0);
+
+        toolitem7 = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem7);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem7);
+
+        button_about = gtk_button_new ();
+        gtk_widget_show (button_about);
+        gtk_container_add (GTK_CONTAINER (toolitem7), button_about);
+
+        alignment12 = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment12);
+        gtk_container_add (GTK_CONTAINER (button_about), alignment12);
+
+        hbox13 = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox13);
+        gtk_container_add (GTK_CONTAINER (alignment12), hbox13);
+
+        image_about = gtk_image_new_from_stock ("gtk-help", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image_about);
+        gtk_box_pack_start (GTK_BOX (hbox13), image_about, FALSE, FALSE, 0);
+
+        label_about = gtk_label_new_with_mnemonic (_("About"));
+        gtk_widget_show (label_about);
+        gtk_box_pack_start (GTK_BOX (hbox13), label_about, FALSE, FALSE, 0);
+
+        toolitem8 = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem8);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem8);
+
+        button_quit = gtk_button_new ();
+        gtk_widget_show (button_quit);
+        gtk_container_add (GTK_CONTAINER (toolitem8), button_quit);
+
+        alignment13 = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment13);
+        gtk_container_add (GTK_CONTAINER (button_quit), alignment13);
+
+        hbox14 = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox14);
+        gtk_container_add (GTK_CONTAINER (alignment13), hbox14);
+
+        image_quit = gtk_image_new_from_stock ("gtk-quit", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image_quit);
+        gtk_box_pack_start (GTK_BOX (hbox14), image_quit, FALSE, FALSE, 0);
+
+        label_quit = gtk_label_new_with_mnemonic (_("Quit"));
+        gtk_widget_show (label_quit);
+        gtk_box_pack_start (GTK_BOX (hbox14), label_quit, FALSE, FALSE, 0);
 	
-	toolbar = gtk_toolbar_new ();
-	gtk_widget_show (toolbar);
-	gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, FALSE, 0);
-	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_TEXT);
-	tmp_toolbar_icon_size = gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar));
-
-	toolitem_folder = (GtkWidget*) gtk_tool_item_new ();
-	gtk_widget_show (toolitem_folder);
-	gtk_container_add (GTK_CONTAINER (toolbar), toolitem_folder);
-
-	new_folder = gtk_button_new ();
-	gtk_widget_show (new_folder);
-	gtk_container_add (GTK_CONTAINER (toolitem_folder), new_folder);
-
-	alignment_folder = gtk_alignment_new (0.5, 0.5, 0, 0);
-	gtk_widget_show (alignment_folder);
-	gtk_container_add (GTK_CONTAINER (new_folder), alignment_folder);
-
-	hbox_folder = gtk_hbox_new (FALSE, 2);
-	gtk_widget_show (hbox_folder);
-	gtk_container_add (GTK_CONTAINER (alignment_folder), hbox_folder);
-
-	image_fnew = gtk_image_new_from_stock ("gtk-new", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show (image_fnew);
-	gtk_box_pack_start (GTK_BOX (hbox_folder), image_fnew, FALSE, FALSE, 0);
-
-	label_fnew = gtk_label_new_with_mnemonic (_("New Folder"));
-	gtk_widget_show (label_fnew);
-	gtk_box_pack_start (GTK_BOX (hbox_folder), label_fnew, FALSE, FALSE, 0);
-
-	toolitem4 = (GtkWidget*) gtk_tool_item_new ();
-	gtk_widget_show (toolitem4);
-	gtk_container_add (GTK_CONTAINER (toolbar), toolitem4);
-	
-	new_note = gtk_button_new ();
-	gtk_widget_show (new_note);
-	gtk_container_add (GTK_CONTAINER (toolitem4), new_note);
-
-	alignment7 = gtk_alignment_new (0.5, 0.5, 0, 0);
-	gtk_widget_show (alignment7);
-	gtk_container_add (GTK_CONTAINER (new_note), alignment7);
-
-	hbox7 = gtk_hbox_new (FALSE, 2);
-	gtk_widget_show (hbox7);
-	gtk_container_add (GTK_CONTAINER (alignment7), hbox7);
-
-	image_new = gtk_image_new_from_stock ("gtk-new", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show (image_new);
-	gtk_box_pack_start (GTK_BOX (hbox7), image_new, FALSE, FALSE, 0);
-
-	label_new = gtk_label_new_with_mnemonic (_("New Note"));
-	gtk_widget_show (label_new);
-	gtk_box_pack_start (GTK_BOX (hbox7), label_new, FALSE, FALSE, 0);
-
-	toolitem5 = (GtkWidget*) gtk_tool_item_new ();
-	gtk_widget_show (toolitem5);
-	gtk_container_add (GTK_CONTAINER (toolbar), toolitem5);
-	
-	edit = gtk_button_new ();
-	gtk_widget_show (edit);
-	gtk_container_add (GTK_CONTAINER (toolitem5), edit);
-
-	alignment8 = gtk_alignment_new (0.5, 0.5, 0, 0);
-	gtk_widget_show (alignment8);
-	gtk_container_add (GTK_CONTAINER (edit), alignment8);
-
-	hbox8 = gtk_hbox_new (FALSE, 2);
-	gtk_widget_show (hbox8);
-	gtk_container_add (GTK_CONTAINER (alignment8), hbox8);
-
-	image_edit = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show (image_edit);
-	gtk_box_pack_start (GTK_BOX (hbox8), image_edit, FALSE, FALSE, 0);
-
-	label_new = gtk_label_new_with_mnemonic (_("Edit"));
-	gtk_widget_show (label_new);
-	gtk_box_pack_start (GTK_BOX (hbox8), label_new, FALSE, FALSE, 0);
-
-	toolitem6 = (GtkWidget*) gtk_tool_item_new ();
-	gtk_widget_show (toolitem6);
-	gtk_container_add (GTK_CONTAINER (toolbar), toolitem6);
-
-	save_note = gtk_button_new_from_stock ("gtk-save");
-	gtk_widget_show (save_note);
-	gtk_container_add (GTK_CONTAINER (toolitem6), save_note);
-
-	toolitem7 = (GtkWidget*) gtk_tool_item_new ();
-	gtk_widget_show (toolitem7);
-	gtk_container_add (GTK_CONTAINER (toolbar), toolitem7);
-
-	del_folder = gtk_button_new ();
-	gtk_widget_show (del_folder);
-	gtk_container_add (GTK_CONTAINER (toolitem7), del_folder);
-
-	alignment9 = gtk_alignment_new (0.5, 0.5, 0, 0);
-	gtk_widget_show (alignment9);
-	gtk_container_add (GTK_CONTAINER (del_folder), alignment9);
-
-	hbox9 = gtk_hbox_new (FALSE, 2);
-	gtk_widget_show (hbox9);
-	gtk_container_add (GTK_CONTAINER (alignment9), hbox9);
-
-	image_cut = gtk_image_new_from_stock ("gtk-delete", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show (image_cut);
-	gtk_box_pack_start (GTK_BOX (hbox9), image_cut, FALSE, FALSE, 0);
-
-	label_cut = gtk_label_new_with_mnemonic (_("Del Folder"));
-	gtk_widget_show (label_cut);
-	gtk_box_pack_start (GTK_BOX (hbox9), label_cut, FALSE, FALSE, 0);
-
-	toolitem8 = (GtkWidget*) gtk_tool_item_new ();
-	gtk_widget_show (toolitem8);
-	gtk_container_add (GTK_CONTAINER (toolbar), toolitem8);
-
-	del_note = gtk_button_new ();
-	gtk_widget_show (del_note);
-	gtk_container_add (GTK_CONTAINER (toolitem8), del_note);
-
-	alignment10 = gtk_alignment_new (0.5, 0.5, 0, 0);
-	gtk_widget_show (alignment10);
-	gtk_container_add (GTK_CONTAINER (del_note), alignment10);
-
-	hbox10 = gtk_hbox_new (FALSE, 2);
-	gtk_widget_show (hbox10);
-	gtk_container_add (GTK_CONTAINER (alignment10), hbox10);
-
-	image_copy = gtk_image_new_from_stock ("gtk-delete", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show (image_copy);
-	gtk_box_pack_start (GTK_BOX (hbox10), image_copy, FALSE, FALSE, 0);
-
-	label_copy = gtk_label_new_with_mnemonic (_("Del Note"));
-	gtk_widget_show (label_copy);
-	gtk_box_pack_start (GTK_BOX (hbox10), label_copy, FALSE, FALSE, 0);
-
-	toolitem9 = (GtkWidget*) gtk_tool_item_new ();
-	gtk_widget_show (toolitem9);
-	gtk_container_add (GTK_CONTAINER (toolbar), toolitem9);
-
-	about_note = gtk_button_new ();
-	gtk_widget_show (about_note);
-	gtk_container_add (GTK_CONTAINER (toolitem9), about_note);
-
-	alignment11 = gtk_alignment_new (0.5, 0.5, 0, 0);
-	gtk_widget_show (alignment11);
-	gtk_container_add (GTK_CONTAINER (about_note), alignment11);
-
-	hbox11 = gtk_hbox_new (FALSE, 2);
-	gtk_widget_show (hbox11);
-	gtk_container_add (GTK_CONTAINER (alignment11), hbox11);
-
-	image_paste = gtk_image_new_from_stock ("gtk-help", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show (image_paste);
-	gtk_box_pack_start (GTK_BOX (hbox11), image_paste, FALSE, FALSE, 0);
-
-	label_paste = gtk_label_new_with_mnemonic (_("About"));
-	gtk_widget_show (label_paste);
-	gtk_box_pack_start (GTK_BOX (hbox11), label_paste, FALSE, FALSE, 0);	
-	
-	g_signal_connect ((gpointer) new_folder, "clicked",
-	                  G_CALLBACK (on_new_folder_clicked),
+	g_signal_connect ((gpointer) button_nf, "clicked",
+	                  G_CALLBACK (on_button_nf_clicked),
 	                  (gpointer *)clist); 
-	g_signal_connect ((gpointer) new_note, "clicked",
-	                  G_CALLBACK (on_new_note_clicked),
+	g_signal_connect ((gpointer) button_nn, "clicked",
+	                  G_CALLBACK (on_button_nn_clicked),
 	                  (gpointer *)clist);
-	g_signal_connect ((gpointer) edit, "clicked",
-	                  G_CALLBACK (on_edit_clicked),
+	g_signal_connect ((gpointer) button_edit, "clicked",
+	                  G_CALLBACK (on_button_edit_clicked),
 	                  (gpointer *)clist);
-	g_signal_connect ((gpointer) save_note, "clicked",
-	                  G_CALLBACK (on_save_note_clicked),
+	g_signal_connect ((gpointer) button_save, "clicked",
+	                  G_CALLBACK (on_button_save_clicked),
 	                  (gpointer *)clist);
-	g_signal_connect ((gpointer) del_folder, "clicked",
-	                  G_CALLBACK (on_del_folder_clicked),
-	                  NULL);
-	g_signal_connect ((gpointer) del_note, "clicked",
-	                  G_CALLBACK (on_del_note_clicked),
-	                  NULL);
-	g_signal_connect ((gpointer) about_note, "clicked",
-	                  G_CALLBACK (on_about_note_clicked),
-	                  (gpointer *)clist);	
+	g_signal_connect ((gpointer) button_df, "clicked",
+	                  G_CALLBACK (on_button_df_clicked),
+	                  (gpointer *)clist);
+	g_signal_connect ((gpointer) button_dn, "clicked",
+	                  G_CALLBACK (on_button_dn_clicked),
+	                  (gpointer *)clist);
+	g_signal_connect ((gpointer) button_about, "clicked",
+	                  G_CALLBACK (on_button_quit_clicked),
+	                  (gpointer *)clist);
+	g_signal_connect ((gpointer) button_quit, "clicked",
+	                  G_CALLBACK (on_button_quit_clicked),
+	                  (gpointer *)main_windown);	
 	                  
-	GLADE_HOOKUP_OBJECT (main_windown, toolitem4, "toolitem4");
-	GLADE_HOOKUP_OBJECT (main_windown, new_note, "new_folder");
-	GLADE_HOOKUP_OBJECT (main_windown, alignment7, "alignment_folder");
-	GLADE_HOOKUP_OBJECT (main_windown, hbox7, "hbox_folder");
-	GLADE_HOOKUP_OBJECT (main_windown, image_new, "image_fnew");
-	GLADE_HOOKUP_OBJECT (main_windown, label_new, "label_fnew");
-	GLADE_HOOKUP_OBJECT (main_windown, new_note, "new_note");
-	GLADE_HOOKUP_OBJECT (main_windown, alignment7, "alignment7");
-	GLADE_HOOKUP_OBJECT (main_windown, hbox7, "hbox7");
-	GLADE_HOOKUP_OBJECT (main_windown, image_new, "image_new");
-	GLADE_HOOKUP_OBJECT (main_windown, label_new, "label_new");
-	GLADE_HOOKUP_OBJECT (main_windown, toolitem5, "toolitem5");
-	GLADE_HOOKUP_OBJECT (main_windown, edit, "edit");
-	GLADE_HOOKUP_OBJECT (main_windown, alignment8, "alignment8");
-	GLADE_HOOKUP_OBJECT (main_windown, hbox8, "hbox8");
-	GLADE_HOOKUP_OBJECT (main_windown, image_edit, "image_edit");
-	GLADE_HOOKUP_OBJECT (main_windown, label_new, "label_new");
-	GLADE_HOOKUP_OBJECT (main_windown, toolitem6, "toolitem6");
-	GLADE_HOOKUP_OBJECT (main_windown, save_note, "save_note");
-	GLADE_HOOKUP_OBJECT (main_windown, toolitem7, "toolitem7");
-	GLADE_HOOKUP_OBJECT (main_windown, del_folder, "del_folder");
-	GLADE_HOOKUP_OBJECT (main_windown, alignment9, "alignment9");
-	GLADE_HOOKUP_OBJECT (main_windown, hbox9, "hbox9");
-	GLADE_HOOKUP_OBJECT (main_windown, image_cut, "image_cut");
-	GLADE_HOOKUP_OBJECT (main_windown, label_cut, "label_cut");
-	GLADE_HOOKUP_OBJECT (main_windown, toolitem8, "toolitem8");
-	GLADE_HOOKUP_OBJECT (main_windown, del_note, "del_note");
-	GLADE_HOOKUP_OBJECT (main_windown, alignment10, "alignment10");
-	GLADE_HOOKUP_OBJECT (main_windown, hbox10, "hbox10");
-	GLADE_HOOKUP_OBJECT (main_windown, image_copy, "image_copy");
-	GLADE_HOOKUP_OBJECT (main_windown, label_copy, "label_copy");
-	GLADE_HOOKUP_OBJECT (main_windown, toolitem9, "toolitem9");
-	GLADE_HOOKUP_OBJECT (main_windown, about_note, "about_note");
-	GLADE_HOOKUP_OBJECT (main_windown, alignment11, "alignment11");
-	GLADE_HOOKUP_OBJECT (main_windown, hbox11, "hbox11");
-	GLADE_HOOKUP_OBJECT (main_windown, image_paste, "image_paste");
-	GLADE_HOOKUP_OBJECT (main_windown, label_paste, "label_paste");
+        GLADE_HOOKUP_OBJECT (main_windown, toolbar, "toolbar");
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem1, "toolitem1");
+        GLADE_HOOKUP_OBJECT (main_windown, button_nf, "button_nf");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment6, "alignment6");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox7, "hbox7");
+        GLADE_HOOKUP_OBJECT (main_windown, image_nf, "image_nf");
+        GLADE_HOOKUP_OBJECT (main_windown, label_nf, "label_nf");
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem2, "toolitem2");
+        GLADE_HOOKUP_OBJECT (main_windown, button_nn, "button_nn");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment7, "alignment7");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox8, "hbox8");
+        GLADE_HOOKUP_OBJECT (main_windown, image_nn, "image_nn");
+        GLADE_HOOKUP_OBJECT (main_windown, label_nn, "label_nn");
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem3, "toolitem3");
+        GLADE_HOOKUP_OBJECT (main_windown, button_edit, "button_edit");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment8, "alignment8");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox9, "hbox9");
+        GLADE_HOOKUP_OBJECT (main_windown, image_edit, "image_edit");
+        GLADE_HOOKUP_OBJECT (main_windown, label_edit, "label_edit");
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem4, "toolitem4");
+        GLADE_HOOKUP_OBJECT (main_windown, button_save, "button_save");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment9, "alignment9");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox10, "hbox10");
+        GLADE_HOOKUP_OBJECT (main_windown, image_save, "image_save");
+        GLADE_HOOKUP_OBJECT (main_windown, label_save, "label_save");
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem5, "toolitem5");
+        GLADE_HOOKUP_OBJECT (main_windown, button_df, "button_df");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment10, "alignment10");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox11, "hbox11");
+        GLADE_HOOKUP_OBJECT (main_windown, image_df, "image_df");
+        GLADE_HOOKUP_OBJECT (main_windown, label1_df, "label1_df");
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem6, "toolitem6");
+        GLADE_HOOKUP_OBJECT (main_windown, button_dn, "button_dn");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment11, "alignment11");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox12, "hbox12");
+        GLADE_HOOKUP_OBJECT (main_windown, image_dn, "image_dn");
+        GLADE_HOOKUP_OBJECT (main_windown, label_dn, "label_dn");
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem7, "toolitem7");
+        GLADE_HOOKUP_OBJECT (main_windown, button_about, "button_about");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment12, "alignment12");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox13, "hbox13");
+        GLADE_HOOKUP_OBJECT (main_windown, image_about, "image_about");
+        GLADE_HOOKUP_OBJECT (main_windown, label_about, "label_about");
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem8, "toolitem8");
+        GLADE_HOOKUP_OBJECT (main_windown, button_quit, "button_quit");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment13, "alignment13");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox14, "hbox14");
+        GLADE_HOOKUP_OBJECT (main_windown, image_quit, "image_quit");
+        GLADE_HOOKUP_OBJECT (main_windown, label_quit, "label_quit");
+
 	return toolbar;
 }

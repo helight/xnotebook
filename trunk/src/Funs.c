@@ -126,8 +126,7 @@ void show_notes(struct clist_struct *cclist)
 		}
 	}
 	closedir(dir);
-	cclist->folder_row = -1;
-	
+		
 	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), FALSE);
 	return;
@@ -250,4 +249,38 @@ void message_box_for_add_folder(GtkWidget *window,gchar *message)
 				GTK_MESSAGE_INFO, GTK_BUTTONS_OK, message);
 	gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(dialog);
+}
+
+void del_folder_or_note(struct clist_struct *cclist)
+{
+	if(cclist->del == FOLDER){
+		if(cclist->folder_row < 0)
+			return;
+		debug_p("the path :%s \n", cclist->sub_path);
+		gint fd = 0;
+		gchar cmd[256];
+		memset(cmd, '\0', sizeof(cmd));
+		strcpy(cmd, "rm -rf ");
+		strcat(cmd, cclist->sub_path);
+		if((fd = system(cmd)) < 0)
+			perror("remove folder:\n");
+		debug_p("cmd: %s \n", cmd);
+		gtk_clist_clear(GTK_CLIST(cclist->clist_folder));
+		show_folders(cclist);
+	} else if(cclist->del == NOTEFILE){
+		if(cclist->note_row < 0)
+			return;
+		debug_p("the path :%s \n", cclist->doc_path);
+		gint fd = 0;
+		if((fd = remove(cclist->doc_path)) < 0)
+			perror("remove note:\n");
+			
+		gtk_clist_clear(GTK_CLIST(cclist->clist_note));
+		show_notes(cclist);		
+	} else {
+		debug_p("Nothing will be deleted...\n");
+		return;
+	}
+	cclist->del = NOTHING;
+	return;
 }
