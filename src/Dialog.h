@@ -14,6 +14,9 @@
 
 GtkWidget* create_dialog_del (struct clist_struct *clist);
 
+gboolean
+on_dialog_delete_event(GtkWidget *widget, GdkEvent *event, gpointer user_data);
+
 void on_button_cancel_clicked (GtkButton *button, gpointer user_data);
 
 void on_button_ok_clicked (GtkButton *button, gpointer user_data);

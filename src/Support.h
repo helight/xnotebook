@@ -49,6 +49,12 @@ struct add_entry{
 	GtkWidget *window;
 	GtkWidget *entry_name;
 	};
+	
+struct wdialog{
+	GtkWidget *dialog;
+	GtkWidget *label_text;
+	};
+	
 enum deal{
 	NOTHING,
 	FOLDER,
@@ -68,6 +74,7 @@ struct clist_struct {
 	gint note_row;
 	GtkWidget *note_text;
 	struct add_entry other;
+	struct wdialog dialog;
 };
 
 /*
