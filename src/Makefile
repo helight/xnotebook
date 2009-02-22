@@ -151,6 +151,7 @@ xnotebook_SOURCES = \
 	MenubarFace.c MenubarCall.c Menubar.h \
 	MainbodyFace.c MainbodyCall.c Mainbody.h \
 	ToolbarFace.c ToolbarCall.c Toolbar.h \
+	StatusbarFace.c Statusbar.h \
 	DialogFace.c DialogCall.c Dialog.h \
 	AboutFace.c AboutCall.c About.h \
 	Funs.c Funs.h \
@@ -171,8 +172,9 @@ am_xnotebook_OBJECTS = main.$(OBJEXT) Support.$(OBJEXT) \
 	Callbacks.$(OBJEXT) MenubarFace.$(OBJEXT) MenubarCall.$(OBJEXT) \
 	MainbodyFace.$(OBJEXT) MainbodyCall.$(OBJEXT) \
 	ToolbarFace.$(OBJEXT) ToolbarCall.$(OBJEXT) \
-	DialogFace.$(OBJEXT) DialogCall.$(OBJEXT) AboutFace.$(OBJEXT) \
-	AboutCall.$(OBJEXT) Funs.$(OBJEXT) Init.$(OBJEXT)
+	StatusbarFace.$(OBJEXT) DialogFace.$(OBJEXT) \
+	DialogCall.$(OBJEXT) AboutFace.$(OBJEXT) AboutCall.$(OBJEXT) \
+	Funs.$(OBJEXT) Init.$(OBJEXT)
 xnotebook_OBJECTS = $(am_xnotebook_OBJECTS)
 xnotebook_DEPENDENCIES =
 xnotebook_LDFLAGS =
@@ -189,7 +191,8 @@ DEP_FILES = ./$(DEPDIR)/AboutCall.Po \
 	./$(DEPDIR)/MainbodyFace.Po \
 	./$(DEPDIR)/Mainwindow.Po \
 	./$(DEPDIR)/MenubarCall.Po \
-	./$(DEPDIR)/MenubarFace.Po ./$(DEPDIR)/Support.Po \
+	./$(DEPDIR)/MenubarFace.Po \
+	./$(DEPDIR)/StatusbarFace.Po ./$(DEPDIR)/Support.Po \
 	./$(DEPDIR)/ToolbarCall.Po \
 	./$(DEPDIR)/ToolbarFace.Po ./$(DEPDIR)/main.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
@@ -256,6 +259,7 @@ include ./$(DEPDIR)/MainbodyFace.Po
 include ./$(DEPDIR)/Mainwindow.Po
 include ./$(DEPDIR)/MenubarCall.Po
 include ./$(DEPDIR)/MenubarFace.Po
+include ./$(DEPDIR)/StatusbarFace.Po
 include ./$(DEPDIR)/Support.Po
 include ./$(DEPDIR)/ToolbarCall.Po
 include ./$(DEPDIR)/ToolbarFace.Po

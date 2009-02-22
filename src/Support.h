@@ -54,6 +54,11 @@ struct wdialog{
 	GtkWidget *dialog;
 	GtkWidget *label_text;
 	};
+struct statusbar{
+	GtkWidget *status_folder;
+	GtkWidget *status_sys;
+	GtkWidget *status_note;
+	};
 	
 enum deal{
 	NOTHING,
@@ -75,6 +80,7 @@ struct clist_struct {
 	GtkWidget *note_text;
 	struct add_entry other;
 	struct wdialog dialog;
+	struct statusbar statusbar;
 };
 
 /*

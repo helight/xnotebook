@@ -24,14 +24,16 @@
 #include "Funs.h"
 
 
-void show_folders(struct clist_struct *clist)
+void show_folders(struct clist_struct *cclist)
 {
 	gchar *fname[1][1];
+	gchar msg[64];
+	gint num = 0;
 	char *ch=NULL;
 	DIR *dir;
 	struct dirent *ptr;
-	printf("root_path:%s\n",clist->root_path);
-opendir:if((dir = opendir(clist->root_path)) == NULL){
+	printf("root_path:%s\n",cclist->root_path);
+opendir:if((dir = opendir(cclist->root_path)) == NULL){
 		perror("cann't open it\n");
 		switch(errno){
 		case EACCES:
@@ -39,7 +41,7 @@ opendir:if((dir = opendir(clist->root_path)) == NULL){
 			exit(1);
 		default:
 			printf("Directory does not exist, or name is an empty string.\n");
-			if(mkdir(clist->root_path, 0755) < 0){
+			if(mkdir(cclist->root_path, 0755) < 0){
 				perror("mkdir:\n");
 				exit(1);
 				}
@@ -52,23 +54,30 @@ opendir:if((dir = opendir(clist->root_path)) == NULL){
 		ch = ptr->d_name;
 		if(*ch != '.'){
 			fname[0][0] = ptr->d_name;
-			gtk_clist_append((GtkCList*)clist->clist_folder,(gchar*)fname[0]);
+			gtk_clist_append((GtkCList*)cclist->clist_folder,(gchar*)fname[0]);
+			num++;
 		}
 		debug_p("file name:%s fname[]:%s\n",ch, fname[0][0]);
 	}	
-	gtk_clist_select_row((GtkCList*)clist->clist_folder,0,0);
-	clist->folder_row = 0;
+	gtk_clist_select_row((GtkCList*)cclist->clist_folder,0,0);
+	cclist->folder_row = 0;
 	closedir(dir);
+	
+	memset(msg, '\0', sizeof(msg));
+	g_snprintf(msg, 80, "Folder : %d", num);
+	show_status(cclist->statusbar.status_folder, msg);
 	
 	return;
 }
 
 void show_notes(struct clist_struct *cclist)
 {
-	gint i = 0, n = 0, row = -1;	
+	gint i = 0, n = 0, row = -1;
 	gchar *fname[1][2] = {"file name","time"};
 	gchar buf_time[32];
 	gchar file_path[512];
+	gchar msg[64];
+	gint num = 0;
 	char *ch=NULL;
 	DIR *dir;
 	struct dirent *ptr;
@@ -120,7 +129,7 @@ void show_notes(struct clist_struct *cclist)
 				//*(fname[0][1] + strlen(fname[0][1] -1)) = '\0';
 				debug_p("file name:%s fname[]:%s : %s\n",ch, fname[0][0], fname[0][1]);
 				gtk_clist_append((GtkCList*)cclist->clist_note,(gchar*)fname[0]);
-				
+				num++;	
 			}
 	
 		}
@@ -129,6 +138,10 @@ void show_notes(struct clist_struct *cclist)
 		
 	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), FALSE);
+	
+	memset(msg, '\0', sizeof(msg));
+	g_snprintf(msg, 80, "Note : %d", num);
+	show_status(cclist->statusbar.status_note, msg);
 	return;
 }
 
@@ -179,7 +192,15 @@ void show_file(struct clist_struct *cclist)
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), FALSE);
 	return;	
 }
-
+void show_status(GtkWidget *statusbar, gchar *msg)
+{
+	gint status_id = 0;
+	
+	debug_p("status:%s\n",msg);
+	status_id = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),"");
+	gtk_statusbar_push(GTK_STATUSBAR(statusbar), status_id, msg);
+	
+}
 void add_folder_or_note(struct clist_struct *cclist)
 {
 	gchar creat_name[512];

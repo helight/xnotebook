@@ -6,26 +6,18 @@
 #	include <config.h>
 #endif
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
-
-#include <gdk/gdkkeysyms.h>
-#include <gtk/gtk.h>
-
-#include "Menubar.h"
-#include "Callbacks.h"
 #include "Mainwindow.h"
+#include "Menubar.h"
+#include "Toolbar.h"
+#include "Statusbar.h"
+#include "Callbacks.h"
 
 GtkWidget*
 create_main_windown (struct clist_struct *clist)
 {
 	GdkPixbuf *window_main_icon_pixbuf;
 	GtkWidget *main_windown;
-	GtkWidget *vbox_bottom;
-	GtkWidget *vbox_head;
+	GtkWidget *vbox_body;
 	/*---------menubar-----------*/
 	GtkWidget *menubar;  
 	/*---------toolebar-------*/
@@ -34,6 +26,7 @@ create_main_windown (struct clist_struct *clist)
 	GtkWidget *hpaned;
 	  
 	GtkTooltips *tooltips;
+	GtkWidget *hbox_status;
 	GtkAccelGroup *accel_group;
 
 	accel_group = gtk_accel_group_new ();
@@ -49,21 +42,20 @@ create_main_windown (struct clist_struct *clist)
 	gdk_pixbuf_unref (window_main_icon_pixbuf);
 	}
 
-	vbox_bottom = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show (vbox_bottom);
-	gtk_container_add (GTK_CONTAINER (main_windown), vbox_bottom);
-	  
-	vbox_head = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show (vbox_head);
-	gtk_box_pack_start (GTK_BOX (vbox_bottom), vbox_head, FALSE, TRUE, 0);
+	vbox_body = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (vbox_body);
+	gtk_container_add (GTK_CONTAINER (main_windown), vbox_body);
 
-	menubar=(GtkWidget *)create_menubar(main_windown, vbox_head, \
-										tooltips, accel_group);
-	toolbar=(GtkWidget *)create_toolbar(main_windown, vbox_head, \
-										tooltips, accel_group, clist);
+	menubar = (GtkWidget *)create_menubar(main_windown, vbox_body, \
+					tooltips, accel_group);
+	toolbar = (GtkWidget *)create_toolbar(main_windown, vbox_body, \
+					tooltips, accel_group, clist);
 
-	hpaned=(GtkWidget *)create_mainbody(main_windown, vbox_bottom, \
-										tooltips, accel_group, clist);
+	hpaned = (GtkWidget *)create_mainbody(main_windown, vbox_body, \
+					tooltips, accel_group, clist);
+
+	hbox_status = create_status(main_windown, vbox_body, \
+					tooltips, accel_group, clist);
 	
 	g_signal_connect ((gpointer) main_windown, "delete_event",
 	                  G_CALLBACK (on_main_windown_delete_event),
@@ -71,12 +63,12 @@ create_main_windown (struct clist_struct *clist)
 
 	/* Store pointers to all widgets, for use by lookup_widget(). */
 	GLADE_HOOKUP_OBJECT_NO_REF (main_windown, main_windown, "main_windown");
-	GLADE_HOOKUP_OBJECT (main_windown, vbox_bottom, "vbox_bottom");
-	GLADE_HOOKUP_OBJECT (main_windown, vbox_head, "vbox_head");
+	GLADE_HOOKUP_OBJECT (main_windown, vbox_body, "vbox_body");
 	GLADE_HOOKUP_OBJECT (main_windown, menubar, "menubar");
 	GLADE_HOOKUP_OBJECT (main_windown, toolbar, "toolbar");  
 	GLADE_HOOKUP_OBJECT (main_windown, hpaned, "hpaned");  
-
+	GLADE_HOOKUP_OBJECT (main_windown, hbox_status, "hbox_status");  
+	
 	gtk_window_add_accel_group (GTK_WINDOW (main_windown), accel_group);
 		
 	return main_windown;
