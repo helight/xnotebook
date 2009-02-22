@@ -32,7 +32,7 @@ void show_folders(struct clist_struct *cclist)
 	char *ch=NULL;
 	DIR *dir;
 	struct dirent *ptr;
-	printf("root_path:%s\n",cclist->root_path);
+	debug_p("root_path:%s\n",cclist->root_path);
 opendir:if((dir = opendir(cclist->root_path)) == NULL){
 		perror("cann't open it\n");
 		switch(errno){
@@ -92,10 +92,9 @@ void show_notes(struct clist_struct *cclist)
 		ch = ptr->d_name;
 		if(*ch != '.'){
 			if(i++ == row){
-					memset(cclist->sub_path, '\0', sizeof(cclist->sub_path));
-					strcpy(cclist->sub_path, cclist->root_path);
-					strcat(cclist->sub_path, "/");
-					strcat(cclist->sub_path, ch);		
+				memset(cclist->sub_path, '\0', sizeof(cclist->sub_path));
+				snprintf(cclist->sub_path, sizeof(cclist->sub_path), "%s/%s",
+				 cclist->root_path, ptr->d_name);
 			}			
 		}		
 	}
@@ -111,9 +110,8 @@ void show_notes(struct clist_struct *cclist)
 		ch = ptr->d_name;
 		if(*ch != '.'){
 			memset(file_path, '\0', sizeof(file_path));
-			strcpy(file_path, cclist->sub_path);
-			strcat(file_path, "/");
-			strcat(file_path, ptr->d_name);
+			snprintf(file_path, sizeof(file_path), "%s/%s",
+				 cclist->sub_path, ptr->d_name);
 			
 			if(strstr(file_path, ".txt")){
 				if(lstat(file_path, &stat) == -1){
@@ -164,9 +162,8 @@ void show_file(struct clist_struct *cclist)
 		if((*ch != '.') && (strstr(ch, ".txt") != NULL)){
 			if(i++ == row){
 				memset(file_path, '\0', sizeof(file_path));
-				strcpy(file_path, cclist->sub_path);
-				strcat(file_path, "/");
-				strcat(file_path, ch);
+				snprintf(file_path, sizeof(file_path), "%s/%s",
+				 cclist->sub_path, ptr->d_name);
 				strcpy(cclist->doc_path,file_path);		
 			}
 		}		
@@ -219,9 +216,9 @@ void add_folder_or_note(struct clist_struct *cclist)
 	}
 	fp = gtk_entry_get_text(GTK_ENTRY(cclist->other.entry_name));
 	printf("fp: %02x\n", *fp);
-	if((strchr(fp, ' ') == NULL) && (*fp != 0)){		
-		strcat(creat_name, "/");
-		strcat(creat_name, fp);
+	if((strchr(fp, ' ') == NULL) && (*fp != 0)){
+		snprintf(creat_name, sizeof(creat_name), "%s/%s",
+				 creat_name, fp);		
 		if(cclist->creat == FOLDER){
 			if(mkdir(creat_name, 0755) < 0){
 				perror("mkdir:\n");
@@ -279,8 +276,8 @@ void del_folder_or_note(struct clist_struct *cclist)
 		gint fd = 0;
 		gchar cmd[256];
 		memset(cmd, '\0', sizeof(cmd));
-		strcpy(cmd, "rm -rf ");
-		strcat(cmd, cclist->sub_path);
+		snprintf(cmd, sizeof(cmd), "rm -rf %s", cclist->sub_path);
+
 		if((fd = system(cmd)) < 0)
 			perror("remove folder:\n");
 		debug_p("cmd: %s \n", cmd);
