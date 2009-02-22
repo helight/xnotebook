@@ -9,18 +9,6 @@
 #  include <config.h>
 #endif
 
-#include <gtk/gtk.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <time.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <dirent.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "AddFolder.h"
 #include "Toolbar.h"
 #include "Dialog.h"
@@ -30,7 +18,7 @@ void
 on_button_nf_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist=(struct clist_struct *)user_data;	
-	printf("root_path:%s \n", cclist->root_path);
+	debug_p("root_path:%s \n", cclist->root_path);
 	cclist->creat = FOLDER;
 	
 	handle_for_create_window_add(cclist);
@@ -42,7 +30,7 @@ void
 on_button_nn_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist=(struct clist_struct *)user_data;	
-	printf("root_path:%s \n", cclist->root_path);
+	debug_p("root_path:%s \n", cclist->root_path);
 	cclist->creat = NOTEFILE;
 	handle_for_create_window_add(cclist);
 	debug_p("new!!!\n");
@@ -65,27 +53,11 @@ on_button_edit_clicked (GtkButton *button, gpointer user_data)
 void
 on_button_save_clicked (GtkButton *button, gpointer  user_data)
 {
-	gchar *text = NULL;
-	gint len = 0;
-	GtkTextIter start,end;
-	int fd = 0;
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
 	
 	if(cclist->note_row < 0) return;
 	
-	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER(cclist->buffer), 
-        					&start, &end);
-	text = gtk_text_buffer_get_text(GTK_TEXT_BUFFER(cclist->buffer), 
-    						&start,&end,FALSE);
-	if(fd = open(cclist->doc_path, O_WRONLY) < 0)
-		perror("open\n");
-    	
-	len = strlen(text);
-	debug_p("save:%s len :%d\n", text, len);
-	if(write(fd, text, len) != len)
-		perror("fweite:");
- 
-	close(fd);
+	save_note(cclist);
 
 	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (

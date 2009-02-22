@@ -140,9 +140,9 @@ INCLUDES = \
 	-D_REENTRANT -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/freetype2 -I/usr/include/directfb -I/usr/include/libpng12 -I/usr/include/pixman-1  
 
 
-bin_PROGRAMS = notebook
+bin_PROGRAMS = xnotebook
 
-notebook_SOURCES = \
+xnotebook_SOURCES = \
 	main.c \
 	Support.c Support.h \
 	Mainwindow.c Mainwindow.h \
@@ -157,25 +157,25 @@ notebook_SOURCES = \
 	Init.c Init.h
 
 
-notebook_LDADD = -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0   $(INTLLIBS)
+xnotebook_LDADD = -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0   $(INTLLIBS)
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
-bin_PROGRAMS = notebook$(EXEEXT)
+bin_PROGRAMS = xnotebook$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_notebook_OBJECTS = main.$(OBJEXT) Support.$(OBJEXT) \
+am_xnotebook_OBJECTS = main.$(OBJEXT) Support.$(OBJEXT) \
 	Mainwindow.$(OBJEXT) AddFolderFace.$(OBJEXT) \
 	Callbacks.$(OBJEXT) MenubarFace.$(OBJEXT) MenubarCall.$(OBJEXT) \
 	MainbodyFace.$(OBJEXT) MainbodyCall.$(OBJEXT) \
 	ToolbarFace.$(OBJEXT) ToolbarCall.$(OBJEXT) \
 	DialogFace.$(OBJEXT) DialogCall.$(OBJEXT) AboutFace.$(OBJEXT) \
 	AboutCall.$(OBJEXT) Funs.$(OBJEXT) Init.$(OBJEXT)
-notebook_OBJECTS = $(am_notebook_OBJECTS)
-notebook_DEPENDENCIES =
-notebook_LDFLAGS =
+xnotebook_OBJECTS = $(am_xnotebook_OBJECTS)
+xnotebook_DEPENDENCIES =
+xnotebook_LDFLAGS =
 
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -196,9 +196,9 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(notebook_SOURCES)
+DIST_SOURCES = $(xnotebook_SOURCES)
 DIST_COMMON = $(srcdir)/Makefile.in Makefile.am
-SOURCES = $(notebook_SOURCES)
+SOURCES = $(xnotebook_SOURCES)
 
 all: all-am
 
@@ -233,9 +233,9 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
-notebook$(EXEEXT): $(notebook_OBJECTS) $(notebook_DEPENDENCIES) 
-	@rm -f notebook$(EXEEXT)
-	$(LINK) $(notebook_LDFLAGS) $(notebook_OBJECTS) $(notebook_LDADD) $(LIBS)
+xnotebook$(EXEEXT): $(xnotebook_OBJECTS) $(xnotebook_DEPENDENCIES) 
+	@rm -f xnotebook$(EXEEXT)
+	$(LINK) $(xnotebook_LDFLAGS) $(xnotebook_OBJECTS) $(xnotebook_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core

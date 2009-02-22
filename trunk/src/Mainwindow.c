@@ -41,7 +41,7 @@ create_main_windown (struct clist_struct *clist)
 	main_windown = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_widget_set_size_request (main_windown, 900, 700);
 	gtk_window_set_position (GTK_WINDOW (main_windown), GTK_WIN_POS_CENTER);
-	gtk_window_set_title (GTK_WINDOW (main_windown), _("Zhwen-Note"));
+	gtk_window_set_title (GTK_WINDOW (main_windown), _("Zhwen-Xnotebook"));
 	window_main_icon_pixbuf = create_pixbuf ("zhwen.png");
 	if (window_main_icon_pixbuf)
 	{
