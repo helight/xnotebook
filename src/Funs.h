@@ -22,4 +22,6 @@ void message_box_for_add_folder(GtkWidget *window,gchar *message);
 
 void del_folder_or_note(struct clist_struct *cclist);
 
+void save_note(struct clist_struct *cclist);
+
 #endif /* TOOLBAR_H_ */

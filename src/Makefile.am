@@ -5,9 +5,9 @@ INCLUDES = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	@PACKAGE_CFLAGS@
 
-bin_PROGRAMS = notebook
+bin_PROGRAMS = xnotebook
 
-notebook_SOURCES = \
+xnotebook_SOURCES = \
 	main.c \
 	Support.c Support.h \
 	Mainwindow.c Mainwindow.h \
@@ -21,5 +21,5 @@ notebook_SOURCES = \
 	Funs.c Funs.h \
 	Init.c Init.h
 
-notebook_LDADD = @PACKAGE_LIBS@ $(INTLLIBS)
+xnotebook_LDADD = @PACKAGE_LIBS@ $(INTLLIBS)
 

@@ -4,6 +4,7 @@
  *  Created on: Feb 19, 2009
  *      Author: helight
  */
+
 #include "Support.h"
 #include "Debug.h"
 #include "Mainbody.h"
@@ -14,7 +15,9 @@ clist_folder_get_selection_row(GtkCList *gtkclist,gint row,gint column,
 {
 	struct clist_struct *clist = (struct clist_struct *)user_data;
 	clist->folder_row = row;
-	show_notes(clist);	
+	show_notes(clist);
+	//memset(clist->doc_path, '\0', sizeof(clist->doc_path));
+	clist->note_row = -1;	
 	return;
 }
 /*

@@ -142,21 +142,19 @@ void show_file(struct clist_struct *cclist)
 	struct dirent *ptr;
 	
 	if((dir = opendir(cclist->sub_path)) == NULL){
-		printf("cann't open it\n");
+		perror("cann't opendir\n");
 		return;
 	}	
 	row = cclist->note_row;	
 	while((ptr = readdir(dir)) != NULL){
 		ch = ptr->d_name;
-		if(*ch != '.'){
-			if(strstr(ch, ".txt")){
-				if(i++ == row){
-						memset(file_path, '\0', sizeof(file_path));
-						strcpy(file_path, cclist->sub_path);
-						strcat(file_path, "/");
-						strcat(file_path, ch);
-						strcpy(cclist->doc_path,file_path);		
-				}			
+		if((*ch != '.') && (strstr(ch, ".txt") != NULL)){
+			if(i++ == row){
+				memset(file_path, '\0', sizeof(file_path));
+				strcpy(file_path, cclist->sub_path);
+				strcat(file_path, "/");
+				strcat(file_path, ch);
+				strcpy(cclist->doc_path,file_path);		
 			}
 		}		
 	}
@@ -283,4 +281,28 @@ void del_folder_or_note(struct clist_struct *cclist)
 	}
 	cclist->del = NOTHING;
 	return;
+}
+
+void save_note(struct clist_struct *cclist)
+{
+	gchar *text = NULL;
+	gint len = 0;
+	GtkTextIter start,end;
+	//int fd = 0;
+	FILE *fd = NULL;
+
+	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER(cclist->buffer), 
+        					&start, &end);
+	text = gtk_text_buffer_get_text(GTK_TEXT_BUFFER(cclist->buffer), 
+    						&start,&end,FALSE);
+	if((fd = fopen(cclist->doc_path, "w")) == NULL)
+		perror("open\n");
+    	
+	len = strlen(text);
+	debug_p("save:%s len :%d\n", text, len);
+	//printf("save:%s len :%d\n", text, len);
+	if(fwrite(text, len, 1, fd) != 1)
+		perror("fweite:");
+ 
+	fclose(fd);
 }
