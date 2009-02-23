@@ -26,7 +26,7 @@
 
 void show_folders(struct clist_struct *cclist)
 {
-	gchar *fname[1][1];
+	gchar *fname[1][1] = {NULL};
 	gchar msg[64];
 	gint num = 0;
 	char *ch=NULL;
@@ -47,7 +47,6 @@ opendir:if((dir = opendir(cclist->root_path)) == NULL){
 				}
 			goto opendir;
 		}
-		
 	}
 	
 	while((ptr = readdir(dir)) != NULL){
@@ -205,20 +204,21 @@ void add_folder_or_note(struct clist_struct *cclist)
 	gchar msg[64];
 	
 	memset(creat_name, '\0', sizeof(creat_name));
-	if(cclist->creat == FOLDER){
-		strcpy(creat_name, cclist->root_path);
-	} else if(cclist->creat == NOTEFILE){
-		strcpy(creat_name, cclist->sub_path);
-	} else {
-		strcpy(msg, "Cann't creat....");
-		goto out;
-		return;
-	}
 	fp = gtk_entry_get_text(GTK_ENTRY(cclist->other.entry_name));
 	printf("fp: %02x\n", *fp);
 	if((strchr(fp, ' ') == NULL) && (*fp != 0)){
-		snprintf(creat_name, sizeof(creat_name), "%s/%s",
-				 creat_name, fp);		
+			if(cclist->creat == FOLDER){
+				snprintf(creat_name, sizeof(creat_name), "%s/%s",
+				 cclist->root_path, fp);
+			} else if(cclist->creat == NOTEFILE){
+				snprintf(creat_name, sizeof(creat_name), "%s/%s",
+				 cclist->sub_path, fp);
+			} else {
+				strcpy(msg, "Cann't creat....");
+				goto out;
+				return;
+			}
+				
 		if(cclist->creat == FOLDER){
 			if(mkdir(creat_name, 0755) < 0){
 				perror("mkdir:\n");
