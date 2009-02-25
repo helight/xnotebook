@@ -13,6 +13,7 @@
 #include "Toolbar.h"
 #include "Dialog.h"
 #include "About.h"
+#include "Funs.h"
 
 void
 on_button_nf_clicked (GtkButton *button, gpointer user_data)
@@ -93,15 +94,6 @@ on_button_dn_clicked (GtkButton *button, gpointer user_data)
 	dialog_del = create_dialog_del(cclist);
 	gtk_widget_show (dialog_del);
 	debug_p("del note\n");
-}
-
-
-void
-on_button_about_clicked (GtkButton *button, gpointer user_data)
-{
-	GtkWidget *dialog_about;
-	dialog_about = create_dialog_about ();
-	gtk_widget_show (dialog_about);
 }
 
 void

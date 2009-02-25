@@ -194,6 +194,7 @@ create_new_add_window (struct clist_struct *clist)
         GLADE_HOOKUP_OBJECT (window, image_apply, "image_apply");
         GLADE_HOOKUP_OBJECT (window, label_apply, "label_apply");
         
+        gtk_widget_grab_focus (entry_text);
         clist->other.window = window;
         clist->other.entry_name = entry_text;
         return window;                                                                                                        

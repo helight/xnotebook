@@ -14,7 +14,8 @@ GtkWidget *
 create_mainbody(GtkWidget *main_windown, GtkWidget *vbox, 
 				GtkTooltips *tooltips, GtkAccelGroup *accel_group,
 				struct clist_struct *clist);
-
+void on_vpaned1_key_press_event(GtkWidget *widget,  GdkEventKey *event, 
+				gpointer user_data);
 void clist_folder_get_selection_row(GtkCList *gtkclist,gint row,
 			gint column, GdkEventButton *event,gpointer user_data);	
 						

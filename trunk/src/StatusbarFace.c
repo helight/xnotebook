@@ -18,7 +18,7 @@ create_status(GtkWidget *main_windown, GtkWidget *vbox,
 {
 	GtkWidget *hbox_status;
 	GtkWidget *status_folder;
-	GtkWidget *status_sys;
+	GtkWidget *status_file;
 	GtkWidget *status_note;
 
         hbox_status = gtk_hbox_new (TRUE, 0);                                                                                              
@@ -31,10 +31,10 @@ create_status(GtkWidget *main_windown, GtkWidget *vbox,
         gtk_box_pack_start (GTK_BOX (hbox_status), status_folder, FALSE, FALSE, 0);
         gtk_widget_set_size_request (status_folder, 200, 21);
 
-        status_sys = gtk_statusbar_new ();
-        gtk_widget_show (status_sys);
-        gtk_box_pack_start (GTK_BOX (hbox_status), status_sys, FALSE, FALSE, 0);
-        gtk_widget_set_size_request (status_sys, 200, 21);
+        status_file = gtk_statusbar_new ();
+        gtk_widget_show (status_file);
+        gtk_box_pack_start (GTK_BOX (hbox_status), status_file, FALSE, FALSE, 0);
+        gtk_widget_set_size_request (status_file, 300, 21);
 
         status_note = gtk_statusbar_new ();
         gtk_widget_show (status_note);
@@ -43,11 +43,11 @@ create_status(GtkWidget *main_windown, GtkWidget *vbox,
         
 	GLADE_HOOKUP_OBJECT (main_windown, hbox_status, "hbox_status");
 	GLADE_HOOKUP_OBJECT (main_windown, status_folder, "status_folder");
-	GLADE_HOOKUP_OBJECT (main_windown, status_sys, "status_sys");
+	GLADE_HOOKUP_OBJECT (main_windown, status_file, "status_file");
 	GLADE_HOOKUP_OBJECT (main_windown, status_note, "status_note");
 	
 	clist->statusbar.status_folder = status_folder;
-	clist->statusbar.status_sys = status_sys;
+	clist->statusbar.status_file = status_file;
 	clist->statusbar.status_note = status_note;
 	
   return hbox_status;

@@ -17,6 +17,7 @@ xnotebook_SOURCES = \
 	MainbodyFace.c MainbodyCall.c Mainbody.h \
 	ToolbarFace.c ToolbarCall.c Toolbar.h \
 	StatusbarFace.c Statusbar.h \
+	CalendarFace.c Calendar.h \
 	DialogFace.c DialogCall.c Dialog.h \
 	AboutFace.c AboutCall.c About.h \
 	Funs.c Funs.h \

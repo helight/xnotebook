@@ -152,6 +152,7 @@ xnotebook_SOURCES = \
 	MainbodyFace.c MainbodyCall.c Mainbody.h \
 	ToolbarFace.c ToolbarCall.c Toolbar.h \
 	StatusbarFace.c Statusbar.h \
+	CalendarFace.c Calendar.h \
 	DialogFace.c DialogCall.c Dialog.h \
 	AboutFace.c AboutCall.c About.h \
 	Funs.c Funs.h \
@@ -172,9 +173,9 @@ am_xnotebook_OBJECTS = main.$(OBJEXT) Support.$(OBJEXT) \
 	Callbacks.$(OBJEXT) MenubarFace.$(OBJEXT) MenubarCall.$(OBJEXT) \
 	MainbodyFace.$(OBJEXT) MainbodyCall.$(OBJEXT) \
 	ToolbarFace.$(OBJEXT) ToolbarCall.$(OBJEXT) \
-	StatusbarFace.$(OBJEXT) DialogFace.$(OBJEXT) \
-	DialogCall.$(OBJEXT) AboutFace.$(OBJEXT) AboutCall.$(OBJEXT) \
-	Funs.$(OBJEXT) Init.$(OBJEXT)
+	StatusbarFace.$(OBJEXT) CalendarFace.$(OBJEXT) \
+	DialogFace.$(OBJEXT) DialogCall.$(OBJEXT) AboutFace.$(OBJEXT) \
+	AboutCall.$(OBJEXT) Funs.$(OBJEXT) Init.$(OBJEXT)
 xnotebook_OBJECTS = $(am_xnotebook_OBJECTS)
 xnotebook_DEPENDENCIES =
 xnotebook_LDFLAGS =
@@ -185,6 +186,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/AboutCall.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/AboutFace.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/AddFolderFace.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/CalendarFace.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Callbacks.Po ./$(DEPDIR)/DialogCall.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/DialogFace.Po ./$(DEPDIR)/Funs.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Init.Po ./$(DEPDIR)/MainbodyCall.Po \
@@ -249,6 +251,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AboutCall.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AboutFace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AddFolderFace.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CalendarFace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Callbacks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogCall.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogFace.Po@am__quote@

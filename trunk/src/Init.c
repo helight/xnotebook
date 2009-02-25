@@ -34,7 +34,7 @@ void init_global_clist(struct clist_struct *clist)
 	clist->dialog.dialog = NULL;
 	clist->dialog.label_text = NULL;
 	clist->statusbar.status_folder = NULL;
-	clist->statusbar.status_sys = NULL;
+	clist->statusbar.status_file = NULL;
 	clist->statusbar.status_note = NULL;
 }
 

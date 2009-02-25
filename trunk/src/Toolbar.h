@@ -11,7 +11,6 @@
 #include <gtk/gtk.h>
 #include "Support.h"
 #include "Debug.h"
-#include "string.h"
 
 GtkWidget *
 create_toolbar(GtkWidget *main_window, GtkWidget *vbox, 
