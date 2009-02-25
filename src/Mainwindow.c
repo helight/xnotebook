@@ -28,8 +28,9 @@ create_main_windown (struct clist_struct *clist)
 	GtkTooltips *tooltips;
 	GtkWidget *hbox_status;
 	GtkAccelGroup *accel_group;
-
-	accel_group = gtk_accel_group_new ();
+	
+        tooltips = gtk_tooltips_new ();
+        accel_group = gtk_accel_group_new ();
 
 	main_windown = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_widget_set_size_request (main_windown, 900, 700);
@@ -38,8 +39,8 @@ create_main_windown (struct clist_struct *clist)
 	window_main_icon_pixbuf = create_pixbuf ("zhwen.png");
 	if (window_main_icon_pixbuf)
 	{
-	gtk_window_set_icon (GTK_WINDOW (main_windown), window_main_icon_pixbuf);
-	gdk_pixbuf_unref (window_main_icon_pixbuf);
+		gtk_window_set_icon (GTK_WINDOW (main_windown), window_main_icon_pixbuf);
+		gdk_pixbuf_unref (window_main_icon_pixbuf);
 	}
 
 	vbox_body = gtk_vbox_new (FALSE, 0);
@@ -47,7 +48,7 @@ create_main_windown (struct clist_struct *clist)
 	gtk_container_add (GTK_CONTAINER (main_windown), vbox_body);
 
 	menubar = (GtkWidget *)create_menubar(main_windown, vbox_body, \
-					tooltips, accel_group);
+					tooltips, accel_group, clist);
 	toolbar = (GtkWidget *)create_toolbar(main_windown, vbox_body, \
 					tooltips, accel_group, clist);
 

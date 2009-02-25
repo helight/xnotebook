@@ -137,7 +137,7 @@ void show_notes(struct clist_struct *cclist)
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), FALSE);
 	
 	memset(msg, '\0', sizeof(msg));
-	g_snprintf(msg, 80, "Note : %d", num);
+	g_snprintf(msg, sizeof(msg), "Note : %d", num);
 	show_status(cclist->statusbar.status_note, msg);
 	return;
 }
@@ -147,9 +147,11 @@ void show_file(struct clist_struct *cclist)
 	gint i = 0, n = 0, row = -1;
 	gchar *fname[1][2] = {"file name","time"};
 	gchar file_path[512];
+	gchar msg[128];
 	char *ch=NULL;
 	DIR *dir;
 	struct dirent *ptr;
+	struct stat stat;
 	
 	if((dir = opendir(cclist->sub_path)) == NULL){
 		perror("cann't opendir\n");
@@ -167,8 +169,9 @@ void show_file(struct clist_struct *cclist)
 			}
 		}		
 	}
-	debug_p("path: %s: doc_path: %s\n", file_path, cclist->doc_path);
 	closedir(dir);
+	debug_p("path: %s: doc_path: %s\n", file_path, cclist->doc_path);
+	
 	
 	if(strstr(file_path, ".txt")){
 		gchar buff[64*1024];
@@ -186,6 +189,16 @@ void show_file(struct clist_struct *cclist)
 	}
 	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), FALSE);
+		
+	if(lstat(file_path, &stat) == -1){
+		perror("stat:");
+		return;
+	}
+	memset(msg, '\0', sizeof(msg));
+	g_snprintf(msg, sizeof(msg), "Name:%s Size:%6d bytes", 
+		file_path + strlen(cclist->sub_path) + 1, stat.st_size);
+	show_status(cclist->statusbar.status_file, msg);
+	
 	return;	
 }
 void show_status(GtkWidget *statusbar, gchar *msg)

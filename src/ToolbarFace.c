@@ -61,13 +61,6 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         GtkWidget *hbox12;
         GtkWidget *image_dn;
         GtkWidget *label_dn;
-/*-----------------button_about-----------------------*/
-        GtkWidget *toolitem7;
-        GtkWidget *button_about;
-        GtkWidget *alignment12;
-        GtkWidget *hbox13;
-        GtkWidget *image_about;
-        GtkWidget *label_about;
 /*-----------------button_quit-----------------------*/
         GtkWidget *toolitem8;
         GtkWidget *button_quit;
@@ -89,7 +82,8 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         button_nf = gtk_button_new ();
         gtk_widget_show (button_nf);
         gtk_container_add (GTK_CONTAINER (toolitem1), button_nf);
-
+	gtk_button_set_relief (GTK_BUTTON (button_nf), GTK_RELIEF_NONE);
+	
         alignment6 = gtk_alignment_new (0.5, 0.5, 0, 0);
         gtk_widget_show (alignment6);
         gtk_container_add (GTK_CONTAINER (button_nf), alignment6);
@@ -102,7 +96,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         gtk_widget_show (image_nf);
         gtk_box_pack_start (GTK_BOX (hbox7), image_nf, FALSE, FALSE, 0);
 
-        label_nf = gtk_label_new_with_mnemonic (_("New Folder"));
+        label_nf = gtk_label_new_with_mnemonic (_("Folder"));
         gtk_widget_show (label_nf);
         gtk_box_pack_start (GTK_BOX (hbox7), label_nf, FALSE, FALSE, 0);
 
@@ -113,6 +107,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         button_nn = gtk_button_new ();
         gtk_widget_show (button_nn);
         gtk_container_add (GTK_CONTAINER (toolitem2), button_nn);
+	gtk_button_set_relief (GTK_BUTTON (button_nn), GTK_RELIEF_NONE);
 
         alignment7 = gtk_alignment_new (0.5, 0.5, 0, 0);
         gtk_widget_show (alignment7);
@@ -126,7 +121,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         gtk_widget_show (image_nn);
         gtk_box_pack_start (GTK_BOX (hbox8), image_nn, FALSE, FALSE, 0);
 
-        label_nn = gtk_label_new_with_mnemonic (_("New Note"));
+        label_nn = gtk_label_new_with_mnemonic (_("Note"));
         gtk_widget_show (label_nn);
         gtk_box_pack_start (GTK_BOX (hbox8), label_nn, FALSE, FALSE, 0);
 
@@ -137,6 +132,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         button_edit = gtk_button_new ();
         gtk_widget_show (button_edit);
         gtk_container_add (GTK_CONTAINER (toolitem3), button_edit);
+	gtk_button_set_relief (GTK_BUTTON (button_edit), GTK_RELIEF_NONE);
 
         alignment8 = gtk_alignment_new (0.5, 0.5, 0, 0);
         gtk_widget_show (alignment8);
@@ -161,6 +157,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         button_save = gtk_button_new ();
         gtk_widget_show (button_save);
         gtk_container_add (GTK_CONTAINER (toolitem4), button_save);
+	gtk_button_set_relief (GTK_BUTTON (button_save), GTK_RELIEF_NONE);
 
         alignment9 = gtk_alignment_new (0.5, 0.5, 0, 0);
         gtk_widget_show (alignment9);
@@ -185,6 +182,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         button_df = gtk_button_new ();
         gtk_widget_show (button_df);
         gtk_container_add (GTK_CONTAINER (toolitem5), button_df);
+	gtk_button_set_relief (GTK_BUTTON (button_df), GTK_RELIEF_NONE);
 
         alignment10 = gtk_alignment_new (0.5, 0.5, 0, 0);
         gtk_widget_show (alignment10);
@@ -198,7 +196,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         gtk_widget_show (image_df);
         gtk_box_pack_start (GTK_BOX (hbox11), image_df, FALSE, FALSE, 0);
 
-        label1_df = gtk_label_new_with_mnemonic (_("Del Folder"));
+        label1_df = gtk_label_new_with_mnemonic (_("Folder"));
         gtk_widget_show (label1_df);
         gtk_box_pack_start (GTK_BOX (hbox11), label1_df, FALSE, FALSE, 0);
 
@@ -209,6 +207,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         button_dn = gtk_button_new ();
         gtk_widget_show (button_dn);
         gtk_container_add (GTK_CONTAINER (toolitem6), button_dn);
+	gtk_button_set_relief (GTK_BUTTON (button_dn), GTK_RELIEF_NONE);
 
         alignment11 = gtk_alignment_new (0.5, 0.5, 0, 0);
         gtk_widget_show (alignment11);
@@ -222,34 +221,11 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         gtk_widget_show (image_dn);
         gtk_box_pack_start (GTK_BOX (hbox12), image_dn, FALSE, FALSE, 0);
 
-        label_dn = gtk_label_new_with_mnemonic (_("Del Note"));
+        label_dn = gtk_label_new_with_mnemonic (_("Note"));
         gtk_widget_show (label_dn);
         gtk_box_pack_start (GTK_BOX (hbox12), label_dn, FALSE, FALSE, 0);
 
-        toolitem7 = (GtkWidget*) gtk_tool_item_new ();
-        gtk_widget_show (toolitem7);
-        gtk_container_add (GTK_CONTAINER (toolbar), toolitem7);
-
-        button_about = gtk_button_new ();
-        gtk_widget_show (button_about);
-        gtk_container_add (GTK_CONTAINER (toolitem7), button_about);
-
-        alignment12 = gtk_alignment_new (0.5, 0.5, 0, 0);
-        gtk_widget_show (alignment12);
-        gtk_container_add (GTK_CONTAINER (button_about), alignment12);
-
-        hbox13 = gtk_hbox_new (FALSE, 2);
-        gtk_widget_show (hbox13);
-        gtk_container_add (GTK_CONTAINER (alignment12), hbox13);
-
-        image_about = gtk_image_new_from_stock ("gtk-help", GTK_ICON_SIZE_BUTTON);
-        gtk_widget_show (image_about);
-        gtk_box_pack_start (GTK_BOX (hbox13), image_about, FALSE, FALSE, 0);
-
-        label_about = gtk_label_new_with_mnemonic (_("About"));
-        gtk_widget_show (label_about);
-        gtk_box_pack_start (GTK_BOX (hbox13), label_about, FALSE, FALSE, 0);
-
+        
         toolitem8 = (GtkWidget*) gtk_tool_item_new ();
         gtk_widget_show (toolitem8);
         gtk_container_add (GTK_CONTAINER (toolbar), toolitem8);
@@ -257,6 +233,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         button_quit = gtk_button_new ();
         gtk_widget_show (button_quit);
         gtk_container_add (GTK_CONTAINER (toolitem8), button_quit);
+	gtk_button_set_relief (GTK_BUTTON (button_quit), GTK_RELIEF_NONE);
 
         alignment13 = gtk_alignment_new (0.5, 0.5, 0, 0);
         gtk_widget_show (alignment13);
@@ -291,9 +268,6 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
 	                  (gpointer *)clist);
 	g_signal_connect ((gpointer) button_dn, "clicked",
 	                  G_CALLBACK (on_button_dn_clicked),
-	                  (gpointer *)clist);
-	g_signal_connect ((gpointer) button_about, "clicked",
-	                  G_CALLBACK (on_button_quit_clicked),
 	                  (gpointer *)clist);
 	g_signal_connect ((gpointer) button_quit, "clicked",
 	                  G_CALLBACK (on_button_quit_clicked),
@@ -336,12 +310,6 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         GLADE_HOOKUP_OBJECT (main_windown, hbox12, "hbox12");
         GLADE_HOOKUP_OBJECT (main_windown, image_dn, "image_dn");
         GLADE_HOOKUP_OBJECT (main_windown, label_dn, "label_dn");
-        GLADE_HOOKUP_OBJECT (main_windown, toolitem7, "toolitem7");
-        GLADE_HOOKUP_OBJECT (main_windown, button_about, "button_about");
-        GLADE_HOOKUP_OBJECT (main_windown, alignment12, "alignment12");
-        GLADE_HOOKUP_OBJECT (main_windown, hbox13, "hbox13");
-        GLADE_HOOKUP_OBJECT (main_windown, image_about, "image_about");
-        GLADE_HOOKUP_OBJECT (main_windown, label_about, "label_about");
         GLADE_HOOKUP_OBJECT (main_windown, toolitem8, "toolitem8");
         GLADE_HOOKUP_OBJECT (main_windown, button_quit, "button_quit");
         GLADE_HOOKUP_OBJECT (main_windown, alignment13, "alignment13");

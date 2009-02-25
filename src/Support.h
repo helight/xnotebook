@@ -56,7 +56,7 @@ struct wdialog{
 	};
 struct statusbar{
 	GtkWidget *status_folder;
-	GtkWidget *status_sys;
+	GtkWidget *status_file;
 	GtkWidget *status_note;
 	};
 	

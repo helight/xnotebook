@@ -14,8 +14,8 @@
 
 GtkWidget *
 create_mainbody(GtkWidget *main_windown, GtkWidget *vbox, 
-				GtkTooltips *tooltips, GtkAccelGroup *accel_group,
-				struct clist_struct *clist)
+		GtkTooltips *tooltips, GtkAccelGroup *accel_group,
+		struct clist_struct *clist)
 {
 	GtkTextBuffer *buffer;
 	
@@ -97,6 +97,10 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
 	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (note_text));	
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (note_text), FALSE);
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (note_text), GTK_WRAP_WORD);
+	
+	g_signal_connect ((gpointer) vpaned1, "key_press_event",
+                    G_CALLBACK (on_vpaned1_key_press_event),
+                    NULL);
 	
 	g_signal_connect((gpointer)(folder_list),"select_row",
         					G_CALLBACK(clist_folder_get_selection_row),

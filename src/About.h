@@ -12,7 +12,20 @@
 #include "Support.h"
 #include "Debug.h"
 
-GtkWidget* create_dialog_about (void);
-void on_okbutton_clicked (GtkButton *button, gpointer user_data);
+GtkWidget* create_window_about (void);
+
+
+gboolean
+on_image_zhwen_button_press_event      (GtkWidget       *widget,
+                                        GdkEventButton  *event,
+                                        gpointer         user_data);
+
+void
+on_button_about_close_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_link_clicked                 (GtkButton       *button,
+                                        gpointer         user_data);
 
 #endif /* TOOLBAR_H_ */

@@ -9,6 +9,12 @@
 #include "Debug.h"
 #include "Mainbody.h"
 #include "Funs.h"
+
+void on_vpaned1_key_press_event(GtkWidget *widget,  GdkEventKey *event, 
+				gpointer user_data)
+{
+	return FALSE;
+}
 void 
 clist_folder_get_selection_row(GtkCList *gtkclist,gint row,gint column,
 							 GdkEventButton *event,gpointer user_data)
