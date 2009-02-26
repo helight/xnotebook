@@ -73,10 +73,13 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
 	gtk_widget_show (note_list);
 	gtk_container_add (GTK_CONTAINER (scrolledwindow5), note_list);
 	gtk_widget_set_size_request (note_list, -1, 180);
-	gtk_clist_set_column_width (GTK_CLIST (note_list), 0, 527);
-	gtk_clist_set_column_width (GTK_CLIST (note_list), 1, 180);
+	//gtk_clist_set_column_width (GTK_CLIST (note_list), 0, 300);
+	gtk_clist_set_column_auto_resize(GTK_CLIST(note_list),0,TRUE);
+	//gtk_clist_set_column_width (GTK_CLIST (note_list), 1, 200);
+	gtk_clist_set_column_auto_resize(GTK_CLIST(note_list),1,TRUE);
 	gtk_clist_column_titles_show (GTK_CLIST (note_list));
-
+	gtk_clist_set_selection_mode (GTK_CLIST (note_list), GTK_SELECTION_BROWSE);
+	
 	note_title = gtk_label_new (_("Title"));
 	gtk_widget_show (note_title);
 	gtk_clist_set_column_widget (GTK_CLIST (note_list), 0, note_title);
