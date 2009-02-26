@@ -53,7 +53,7 @@ opendir:if((dir = opendir(cclist->root_path)) == NULL){
 		ch = ptr->d_name;
 		if(*ch != '.'){
 			fname[0][0] = ptr->d_name;
-			gtk_clist_append((GtkCList*)cclist->clist_folder,(gchar*)fname[0]);
+			gtk_clist_append((GtkCList*)cclist->clist_folder,fname[0]);
 			num++;
 		}
 		debug_p("file name:%s fname[]:%s\n",ch, fname[0][0]);
@@ -72,7 +72,7 @@ opendir:if((dir = opendir(cclist->root_path)) == NULL){
 void show_notes(struct clist_struct *cclist)
 {
 	gint i = 0, n = 0, row = -1;
-	gchar *fname[1][2] = {"file name","time"};
+	gchar *fname[1][2] = {NULL,NULL};
 	gchar buf_time[32];
 	gchar file_path[512];
 	gchar msg[64];
@@ -117,15 +117,16 @@ void show_notes(struct clist_struct *cclist)
 					perror("stat:");
 					return;
 				}
-				
-				fname[0][0] = ptr->d_name;
+				memset(msg, '\0', sizeof(msg));	
+				snprintf(msg, sizeof(msg), "%s %s",
+				 ptr->d_name, "     ");
+				fname[0][0] = msg;
 				memset(buf_time, '\0', sizeof(buf_time));
 				strcpy(buf_time, ctime(&stat.st_mtime));
 				buf_time[strlen(buf_time) -1] = '\0';
 				fname[0][1] = buf_time;
-				//*(fname[0][1] + strlen(fname[0][1] -1)) = '\0';
 				debug_p("file name:%s fname[]:%s : %s\n",ch, fname[0][0], fname[0][1]);
-				gtk_clist_append((GtkCList*)cclist->clist_note,(gchar*)fname[0]);
+				gtk_clist_append((GtkCList*)cclist->clist_note,fname[0]);
 				num++;	
 			}
 	
