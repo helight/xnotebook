@@ -49,7 +49,7 @@ create_window_about (void)
         gtk_widget_show (image_zhwen);
         gtk_box_pack_start (GTK_BOX (vbox_about), image_zhwen, FALSE, TRUE, 0);
 
-        label_zhwen = gtk_label_new (_("<b>Xnotebook (0.03)</b>"));
+        label_zhwen = gtk_label_new (_("<b>Xnotebook (V0.03)</b>"));
         gtk_widget_show (label_zhwen);
         gtk_box_pack_start (GTK_BOX (vbox_about), label_zhwen, FALSE, TRUE, 0);
         gtk_label_set_use_markup (GTK_LABEL (label_zhwen), TRUE);
