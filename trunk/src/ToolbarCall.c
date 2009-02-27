@@ -22,6 +22,8 @@ on_button_nf_clicked (GtkButton *button, gpointer user_data)
 	debug_p("root_path:%s \n", cclist->root_path);
 	cclist->creat = FOLDER;
 	
+	cclist->del = NOTHING;
+	cclist->xname = NOTHING;	
 	handle_for_create_window_add(cclist);
 	debug_p("new!!!\n");
 	return;
@@ -32,7 +34,10 @@ on_button_nn_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist=(struct clist_struct *)user_data;	
 	debug_p("root_path:%s \n", cclist->root_path);
-	cclist->creat = NOTEFILE;
+	cclist->creat = NOTE_FILE;
+	
+	cclist->del = NOTHING;
+	cclist->xname = NOTHING;
 	handle_for_create_window_add(cclist);
 	debug_p("new!!!\n");
 	return;
@@ -66,18 +71,50 @@ on_button_save_clicked (GtkButton *button, gpointer  user_data)
 	return;
 }
 
+void
+on_button_ref_clicked (GtkButton  *button, gpointer user_data)
+{
+	struct clist_struct *cclist = (struct clist_struct *)user_data;
+	if(cclist->folder_row < 0)
+		cclist->xname = NOTHING;
+	else
+		cclist->xname = FOLDER;
+	cclist->creat = NOTHING;
+	cclist->del = NOTHING;
+	debug_p("folder_row:%d \n", cclist->folder_row);
+	handle_for_create_window_add(cclist);
+}
+
+void
+on_button_ren_clicked (GtkButton  *button, gpointer user_data)
+{
+	gchar msg[] = "";
+	struct clist_struct *cclist = (struct clist_struct *)user_data;
+	if(cclist->note_row < 0)
+		cclist->xname = NOTHING;
+	else
+		cclist->xname = NOTE_FILE;
+	
+	cclist->creat = NOTHING;
+	cclist->del = NOTHING;	
+	debug_p("Rename note: %d\n", cclist->note_row);
+	handle_for_create_window_add(cclist);
+}
 
 void
 on_button_df_clicked (GtkButton  *button, gpointer user_data)
 {
 	GtkWidget *dialog_del;
+	gchar msg[] = "Del This Folder?";
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
 	if(cclist->folder_row < 0)
 		cclist->del = NOTHING;
 	else
 		cclist->del = FOLDER;
+	cclist->creat = NOTHING;
+	cclist->xname = NOTHING;
 	debug_p("folder_row:%d \n", cclist->folder_row);
-	dialog_del = create_dialog_del(cclist);
+	dialog_del = create_dialog(cclist, msg);
 	gtk_widget_show (dialog_del);
 }
 
@@ -85,13 +122,16 @@ void
 on_button_dn_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *dialog_del;
+	gchar msg[] = "Del This Note?";
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
 	if(cclist->note_row < 0)
 		cclist->del = NOTHING;
 	else
-		cclist->del = NOTEFILE;
-	
-	dialog_del = create_dialog_del(cclist);
+		cclist->del = NOTE_FILE;
+		
+	cclist->creat = NOTHING;
+	cclist->xname = NOTHING;	
+	dialog_del = create_dialog(cclist, msg);
 	gtk_widget_show (dialog_del);
 	debug_p("del note\n");
 }

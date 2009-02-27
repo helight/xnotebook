@@ -13,7 +13,7 @@
 #include "Dialog.h"
 
 GtkWidget*
-create_dialog_del (struct clist_struct *cclist)
+create_dialog (struct clist_struct *cclist, gchar *titles)
 {
         GtkWidget *dialog_del;                                                                                                                                                                                                                             
         GtkWidget *dialog_vbox1;
@@ -21,11 +21,10 @@ create_dialog_del (struct clist_struct *cclist)
         GtkWidget *dialog_action_area1;
         GtkWidget *button_cancel;
         GtkWidget *button_ok;
-	
 	gchar *msg = NULL;
 	
         dialog_del = gtk_dialog_new ();
-        gtk_window_set_title (GTK_WINDOW (dialog_del), _("Are You Suer?"));
+        gtk_window_set_title (GTK_WINDOW (dialog_del), _(titles));
         gtk_window_set_position (GTK_WINDOW (dialog_del), GTK_WIN_POS_CENTER);
         gtk_window_set_default_size (GTK_WINDOW (dialog_del), 100, 70);
         gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog_del), TRUE);
@@ -37,7 +36,7 @@ create_dialog_del (struct clist_struct *cclist)
 	
 	if(cclist->del == FOLDER){
 		msg = cclist->sub_path + strlen(cclist->root_path) +1;
-	} else if(cclist->del == NOTEFILE){
+	} else if(cclist->del == NOTE_FILE){
 		msg = cclist->doc_path + strlen(cclist->root_path) +1;
 	} else {
 		gchar mmsg[]="<b>You Select Nothing TO Del...</b>";

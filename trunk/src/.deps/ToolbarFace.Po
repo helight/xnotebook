@@ -356,9 +356,7 @@ ToolbarFace.o: ToolbarFace.c ../config.h /usr/include/gtk-2.0/gtk/gtk.h \
   /usr/include/gtk-2.0/gtk/gtkvscale.h \
   /usr/include/gtk-2.0/gtk/gtkvseparator.h Toolbar.h Support.h \
   /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
-  Debug.h /usr/include/string.h /usr/include/bits/string.h \
-  /usr/include/bits/string2.h /usr/include/endian.h \
-  /usr/include/bits/endian.h /usr/include/stdlib.h
+  Debug.h
 
 ../config.h:
 
@@ -1173,15 +1171,3 @@ Support.h:
 /usr/include/bits/locale.h:
 
 Debug.h:
-
-/usr/include/string.h:
-
-/usr/include/bits/string.h:
-
-/usr/include/bits/string2.h:
-
-/usr/include/endian.h:
-
-/usr/include/bits/endian.h:
-
-/usr/include/stdlib.h:

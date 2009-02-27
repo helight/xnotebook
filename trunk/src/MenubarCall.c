@@ -36,7 +36,7 @@ on_new_note_activate (GtkMenuItem  *menuitem, gpointer user_data)
 {
 	struct clist_struct *cclist=(struct clist_struct *)user_data;	
 	debug_p("root_path:%s \n", cclist->root_path);
-	cclist->creat = NOTEFILE;
+	cclist->creat = NOTE_FILE;
 	handle_for_create_window_add(cclist);
 	debug_p("new!!!\n");
 	return;
@@ -79,32 +79,66 @@ on_edit_note_activate (GtkMenuItem *menuitem, gpointer user_data)
 }
 
 void
+on_rename_folder_activate (GtkMenuItem *menuitem, gpointer user_data)
+{
+	struct clist_struct *cclist = (struct clist_struct *)user_data;
+	if(cclist->folder_row < 0)
+		cclist->xname = NOTHING;
+	else
+		cclist->xname = FOLDER;
+	cclist->creat = NOTHING;
+	cclist->del = NOTHING;
+	debug_p("folder_row:%d \n", cclist->folder_row);
+	handle_for_create_window_add(cclist);
+	
+	return;
+}
+
+void
+on_rename_note_activate (GtkMenuItem *menuitem, gpointer user_data)
+{
+	gchar msg[] = "";
+	struct clist_struct *cclist = (struct clist_struct *)user_data;
+	if(cclist->note_row < 0)
+		cclist->xname = NOTHING;
+	else
+		cclist->xname = NOTE_FILE;
+	
+	cclist->creat = NOTHING;
+	cclist->del = NOTHING;	
+	debug_p("Rename note: %d\n", cclist->note_row);
+	handle_for_create_window_add(cclist);
+	
+	return;
+}
+
+void
 on_del_folder_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
-	GtkWidget *dialog_del;
+	GtkWidget *dialog;
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
 	if(cclist->folder_row < 0)
 		cclist->del = NOTHING;
 	else
 		cclist->del = FOLDER;
 	debug_p("folder_row:%d \n", cclist->folder_row);
-	dialog_del = create_dialog_del(cclist);
-	gtk_widget_show (dialog_del);
+	dialog = create_dialog(cclist, NULL);
+	gtk_widget_show (dialog);
 }
 
 
 void
 on_del_note_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
-	GtkWidget *dialog_del;
+	GtkWidget *dialog;
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
 	if(cclist->note_row < 0)
 		cclist->del = NOTHING;
 	else
-		cclist->del = NOTEFILE;
+		cclist->del = NOTE_FILE;
 	
-	dialog_del = create_dialog_del(cclist);
-	gtk_widget_show (dialog_del);
+	dialog = create_dialog(cclist, NULL);
+	gtk_widget_show (dialog);
 	debug_p("del note\n");
 }
 

@@ -24,6 +24,7 @@ void init_global_clist(struct clist_struct *clist)
 	clist->buffer = NULL;
 	clist->creat = NOTHING;
 	clist->del = NOTHING;
+	clist->xname = NOTHING;
 	clist->clist_folder = NULL;
 	clist->folder_row = -1;
 	clist->clist_note = NULL;

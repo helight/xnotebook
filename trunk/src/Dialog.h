@@ -12,7 +12,7 @@
 #include "Support.h"
 #include "Debug.h"
 
-GtkWidget* create_dialog_del (struct clist_struct *clist);
+GtkWidget* create_dialog (struct clist_struct *clist, gchar *titles);
 
 gboolean
 on_dialog_delete_event(GtkWidget *widget, GdkEvent *event, gpointer user_data);

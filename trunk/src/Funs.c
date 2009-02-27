@@ -118,6 +118,7 @@ void show_notes(struct clist_struct *cclist)
 					return;
 				}
 				memset(msg, '\0', sizeof(msg));	
+				*(ptr->d_name + strlen(ptr->d_name) - 4) = '\0';
 				snprintf(msg, sizeof(msg), "%s %s",
 				 ptr->d_name, "     ");
 				fname[0][0] = msg;
@@ -224,7 +225,7 @@ void add_folder_or_note(struct clist_struct *cclist)
 			if(cclist->creat == FOLDER){
 				snprintf(creat_name, sizeof(creat_name), "%s/%s",
 				 cclist->root_path, fp);
-			} else if(cclist->creat == NOTEFILE){
+			} else if(cclist->creat == NOTE_FILE){
 				snprintf(creat_name, sizeof(creat_name), "%s/%s",
 				 cclist->sub_path, fp);
 			} else {
@@ -241,11 +242,9 @@ void add_folder_or_note(struct clist_struct *cclist)
 			}
 			gtk_clist_clear(GTK_CLIST(cclist->clist_folder));	
 			show_folders(cclist);
-		} else if(cclist->creat == NOTEFILE){
+		} else if(cclist->creat == NOTE_FILE){
 			if(strstr(fp, ".txt") == NULL){
-				strcpy(msg, "The name should be like xxx.txt");
-				message_box_for_add_folder(cclist->other.window,msg);
-				return;
+				strcat(creat_name, ".txt");
 			}
 			int fd = 0;
 			if ((fd = open(creat_name, O_CREAT, 0644)) < 0){
@@ -281,6 +280,54 @@ void message_box_for_add_folder(GtkWidget *window,gchar *message)
 	gtk_widget_destroy(dialog);
 }
 
+void rename_folder_or_note(struct clist_struct *cclist)
+{
+	gchar creat_name[512];
+	gchar cmd[1024];
+	const gchar *fp = NULL;
+	gchar msg[64];
+	
+	memset(creat_name, '\0', sizeof(creat_name));
+	fp = gtk_entry_get_text(GTK_ENTRY(cclist->other.entry_name));
+	printf("fp: %02x\n", *fp);
+	if((strchr(fp, ' ') == NULL) && (*fp != 0)){
+			if(cclist->xname == FOLDER){
+				g_snprintf(cmd, sizeof(cmd), "mv %s %s/%s", 
+				 	cclist->sub_path, cclist->root_path, fp);
+				 system(cmd);	
+				gtk_clist_clear(GTK_CLIST(cclist->clist_folder));	
+				show_folders(cclist);
+				
+				strcpy(msg, "Reame OK");
+			} else if(cclist->xname == NOTE_FILE){
+				if(strstr(fp, ".txt") == NULL){
+					g_snprintf(cmd, sizeof(cmd), "mv %s %s/%s%s", 
+				 	cclist->doc_path, cclist->sub_path, fp, ".txt");
+				}else{
+					g_snprintf(cmd, sizeof(cmd), "mv %s %s/%s", 
+				 	cclist->doc_path, cclist->sub_path, fp);
+				}
+				system(cmd);
+				gtk_clist_clear(GTK_CLIST(cclist->clist_note));
+				show_notes(cclist);
+				strcpy(msg, "Reame OK");
+			} else {
+				strcpy(msg, "Cann't Rename....");
+			}
+		message_box_for_add_folder(cclist->other.window,msg);
+		debug_p("root_path:%s \n", creat_name);	
+		gtk_widget_destroy(GTK_WIDGET(cclist->other.window));
+		cclist->other.window = NULL;
+		cclist->other.entry_name = NULL;
+	} else {
+		debug_p("no words or input the wrong name\n");
+		strcpy(msg, "No words or input the wrong name");
+		message_box_for_add_folder(cclist->other.window,msg);
+	}
+	
+	return;
+}
+
 void del_folder_or_note(struct clist_struct *cclist)
 {
 	if(cclist->del == FOLDER){
@@ -297,7 +344,7 @@ void del_folder_or_note(struct clist_struct *cclist)
 		debug_p("cmd: %s \n", cmd);
 		gtk_clist_clear(GTK_CLIST(cclist->clist_folder));
 		show_folders(cclist);
-	} else if(cclist->del == NOTEFILE){
+	} else if(cclist->del == NOTE_FILE){
 		if(cclist->note_row < 0)
 			return;
 		debug_p("the path :%s \n", cclist->doc_path);

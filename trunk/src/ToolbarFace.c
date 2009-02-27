@@ -47,6 +47,20 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         GtkWidget *hbox10;
         GtkWidget *image_save;
         GtkWidget *label_save;
+/*-----------------button_ref-----------------------*/        
+        GtkWidget *toolitem_ref;
+        GtkWidget *button_ref;
+        GtkWidget *alignment_ref;
+        GtkWidget *hbox_ref;
+        GtkWidget *image__ref;
+        GtkWidget *label__ref;
+/*-----------------button_ref-----------------------*/        
+        GtkWidget *toolitem_ren;
+        GtkWidget *button_ren;
+        GtkWidget *alignment_ren;
+        GtkWidget *hbox_ren;
+        GtkWidget *image__ren;
+        GtkWidget *label__ren;
 /*-----------------button_df-----------------------*/
         GtkWidget *toolitem5;
         GtkWidget *button_df;
@@ -174,7 +188,57 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         label_save = gtk_label_new_with_mnemonic (_("Save"));
         gtk_widget_show (label_save);
         gtk_box_pack_start (GTK_BOX (hbox10), label_save, FALSE, FALSE, 0);
+/*-----------------button_ref-----------------------*/        
+        toolitem_ref = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem_ref);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem_ref);
 
+        button_ref = gtk_button_new ();
+        gtk_widget_show (button_ref);
+        gtk_container_add (GTK_CONTAINER (toolitem_ref), button_ref);
+	gtk_button_set_relief (GTK_BUTTON (button_ref), GTK_RELIEF_NONE);
+
+        alignment_ref = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment_ref);
+        gtk_container_add (GTK_CONTAINER (button_ref), alignment_ref);
+
+        hbox_ref = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox_ref);
+        gtk_container_add (GTK_CONTAINER (alignment_ref), hbox_ref);
+
+        image__ref = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image__ref);
+        gtk_box_pack_start (GTK_BOX (hbox_ref), image__ref, FALSE, FALSE, 0);
+
+        label__ref = gtk_label_new_with_mnemonic (_("Folder"));
+        gtk_widget_show (label__ref);
+        gtk_box_pack_start (GTK_BOX (hbox_ref), label__ref, FALSE, FALSE, 0);        
+/*-----------------button_ren-----------------------*/  
+        toolitem_ren = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem_ren);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem_ren);
+
+        button_ren = gtk_button_new ();
+        gtk_widget_show (button_ren);
+        gtk_container_add (GTK_CONTAINER (toolitem_ren), button_ren);
+	gtk_button_set_relief (GTK_BUTTON (button_ren), GTK_RELIEF_NONE);
+
+        alignment_ren = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment_ren);
+        gtk_container_add (GTK_CONTAINER (button_ren), alignment_ren);
+
+        hbox_ren = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox_ren);
+        gtk_container_add (GTK_CONTAINER (alignment_ren), hbox_ren);
+
+        image__ren = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image__ren);
+        gtk_box_pack_start (GTK_BOX (hbox_ren), image__ren, FALSE, FALSE, 0);
+
+        label__ren = gtk_label_new_with_mnemonic (_("Note"));
+        gtk_widget_show (label__ren);
+        gtk_box_pack_start (GTK_BOX (hbox_ren), label__ren, FALSE, FALSE, 0);
+/*-----------------------------------------------------------*/
         toolitem5 = (GtkWidget*) gtk_tool_item_new ();
         gtk_widget_show (toolitem5);
         gtk_container_add (GTK_CONTAINER (toolbar), toolitem5);
@@ -263,6 +327,12 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
 	g_signal_connect ((gpointer) button_save, "clicked",
 	                  G_CALLBACK (on_button_save_clicked),
 	                  (gpointer *)clist);
+	g_signal_connect ((gpointer) button_ref, "clicked",
+	                  G_CALLBACK (on_button_ref_clicked),
+	                  (gpointer *)clist);
+	g_signal_connect ((gpointer) button_ren, "clicked",
+	                  G_CALLBACK (on_button_ren_clicked),
+	                  (gpointer *)clist);
 	g_signal_connect ((gpointer) button_df, "clicked",
 	                  G_CALLBACK (on_button_df_clicked),
 	                  (gpointer *)clist);
@@ -298,6 +368,21 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         GLADE_HOOKUP_OBJECT (main_windown, hbox10, "hbox10");
         GLADE_HOOKUP_OBJECT (main_windown, image_save, "image_save");
         GLADE_HOOKUP_OBJECT (main_windown, label_save, "label_save");
+/*-----------------------------------------------------------------------*/
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem_ref, "toolitem_ref");
+        GLADE_HOOKUP_OBJECT (main_windown, button_ref, "button_ref");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment_ref, "alignment_ref");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox_ref, "hbox_ref");
+        GLADE_HOOKUP_OBJECT (main_windown, image__ref, "image__ref");
+        GLADE_HOOKUP_OBJECT (main_windown, label__ref, "label__ref");
+/*-----------------------------------------------------------------------*/
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem_ren, "toolitem_ren");
+        GLADE_HOOKUP_OBJECT (main_windown, button_ren, "button_ren");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment_ren, "alignment_ren");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox_ren, "hbox_ren");
+        GLADE_HOOKUP_OBJECT (main_windown, image__ren, "image__ren");
+        GLADE_HOOKUP_OBJECT (main_windown, label__ren, "label__ren");
+/*-----------------------------------------------------------------------*/
         GLADE_HOOKUP_OBJECT (main_windown, toolitem5, "toolitem5");
         GLADE_HOOKUP_OBJECT (main_windown, button_df, "button_df");
         GLADE_HOOKUP_OBJECT (main_windown, alignment10, "alignment10");
