@@ -354,7 +354,9 @@ MenubarCall.o: MenubarCall.c ../config.h /usr/include/gtk-2.0/gtk/gtk.h \
   /usr/include/gtk-2.0/gtk/gtkvpaned.h \
   /usr/include/gtk-2.0/gtk/gtkvruler.h \
   /usr/include/gtk-2.0/gtk/gtkvscale.h \
-  /usr/include/gtk-2.0/gtk/gtkvseparator.h Menubar.h
+  /usr/include/gtk-2.0/gtk/gtkvseparator.h Menubar.h Support.h \
+  /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
+  Debug.h AddFolder.h Toolbar.h Dialog.h About.h Calendar.h Funs.h
 
 ../config.h:
 
@@ -1159,3 +1161,25 @@ MenubarCall.o: MenubarCall.c ../config.h /usr/include/gtk-2.0/gtk/gtk.h \
 /usr/include/gtk-2.0/gtk/gtkvseparator.h:
 
 Menubar.h:
+
+Support.h:
+
+/usr/include/libintl.h:
+
+/usr/include/locale.h:
+
+/usr/include/bits/locale.h:
+
+Debug.h:
+
+AddFolder.h:
+
+Toolbar.h:
+
+Dialog.h:
+
+About.h:
+
+Calendar.h:
+
+Funs.h:

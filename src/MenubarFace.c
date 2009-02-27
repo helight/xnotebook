@@ -24,10 +24,13 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
 	  /*-----------file ---------*/
 	  GtkWidget *menuitem_file;
 	  GtkWidget *menu_file;
+	  
 	  GtkWidget *new_folder;
 	  GtkWidget *image_new_folder;
+	  
 	  GtkWidget *new_note;
 	  GtkWidget *image_new_note;
+	  
 	  GtkWidget *save_note;
 	  GtkWidget *image_save;
 	  GtkWidget *separatormenuitem_file;
@@ -37,6 +40,13 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
 	  GtkWidget *menu_edit;
 	  GtkWidget *edit_note;
 	  GtkWidget *image_edit;
+	  
+	  GtkWidget *rename_folder;
+	  GtkWidget *image_ref;
+	  
+	  GtkWidget *rename_note;
+	  GtkWidget *image_ren;
+	  
 	  GtkWidget *separatormenuitem_edit;
 	  GtkWidget *del_folder;
 	  GtkWidget *image_del_folder;
@@ -130,6 +140,30 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
 	  gtk_widget_show (image_edit);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (edit_note), image_edit);
  /*------------------------------------------------------------------------------------*/
+	  rename_folder = gtk_image_menu_item_new_with_mnemonic (_("Rename Folder"));
+	  gtk_widget_show (rename_folder);
+          gtk_container_add (GTK_CONTAINER (menu_edit), rename_folder);
+          gtk_tooltips_set_tip (tooltips, rename_folder, _("Rename The Folder"), NULL);
+          gtk_widget_add_accelerator (rename_folder, "activate", accel_group,
+                                                    GDK_Y, (GdkModifierType) GDK_CONTROL_MASK,
+                                                     GTK_ACCEL_VISIBLE);
+                                                     
+          image_ref = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_MENU);
+	  gtk_widget_show (image_ref);
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (rename_folder), image_ref); 
+/*------------------------------------------------------------------------------------*/
+	  rename_note = gtk_image_menu_item_new_with_mnemonic (_("Rename Note"));
+	  gtk_widget_show (rename_note);
+          gtk_container_add (GTK_CONTAINER (menu_edit), rename_note);
+          gtk_tooltips_set_tip (tooltips, rename_note, _("Rename The Note"), NULL);
+          gtk_widget_add_accelerator (rename_note, "activate", accel_group,
+                                                    GDK_U, (GdkModifierType) GDK_CONTROL_MASK,
+                                                     GTK_ACCEL_VISIBLE);
+                                                     
+          image_ren = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_MENU);
+	  gtk_widget_show (image_ren);
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (rename_note), image_ren);
+ /*------------------------------------------------------------------------------------*/
  	  separatormenuitem_edit = gtk_separator_menu_item_new ();
 	  gtk_widget_show (separatormenuitem_edit);
 	  gtk_container_add (GTK_CONTAINER (menu_edit), separatormenuitem_edit);
@@ -212,7 +246,13 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
 	  g_signal_connect ((gpointer) edit_note, "activate",
 	              G_CALLBACK (on_edit_note_activate),
 	              (gpointer)clist);
-	  g_signal_connect ((gpointer) del_folder, "activate",
+	  g_signal_connect ((gpointer) rename_folder, "activate",
+	              G_CALLBACK (on_rename_folder_activate),
+	              (gpointer)clist);
+	  g_signal_connect ((gpointer) rename_note, "activate",
+	              G_CALLBACK (on_rename_note_activate),
+	              (gpointer)clist);
+ 	  g_signal_connect ((gpointer) del_folder, "activate",
 	              G_CALLBACK (on_del_folder_activate),
 	              (gpointer)clist);
 	  g_signal_connect ((gpointer) del_note, "activate",
@@ -239,6 +279,10 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
 	  GLADE_HOOKUP_OBJECT (main_windown, menu_edit, "menu_edit");
 	  GLADE_HOOKUP_OBJECT (main_windown, edit_note, "edit_note");
 	  GLADE_HOOKUP_OBJECT (main_windown, image_edit, "image_edit");
+	  GLADE_HOOKUP_OBJECT (main_windown, rename_folder, "rename_folder");
+	  GLADE_HOOKUP_OBJECT (main_windown, image_ref, "image_ref");
+	  GLADE_HOOKUP_OBJECT (main_windown, rename_note, "rename_note");
+	  GLADE_HOOKUP_OBJECT (main_windown, image_ren, "image_ren");
 	  GLADE_HOOKUP_OBJECT (main_windown, separatormenuitem_edit, "separatormenuitem_edit");
 	  GLADE_HOOKUP_OBJECT (main_windown, del_folder, "del_folder");
 	  GLADE_HOOKUP_OBJECT (main_windown, image_del_folder, "image_del_folder");

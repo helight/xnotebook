@@ -63,7 +63,7 @@ struct statusbar{
 enum deal{
 	NOTHING,
 	FOLDER,
-	NOTEFILE
+	NOTE_FILE
 	};
 	
 struct clist_struct {
@@ -73,6 +73,7 @@ struct clist_struct {
 	GtkTextBuffer *buffer;
 	enum deal creat;
 	enum deal del;
+	enum deal xname;
 	GtkWidget *clist_folder;
 	gint folder_row;
 	GtkWidget *clist_note;

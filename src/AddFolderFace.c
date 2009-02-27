@@ -24,12 +24,18 @@ void handle_for_create_window_add(gpointer user_data)
 	if(clist->creat == FOLDER)
 		gtk_window_set_title (GTK_WINDOW (window), _(
 					"Add A Folder"));
-	else if(clist->creat == NOTEFILE)
+	else if(clist->creat == NOTE_FILE)
 		gtk_window_set_title (GTK_WINDOW (window), _(
 					"Add A NoteFile"));
-	else {
-		gtk_widget_destroy(GTK_WIDGET(window));
-		return;
+	else if(clist->xname == FOLDER)
+		gtk_window_set_title (GTK_WINDOW (window), _(
+					"Rename The Folder"));
+	else if(clist->xname == NOTE_FILE)
+		gtk_window_set_title (GTK_WINDOW (window), _(
+					"Rename The NoteFile"));
+	else{ 
+		gtk_window_set_title (GTK_WINDOW (window), _(
+					"You Haven't selected Folder or File"));
 	}
 	gtk_widget_show(window);
 }
@@ -71,17 +77,30 @@ create_new_add_window (struct clist_struct *clist)
         
 	if(clist->creat == FOLDER){
 		label_title = gtk_label_new (_("<b>Creat Folder On Root Folder:</b>"));
-	} else if(clist->creat == NOTEFILE){
+	} else if(clist->creat == NOTE_FILE){
+		gchar title[128];
 		gchar *name = clist->sub_path;
-		gchar title[128] = "<b>Creat NoteFile ON \n";
 		name = name + strlen(clist->root_path)+1;
-		strcat(title, name);
-		strcat(title, "</b>");
+		g_snprintf(title, sizeof(title), "<b>Creat Folder On \n %s </b>", name);
+		debug_p("the foldername:%s\n",name);
+		label_title = gtk_label_new (_(title));
+	} else if(clist->xname == FOLDER){
+		gchar title[128];
+		gchar *name = clist->sub_path;
+		name = name + strlen(clist->root_path)+1;
+		g_snprintf(title, sizeof(title), "<b>Rename This NoteFile \n %s </b>", name);
+		debug_p("the foldername:%s\n",name);
+		label_title = gtk_label_new (_(title));
+		
+	} else if(clist->xname == NOTE_FILE){
+		gchar title[128];
+		gchar *name = clist->doc_path;
+		name = name + strlen(clist->sub_path)+1;
+		g_snprintf(title, sizeof(title), "<b>Rename This NoteFile \n %s </b>", name);
 		debug_p("the foldername:%s\n",name);
 		label_title = gtk_label_new (_(title));
 	} else {
-		label_title = gtk_label_new (_("<b>Cann't Creat....!!!</b>"));
-		return;
+		label_title = gtk_label_new (_("<b>Nothing Can be Done....!!!</b>"));
 	}
         gtk_widget_show (label_title);
         gtk_box_pack_start (GTK_BOX (vbox_top), label_title, FALSE, FALSE, 0);
@@ -204,7 +223,16 @@ void
 on_button_add_folder_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist=(struct clist_struct *)user_data;
-	add_folder_or_note(cclist);
+	if((cclist->creat == NOTHING) && (cclist->xname == NOTHING)){
+		gchar msg[] = "You Select Nothing";
+		message_box_for_add_folder(cclist->other.window,msg);		
+		return;	
+	} else if(cclist->creat != NOTHING){
+		add_folder_or_note(cclist);
+	}else if(cclist->xname != NOTHING){
+		rename_folder_or_note(cclist);
+	}
+	return;	
 }
 void
 on_button_add_folder_cancel_clicked (GtkButton *button, gpointer user_data)
@@ -213,6 +241,8 @@ on_button_add_folder_cancel_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_destroy(GTK_WIDGET(cclist->other.window));
 	cclist->other.window = NULL;
 	cclist->other.entry_name = NULL;
+	
+	return;	
 	
 }
 
@@ -224,6 +254,7 @@ on_window_add_folder_destroy (GtkObject *object, gpointer user_data)
 	cclist->other.entry_name = NULL;
 	
 	gtk_widget_destroy(GTK_WIDGET(object));
+	return;	
 }
 
 void
@@ -232,4 +263,6 @@ on_button_add_folder_help_clicked (GtkButton *button, gpointer user_data)
 	gchar msg[]="Please Input The Name:\n You can input input the\
 	name of the folder of note that you want to creat.";
 	message_box_for_add_folder(user_data,msg);
+	
+	return;	
 }

@@ -28,6 +28,12 @@ void on_save_note_activate (GtkMenuItem *menuitem, gpointer user_data);
 
 void on_edit_note_activate (GtkMenuItem *menuitem, gpointer user_data);
 
+void
+on_rename_folder_activate (GtkMenuItem *menuitem, gpointer user_data);
+
+void
+on_rename_note_activate (GtkMenuItem *menuitem, gpointer user_data);
+
 void on_del_folder_activate (GtkMenuItem *menuitem, gpointer user_data);
 
 void on_del_note_activate (GtkMenuItem *menuitem, gpointer user_data);
