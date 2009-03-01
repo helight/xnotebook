@@ -23,7 +23,7 @@ clist_folder_get_selection_row(GtkCList *gtkclist,gint row,gint column,
 	clist->folder_row = row;
 	show_notes(clist);
 	//memset(clist->doc_path, '\0', sizeof(clist->doc_path));
-	clist->note_row = -1;	
+	clist->note_row = 0;	
 	return;
 }
 /*
