@@ -16,20 +16,20 @@ GtkWidget*
 create_window_about (void)
 {
 	GdkPixbuf *window_main_icon_pixbuf;
-        GtkWidget *window_about;                                                                                                                                                                                                                                                                                          
-        GtkWidget *vbox_about;
-        GtkWidget *image_zhwen;
-        GtkWidget *label_zhwen;
-        GtkWidget *label_xnote;
-        GtkWidget *button_link;
-        GtkWidget *button_about_close;
-        GtkWidget *alignment_close;
-        GtkWidget *hbox_close;
-        GtkWidget *image_close;
-        GtkWidget *label_close;
+	GtkWidget *window_about;                                                                                                                                                                                                                                                                                          
+	GtkWidget *vbox_about;
+	GtkWidget *image_zhwen;
+	GtkWidget *label_zhwen;
+	GtkWidget *label_xnote;
+	GtkWidget *button_link;
+	GtkWidget *button_about_close;
+	GtkWidget *alignment_close;
+	GtkWidget *hbox_close;
+	GtkWidget *image_close;
+	GtkWidget *label_close;
 
-        window_about = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-        gtk_window_set_title (GTK_WINDOW (window_about), _("About Xnotebook"));
+	window_about = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (window_about), _("About Xnotebook"));
 	gtk_window_set_default_size (GTK_WINDOW (window_about), 300, 310);
 	gtk_window_set_position (GTK_WINDOW (window_about), GTK_WIN_POS_CENTER);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (window_about), TRUE);
