@@ -48,8 +48,7 @@ on_button_edit_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
 	if(cclist->note_row >= 0){
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (
-					cclist->note_text), TRUE);
+		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), TRUE);
 		debug_p("enable edit\n");
 	}
 	return;
@@ -65,9 +64,9 @@ on_button_save_clicked (GtkButton *button, gpointer  user_data)
 	
 	save_note(cclist);
 
-	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (
-					cclist->note_text), FALSE);
+	//if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
+	//	gtk_text_view_set_editable (GTK_TEXT_VIEW (
+	//				cclist->note_text), FALSE);
 	return;
 }
 

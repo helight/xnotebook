@@ -137,7 +137,6 @@ void show_notes(struct clist_struct *cclist)
 		
 	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), FALSE);
-	
 	memset(msg, '\0', sizeof(msg));
 	g_snprintf(msg, sizeof(msg), "Note : %d", num);
 	show_status(cclist->statusbar.status_note, msg);

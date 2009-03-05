@@ -59,9 +59,9 @@ on_save_note_activate (GtkMenuItem *menuitem, gpointer user_data)
 	
 	save_note(cclist);
 
-	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (
-					cclist->note_text), FALSE);
+	//if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
+	//	gtk_text_view_set_editable (GTK_TEXT_VIEW (
+	//				cclist->note_text), FALSE);
 	return;
 }
 
