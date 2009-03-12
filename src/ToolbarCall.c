@@ -47,10 +47,8 @@ void
 on_button_edit_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
-	if(cclist->note_row >= 0){
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), TRUE);
-		debug_p("enable edit\n");
-	}
+
+	enable_edit(cclist);
 	return;
 }
 
@@ -68,36 +66,6 @@ on_button_save_clicked (GtkButton *button, gpointer  user_data)
 	//	gtk_text_view_set_editable (GTK_TEXT_VIEW (
 	//				cclist->note_text), FALSE);
 	return;
-}
-
-void
-on_button_ref_clicked (GtkButton  *button, gpointer user_data)
-{
-	struct clist_struct *cclist = (struct clist_struct *)user_data;
-	if(cclist->folder_row < 0)
-		cclist->xname = NOTHING;
-	else
-		cclist->xname = FOLDER;
-	cclist->creat = NOTHING;
-	cclist->del = NOTHING;
-	debug_p("folder_row:%d \n", cclist->folder_row);
-	handle_for_create_window_add(cclist);
-}
-
-void
-on_button_ren_clicked (GtkButton  *button, gpointer user_data)
-{
-	gchar msg[] = "";
-	struct clist_struct *cclist = (struct clist_struct *)user_data;
-	if(cclist->note_row < 0)
-		cclist->xname = NOTHING;
-	else
-		cclist->xname = NOTE_FILE;
-	
-	cclist->creat = NOTHING;
-	cclist->del = NOTHING;	
-	debug_p("Rename note: %d\n", cclist->note_row);
-	handle_for_create_window_add(cclist);
 }
 
 void

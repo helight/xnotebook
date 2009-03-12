@@ -138,7 +138,7 @@ void show_notes(struct clist_struct *cclist)
 	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), FALSE);
 	memset(msg, '\0', sizeof(msg));
-	g_snprintf(msg, sizeof(msg), "Note : %d", num);
+	g_snprintf(msg, sizeof(msg), "Total Notes : %d", num);
 	show_status(cclist->statusbar.status_note, msg);
 	return;
 }
@@ -196,12 +196,37 @@ void show_file(struct clist_struct *cclist)
 		return;
 	}
 	memset(msg, '\0', sizeof(msg));
-	g_snprintf(msg, sizeof(msg), "Name:%s Size:%6d bytes", 
+	g_snprintf(msg, sizeof(msg), "Note:%s Size:%6d bytes --- Can't Edit: Locked", 
 		file_path + strlen(cclist->sub_path) + 1, stat.st_size);
 	show_status(cclist->statusbar.status_file, msg);
 	
 	return;	
 }
+
+gboolean enable_edit(struct clist_struct *cclist)
+{
+	gchar msg[128];
+	struct stat stat;
+	
+	if(cclist->note_row >= 0){
+		if(lstat(cclist->doc_path, &stat) == -1){
+			perror("stat:");
+			return;
+		}
+		
+		memset(msg, '\0', sizeof(msg));
+		g_snprintf(msg, sizeof(msg), "Note:%s Size:%6d bytes --- Editable", 
+		cclist->doc_path + strlen(cclist->sub_path) + 1, stat.st_size);
+		show_status(cclist->statusbar.status_file, msg);
+
+		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), TRUE);
+		debug_p("enable edit\n");		
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+
 void show_status(GtkWidget *statusbar, gchar *msg)
 {
 	gint status_id = 0;

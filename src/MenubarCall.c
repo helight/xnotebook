@@ -8,7 +8,6 @@
 #  include <config.h>
 #endif
 
-#include <gtk/gtk.h>
 #include "Menubar.h"
 #include "AddFolder.h"
 #include "Toolbar.h"

@@ -29,17 +29,17 @@ create_status(GtkWidget *main_windown, GtkWidget *vbox,
         status_folder = gtk_statusbar_new ();
         gtk_widget_show (status_folder);
         gtk_box_pack_start (GTK_BOX (hbox_status), status_folder, FALSE, FALSE, 0);
-        gtk_widget_set_size_request (status_folder, 200, 21);
+        gtk_widget_set_size_request (status_folder, 120, 21);
 
         status_file = gtk_statusbar_new ();
         gtk_widget_show (status_file);
         gtk_box_pack_start (GTK_BOX (hbox_status), status_file, FALSE, FALSE, 0);
-        gtk_widget_set_size_request (status_file, 300, 21);
+        gtk_widget_set_size_request (status_file, 500, 21);
 
         status_note = gtk_statusbar_new ();
         gtk_widget_show (status_note);
         gtk_box_pack_start (GTK_BOX (hbox_status), status_note, FALSE, FALSE, 0);
-        gtk_widget_set_size_request (status_note, 200, 21);
+        gtk_widget_set_size_request (status_note, 120, 21);
         
 	GLADE_HOOKUP_OBJECT (main_windown, hbox_status, "hbox_status");
 	GLADE_HOOKUP_OBJECT (main_windown, status_folder, "status_folder");
