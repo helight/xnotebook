@@ -14,8 +14,8 @@
 
 GtkWidget *
 create_toolbar(GtkWidget *main_window, GtkWidget *vbox, 
-				GtkTooltips *tooltips, GtkAccelGroup *accel_group, 
-				struct clist_struct *clist);
+		GtkTooltips *tooltips, GtkAccelGroup *accel_group, 
+		struct clist_struct *clist);
 
 void
 on_button_nf_clicked (GtkButton *button, gpointer user_data);
@@ -28,12 +28,6 @@ on_button_edit_clicked (GtkButton *button, gpointer user_data);
 
 void
 on_button_save_clicked (GtkButton *button, gpointer user_data);
-
-void
-on_button_ref_clicked (GtkButton  *button, gpointer user_data);
-
-void
-on_button_ren_clicked (GtkButton  *button, gpointer user_data);
 
 void
 on_button_df_clicked (GtkButton  *button, gpointer user_data);

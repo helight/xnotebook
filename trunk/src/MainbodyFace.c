@@ -52,7 +52,7 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
 	gtk_widget_set_size_request (folder_list, 150, -1);
 	gtk_clist_set_column_width (GTK_CLIST (folder_list), 0, 80);
 	gtk_clist_column_titles_show (GTK_CLIST (folder_list));
-        fontdesc_folder_list= pango_font_description_from_string("Sans 14"); 
+        fontdesc_folder_list= pango_font_description_from_string("Sans 12"); 
         gtk_widget_modify_font(folder_list, fontdesc_folder_list); 
         pango_font_description_free(fontdesc_folder_list); 
 
@@ -85,7 +85,7 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
 	gtk_clist_set_column_auto_resize(GTK_CLIST(note_list),1,TRUE);
 	gtk_clist_column_titles_show (GTK_CLIST (note_list));
 	gtk_clist_set_selection_mode (GTK_CLIST (note_list), GTK_SELECTION_BROWSE);
-        fontdesc_note_list= pango_font_description_from_string("Sans 13"); 
+        fontdesc_note_list= pango_font_description_from_string("Sans 11"); 
         gtk_widget_modify_font(note_list, fontdesc_note_list); 
         pango_font_description_free(fontdesc_note_list); 
 	
@@ -109,20 +109,27 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
 	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (note_text));	
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (note_text), TRUE);
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (note_text), GTK_WRAP_WORD);
-        fontdesc_note_text = pango_font_description_from_string("Sans 12"); 
+        fontdesc_note_text = pango_font_description_from_string("Sans 11"); 
         gtk_widget_modify_font(note_text, fontdesc_note_text); 
         pango_font_description_free(fontdesc_note_text); 
 	
 	g_signal_connect ((gpointer) vpaned1, "key_press_event",
-                    G_CALLBACK (on_vpaned1_key_press_event),
-                    NULL);
-	
-	g_signal_connect((gpointer)(folder_list),"select_row",
-        					G_CALLBACK(clist_folder_get_selection_row),
-        					(gpointer *)clist);
-	g_signal_connect((gpointer)(note_list),"select_row",
-        					G_CALLBACK(clist_note_get_selection_row),
-        					(gpointer *)clist);
+			G_CALLBACK (on_vpaned1_key_press_event),
+			NULL);
+	g_signal_connect ((gpointer) folder_list, "button_press_event",
+                    	G_CALLBACK (folder_list_button_press_event),
+                    	(gpointer *)clist);                    				
+	g_signal_connect((gpointer) folder_list,"select_row",
+        		G_CALLBACK(clist_folder_get_selection_row),
+        		(gpointer *)clist);
+        
+        g_signal_connect((gpointer) note_list,"button_press_event",
+        		G_CALLBACK(note_list_button_press_event),
+        		(gpointer *)clist);		
+	g_signal_connect((gpointer) note_list,"select_row",
+        		G_CALLBACK(clist_note_get_selection_row),
+        		(gpointer *)clist);
+
         					
 	GLADE_HOOKUP_OBJECT (main_windown, scrolledwindow4, "scrolledwindow4");
 	GLADE_HOOKUP_OBJECT (main_windown, folder_list, "folder_list");

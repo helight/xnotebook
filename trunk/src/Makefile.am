@@ -14,6 +14,7 @@ xnotebook_SOURCES = \
 	AddFolderFace.c AddFolder.h\
 	Callbacks.c Callbacks.h	\
 	MenubarFace.c MenubarCall.c Menubar.h \
+	PopmenuFace.c PopmenuCall.c Popmenu.h \
 	MainbodyFace.c MainbodyCall.c Mainbody.h \
 	ToolbarFace.c ToolbarCall.c Toolbar.h \
 	StatusbarFace.c Statusbar.h \

@@ -16,6 +16,8 @@ void show_notes(struct clist_struct *clist);
 
 void show_file(struct clist_struct *cclist);
 
+gboolean enable_edit(struct clist_struct *cclist);
+
 void show_status(GtkWidget *statusbar, gchar *msg);
 
 void add_folder_or_note(struct clist_struct *clist);
