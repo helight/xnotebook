@@ -13,6 +13,7 @@
 #include "AddFolder.h"
 #include "Dialog.h"
 #include "About.h"
+#include "AddRss.h"
 #include "Funs.h"
 void
 on_add_folder_pop_activate (GtkMenuItem *menuitem, gpointer user_data)
@@ -110,4 +111,45 @@ on_delete_note_pop_activate (GtkMenuItem *menuitem, gpointer user_data)
 	dialog_del = create_dialog(cclist, msg);
 	gtk_widget_show (dialog_del);
 	debug_p("del note\n");
+}
+
+
+void
+on_add_rss_pop_activate (GtkMenuItem *menuitem, gpointer user_data)
+{
+	//GtkWidget *window;
+	printf("on_add_rss_pop_activate\n");
+	struct clist_struct *cclist=(struct clist_struct *)user_data;	
+	debug_p("root_path:%s \n", cclist->rss_path);
+	//window = (GtkWidget *)create_add_rss_window (user_data);	
+	//gtk_widget_show(window);
+	handle_for_create_rss_window(cclist);
+	debug_p("new!!!\n");
+}
+
+void
+on_rename_rss_pop_activate (GtkMenuItem *menuitem, gpointer user_data)
+{
+	printf("on_rename_rss_pop_activate\n");
+}
+
+void
+on_delete_rss_pop_activate (GtkMenuItem *menuitem, gpointer user_data)
+{
+	GtkWidget *dialog_del;
+	gchar msg[] = "Del This RSS Item?";
+	struct clist_struct *cclist = (struct clist_struct *)user_data;
+	
+	if(cclist->rss_row < 0)
+		cclist->del = NOTHING;
+	else
+		cclist->del = RSS_ITEM;
+	
+	cclist->creat = NOTHING;
+	cclist->xname = NOTHING;	
+	dialog_del = create_dialog(cclist, msg);
+	gtk_widget_show (dialog_del);
+	debug_p("del note\n");
+	printf("on_delete_rss_pop_activate\n");
+
 }

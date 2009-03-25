@@ -46,7 +46,8 @@ PROGRAMS = $(bin_PROGRAMS)
 am_xnotebook_OBJECTS = main.$(OBJEXT) Support.$(OBJEXT) \
 	Mainwindow.$(OBJEXT) AddFolderFace.$(OBJEXT) \
 	Callbacks.$(OBJEXT) MenubarFace.$(OBJEXT) \
-	MenubarCall.$(OBJEXT) PopmenuFace.$(OBJEXT) \
+	MenubarCall.$(OBJEXT) Rss.$(OBJEXT) AddRssFace.$(OBJEXT) \
+	AddRssCall.$(OBJEXT) PopmenuFace.$(OBJEXT) \
 	PopmenuCall.$(OBJEXT) MainbodyFace.$(OBJEXT) \
 	MainbodyCall.$(OBJEXT) ToolbarFace.$(OBJEXT) \
 	ToolbarCall.$(OBJEXT) StatusbarFace.$(OBJEXT) \
@@ -68,11 +69,11 @@ DIST_SOURCES = $(xnotebook_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/helight/workspace/xnotebook/missing --run aclocal-1.10
-AMTAR = ${SHELL} /home/helight/workspace/xnotebook/missing --run tar
-AUTOCONF = ${SHELL} /home/helight/workspace/xnotebook/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/helight/workspace/xnotebook/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/helight/workspace/xnotebook/missing --run automake-1.10
+ACLOCAL = ${SHELL} /home/helight/mywork/xnotebook/missing --run aclocal-1.10
+AMTAR = ${SHELL} /home/helight/mywork/xnotebook/missing --run tar
+AUTOCONF = ${SHELL} /home/helight/mywork/xnotebook/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/helight/mywork/xnotebook/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/helight/mywork/xnotebook/missing --run automake-1.10
 AWK = mawk
 CATALOGS = 
 CATOBJEXT = .gmo
@@ -106,7 +107,7 @@ LIBOBJS =
 LIBS = 
 LTLIBOBJS = 
 MAINT = 
-MAKEINFO = ${SHELL} /home/helight/workspace/xnotebook/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/helight/mywork/xnotebook/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = ./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
@@ -132,10 +133,10 @@ STRIP =
 USE_NLS = yes
 VERSION = 0.1
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/helight/workspace/xnotebook/src
-abs_srcdir = /home/helight/workspace/xnotebook/src
-abs_top_builddir = /home/helight/workspace/xnotebook
-abs_top_srcdir = /home/helight/workspace/xnotebook
+abs_builddir = /home/helight/mywork/xnotebook/src
+abs_srcdir = /home/helight/mywork/xnotebook/src
+abs_top_builddir = /home/helight/mywork/xnotebook
+abs_top_srcdir = /home/helight/mywork/xnotebook
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -154,7 +155,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = $(SHELL) /home/helight/workspace/xnotebook/install-sh
+install_sh = $(SHELL) /home/helight/mywork/xnotebook/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -185,6 +186,8 @@ xnotebook_SOURCES = \
 	AddFolderFace.c AddFolder.h\
 	Callbacks.c Callbacks.h	\
 	MenubarFace.c MenubarCall.c Menubar.h \
+	Rss.c Rss.h \
+	AddRssFace.c AddRssCall.c AddRss.h \
 	PopmenuFace.c PopmenuCall.c Popmenu.h \
 	MainbodyFace.c MainbodyCall.c Mainbody.h \
 	ToolbarFace.c ToolbarCall.c Toolbar.h \
@@ -265,6 +268,8 @@ distclean-compile:
 include ./$(DEPDIR)/AboutCall.Po
 include ./$(DEPDIR)/AboutFace.Po
 include ./$(DEPDIR)/AddFolderFace.Po
+include ./$(DEPDIR)/AddRssCall.Po
+include ./$(DEPDIR)/AddRssFace.Po
 include ./$(DEPDIR)/CalendarFace.Po
 include ./$(DEPDIR)/Callbacks.Po
 include ./$(DEPDIR)/DialogCall.Po
@@ -278,6 +283,7 @@ include ./$(DEPDIR)/MenubarCall.Po
 include ./$(DEPDIR)/MenubarFace.Po
 include ./$(DEPDIR)/PopmenuCall.Po
 include ./$(DEPDIR)/PopmenuFace.Po
+include ./$(DEPDIR)/Rss.Po
 include ./$(DEPDIR)/StatusbarFace.Po
 include ./$(DEPDIR)/Support.Po
 include ./$(DEPDIR)/ToolbarCall.Po

@@ -43,7 +43,7 @@ void handle_for_create_window_add(gpointer user_data)
 GtkWidget*
 create_new_add_window (struct clist_struct *clist)
 {
-        GtkWidget *window;                                                                                                                                                                                                                                                                                                
+        GtkWidget *window; 
         GtkWidget *vbox_top;
         GtkWidget *label_title;
         GtkWidget *entry_text;

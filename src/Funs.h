@@ -1,5 +1,5 @@
 /*
- * toolbar.h
+ * Funs.h
  *
  *  Created on: Feb 19, 2009
  *      Author: helight
@@ -28,4 +28,4 @@ void del_folder_or_note(struct clist_struct *cclist);
 
 void save_note(struct clist_struct *cclist);
 
-#endif /* TOOLBAR_H_ */
+#endif /* FUNS_H_ */

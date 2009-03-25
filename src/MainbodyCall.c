@@ -1,5 +1,5 @@
 /*
- * cbody.c
+ * MainbodyCall.c
  *
  *  Created on: Feb 19, 2009
  *      Author: helight
@@ -42,6 +42,7 @@ clist_folder_get_selection_row(GtkCList *gtkclist,gint row,gint column,
 {
 	struct clist_struct *clist = (struct clist_struct *)user_data;
 	clist->folder_row = row;
+	clist->is_rss = 0;
 	show_notes(clist);
 	//memset(clist->doc_path, '\0', sizeof(clist->doc_path));
 	clist->note_row = 0;	
@@ -58,10 +59,10 @@ note_list_button_press_event(GtkWidget *widget, GdkEventButton  *event,
 	if(event->button == BUTTON_RIGHT){
 		popup_menu_folder_list= (GtkWidget *)create_note_list_popmenu(clist);
 		gtk_menu_popup (GTK_MENU(popup_menu_folder_list), 
-						NULL, NULL, NULL, NULL,event->button, event->time);	
+				NULL, NULL, NULL, NULL,event->button, event->time);	
         return TRUE;
-    }
-    return FALSE;
+	}
+	return FALSE;
 }
 /*
  * 
@@ -72,6 +73,36 @@ clist_note_get_selection_row(GtkCList *gtkclist,gint row,gint column,
 {
 	struct clist_struct *clist = (struct clist_struct *)user_data;
 	clist->note_row = row;
-	show_file(clist);	
+	if (clist->is_rss == 0)
+		show_file(clist);	
 	return;
 }
+
+
+gboolean clist_rss_button_press_event(GtkWidget *widget, GdkEventButton  *event,
+				gpointer user_data)
+{
+	struct clist_struct *clist = (struct clist_struct *)user_data;
+	GtkWidget *popup_menu_clist_rss;
+  
+	if(event->button == BUTTON_RIGHT){
+		popup_menu_clist_rss= (GtkWidget *)create_clist_rss_popmenu(clist);
+		gtk_menu_popup (GTK_MENU(popup_menu_clist_rss), 
+				NULL, NULL, NULL, NULL,event->button, event->time);	
+        return TRUE;
+	}
+    return FALSE;
+}
+										
+void clist_rss_get_selection_row(GtkCList *gtkclist,gint row,
+			gint column, GdkEventButton *event, gpointer user_data)
+{
+	struct clist_struct *clist = (struct clist_struct *)user_data;
+	clist->rss_row = row;
+	clist->is_rss = 1;
+	show_rss_item(clist);	
+	return;
+}
+
+
+			

@@ -8,8 +8,8 @@
 #  include <config.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <sys/types.h>
+#include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <time.h>
 #include <fcntl.h>
@@ -68,6 +68,107 @@ opendir:if((dir = opendir(cclist->root_path)) == NULL){
 	
 	return;
 }
+
+void show_rss(struct clist_struct *cclist)
+{
+	gchar *fname[1][1] = {NULL};
+	gchar msg[64];
+	gint num = 0;
+	char *ch=NULL;
+	DIR *dir;
+	struct dirent *ptr;
+	debug_p("root_path:%s\n",cclist->rss_path);
+opendir:if((dir = opendir(cclist->rss_path)) == NULL){
+		perror("cann't open it\n");
+		switch(errno){
+		case EACCES:
+			perror("Permission denied.\n");
+			exit(1);
+		default:
+			printf("Directory does not exist, or name is an empty string.\n");
+			if(mkdir(cclist->rss_path, 0755) < 0){
+				perror("mkdir:\n");
+				exit(1);
+				}
+			goto opendir;
+		}
+	}
+	
+	while((ptr = readdir(dir)) != NULL){
+		ch = ptr->d_name;
+		if(*ch != '.'){
+			fname[0][0] = ptr->d_name;
+			gtk_clist_append((GtkCList*)cclist->clist_rss,fname[0]);
+			num++;
+		}
+		debug_p("file name:%s fname[]:%s\n",ch, fname[0][0]);
+	}	
+	//gtk_clist_select_row((GtkCList*)cclist->clist_rss,0,0);
+	cclist->rss_row = 0;
+	closedir(dir);
+	
+	memset(msg, '\0', sizeof(msg));
+	g_snprintf(msg, 80, "Folder : %d", num);
+	show_status(cclist->statusbar.status_folder, msg);
+	
+	return;
+}
+
+void show_rss_item(struct clist_struct *cclist)
+{
+	gint i = 0, n = 0, row = -1, len = 0;
+	char *ret = NULL;
+	FILE *fd = NULL;
+	gchar *fname[1][2] = {NULL,NULL};	
+	gchar buf[1024];
+	char *ch=NULL;
+	DIR *dir;
+	struct dirent *ptr;
+	struct stat stat;
+	
+	if((dir = opendir(cclist->rss_path)) == NULL){
+		printf("cann't open it\n");
+		return;
+	}	
+	row = cclist->rss_row;	
+	while((ptr = readdir(dir)) != NULL){
+		ch = ptr->d_name;
+		if(*ch != '.'){
+			if(i++ == row){
+				memset(cclist->rss_file_path, '\0', sizeof(cclist->rss_path));
+				snprintf(cclist->rss_file_path, sizeof(cclist->rss_file_path), "%s/%s",
+				 cclist->rss_path, ptr->d_name);
+			}			
+		}		
+	}
+	debug_p("path: %s\n", cclist->rss_file_path);
+	closedir(dir);
+	gtk_clist_clear(GTK_CLIST(cclist->clist_note));	
+	
+	fd = fopen(cclist->rss_file_path, "r");
+	ret = fgets(buf, sizeof(buf), fd);
+	debug_p("%s\n", buf);
+	while(ret) {
+		ret = fgets(buf, sizeof(buf), fd);
+		if(ret == NULL)
+			break;
+		ch = strstr(buf, "http://");
+		*(ch -1) = '\0';
+		fname[0][0] = buf;
+		len = strlen(ch);
+		*(ch + len -1) = '\0';
+		fname[0][1] = ch;
+		debug_p("%s\n", buf);
+		debug_p("%s\n", ch);
+		if(ret)
+			gtk_clist_append((GtkCList*)cclist->clist_note,fname[0]);
+	};
+	
+	debug_p("ok\n");
+	fclose(fd);
+	return;
+}
+
 
 void show_notes(struct clist_struct *cclist)
 {
@@ -378,6 +479,17 @@ void del_folder_or_note(struct clist_struct *cclist)
 			
 		gtk_clist_clear(GTK_CLIST(cclist->clist_note));
 		show_notes(cclist);		
+	} else if(cclist->del == RSS_ITEM){
+		if(cclist->rss_row < 0)
+			return;
+		debug_p("the path :%s \n", cclist->rss_file_path);
+		gint fd = 0;
+		if((fd = remove(cclist->rss_file_path)) < 0)
+			perror("remove rss:\n");
+			
+		gtk_clist_clear(GTK_CLIST(cclist->clist_rss));
+		show_rss(cclist);
+		return;
 	} else {
 		debug_p("Nothing will be deleted...\n");
 		return;

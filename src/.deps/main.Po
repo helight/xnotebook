@@ -356,7 +356,7 @@ main.o: main.c ../config.h /usr/include/gtk-2.0/gtk/gtk.h \
   /usr/include/gtk-2.0/gtk/gtkvscale.h \
   /usr/include/gtk-2.0/gtk/gtkvseparator.h Mainwindow.h Support.h \
   /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
-  Init.h Debug.h
+  Init.h Debug.h Funs.h
 
 ../config.h:
 
@@ -1173,3 +1173,5 @@ Support.h:
 Init.h:
 
 Debug.h:
+
+Funs.h:
