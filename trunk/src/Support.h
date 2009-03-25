@@ -48,6 +48,7 @@ g_object_set_data (G_OBJECT (component), name, widget)
 struct add_entry{
 	GtkWidget *window;
 	GtkWidget *entry_name;
+	GtkWidget *entry_url;
 	};
 	
 struct wdialog{
@@ -63,14 +64,18 @@ struct statusbar{
 enum deal{
 	NOTHING,
 	FOLDER,
-	NOTE_FILE
+	NOTE_FILE,
+	RSS_ITEM
 	};
 	
 struct clist_struct {
 	gchar root_path[128];
+	gchar rss_path[128];
 	gchar sub_path[128];
+	gchar rss_file_path[256];
 	gchar doc_path[256];
 	GtkTextBuffer *buffer;
+	gint is_rss;
 	enum deal creat;
 	enum deal del;
 	enum deal xname;
@@ -78,6 +83,8 @@ struct clist_struct {
 	gint folder_row;
 	GtkWidget *clist_note;
 	gint note_row;
+	GtkWidget *clist_rss;
+	gint rss_row;
 	GtkWidget *note_text;
 	struct add_entry other;
 	struct wdialog dialog;

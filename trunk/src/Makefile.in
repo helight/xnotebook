@@ -46,7 +46,8 @@ PROGRAMS = $(bin_PROGRAMS)
 am_xnotebook_OBJECTS = main.$(OBJEXT) Support.$(OBJEXT) \
 	Mainwindow.$(OBJEXT) AddFolderFace.$(OBJEXT) \
 	Callbacks.$(OBJEXT) MenubarFace.$(OBJEXT) \
-	MenubarCall.$(OBJEXT) PopmenuFace.$(OBJEXT) \
+	MenubarCall.$(OBJEXT) Rss.$(OBJEXT) AddRssFace.$(OBJEXT) \
+	AddRssCall.$(OBJEXT) PopmenuFace.$(OBJEXT) \
 	PopmenuCall.$(OBJEXT) MainbodyFace.$(OBJEXT) \
 	MainbodyCall.$(OBJEXT) ToolbarFace.$(OBJEXT) \
 	ToolbarCall.$(OBJEXT) StatusbarFace.$(OBJEXT) \
@@ -185,6 +186,8 @@ xnotebook_SOURCES = \
 	AddFolderFace.c AddFolder.h\
 	Callbacks.c Callbacks.h	\
 	MenubarFace.c MenubarCall.c Menubar.h \
+	Rss.c Rss.h \
+	AddRssFace.c AddRssCall.c AddRss.h \
 	PopmenuFace.c PopmenuCall.c Popmenu.h \
 	MainbodyFace.c MainbodyCall.c Mainbody.h \
 	ToolbarFace.c ToolbarCall.c Toolbar.h \
@@ -265,6 +268,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AboutCall.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AboutFace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AddFolderFace.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AddRssCall.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AddRssFace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CalendarFace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Callbacks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogCall.Po@am__quote@
@@ -278,6 +283,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MenubarFace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/PopmenuCall.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/PopmenuFace.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Rss.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/StatusbarFace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Support.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ToolbarCall.Po@am__quote@

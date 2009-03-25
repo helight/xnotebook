@@ -356,7 +356,7 @@ DialogCall.o: DialogCall.c ../config.h /usr/include/gtk-2.0/gtk/gtk.h \
   /usr/include/gtk-2.0/gtk/gtkvscale.h \
   /usr/include/gtk-2.0/gtk/gtkvseparator.h Dialog.h Support.h \
   /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
-  Debug.h
+  Debug.h Rss.h
 
 ../config.h:
 
@@ -1171,3 +1171,5 @@ Support.h:
 /usr/include/bits/locale.h:
 
 Debug.h:
+
+Rss.h:

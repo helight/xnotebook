@@ -1,5 +1,5 @@
 /*
- * body.h
+ * Mainbody.h
  *
  *  Created on: Feb 19, 2009
  *      Author: helight
@@ -34,5 +34,11 @@ gboolean note_list_button_press_event(GtkWidget *widget, GdkEventButton  *event,
 				gpointer user_data);
 										
 void clist_note_get_selection_row(GtkCList *gtkclist,gint row,
+			gint column, GdkEventButton *event, gpointer user_data);
+
+gboolean clist_rss_button_press_event(GtkWidget *widget, GdkEventButton  *event,
+				gpointer user_data);
+										
+void clist_rss_get_selection_row(GtkCList *gtkclist,gint row,
 			gint column, GdkEventButton *event, gpointer user_data);	
 #endif /* BODY_H_ */

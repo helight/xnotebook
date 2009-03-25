@@ -36,7 +36,17 @@ on_add_note_pop_activate (GtkMenuItem *menuitem, gpointer user_data);
 void
 on_rename_note_pop_activate (GtkMenuItem *menuitem, gpointer user_data);
 
-
 void
 on_delete_note_pop_activate (GtkMenuItem *menuitem, gpointer user_data);
+
+void
+on_add_rss_pop_activate (GtkMenuItem *menuitem, gpointer user_data);
+
+void
+on_rename_rss_pop_activate (GtkMenuItem *menuitem, gpointer user_data);
+
+void
+on_delete_rss_pop_activate (GtkMenuItem *menuitem, gpointer user_data);
 #endif /* POPMENU_H_ */
+
+

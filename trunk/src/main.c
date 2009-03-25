@@ -10,8 +10,8 @@
 #include <gtk/gtk.h>
 
 #include "Mainwindow.h"
-#include "Support.h"
 #include "Init.h"
+#include "Funs.h"
 
 struct clist_struct clist;
 
@@ -43,6 +43,7 @@ int main (int argc, char *argv[])
 	gtk_widget_show (main_windown);
 	
 	show_folders(&clist);
+	show_rss(&clist);
 	gtk_main ();
 	return 0;
 }
