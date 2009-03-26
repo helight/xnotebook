@@ -145,14 +145,14 @@ void
 on_calendar_note_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkWidget *window;
-	window = create_window_note ();
+	window = create_calendar_note (user_data);
 	gtk_widget_show (window);
 }
 void
 on_about_me_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkWidget *window_about;
-	window_about = create_window_about ();
+	window_about = create_about_xnote (user_data);
 	gtk_widget_show (window_about);
 
 }

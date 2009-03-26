@@ -2,7 +2,7 @@
  * CalendarFace.c
  *
  *	Created on: Feb 19, 2009
- *	    Author: helight
+ *			Author: helight
  */
 #ifdef HAVE_CONFIG_H
 #	include <config.h>
@@ -11,77 +11,60 @@
 #include <gtk/gtk.h>
 #include "Calendar.h"
 
-GtkWidget*                                                                                                                                                                                                                                                 
-create_window_note (void)
+GtkWidget*
+create_calendar_note (GtkWidget *main_window)
 {
-        GtkWidget *window_note;
-        GtkWidget *vbox_calendar;
-        GtkWidget *calendar_note;
-        GtkWidget *button_close;
-        GtkWidget *alignment_colse;
-        GtkWidget *hbox_colse;
-        GtkWidget *image_colse;
-        GtkWidget *label_colse;
+	GtkWidget *calendar_xnote;
+	GtkWidget *dialog_vbox2;
+	GtkWidget *xcalendar;
+	GtkWidget *dialog_action_area2;
+	GtkWidget *close_calendar;
 
-        window_note = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-        gtk_window_set_position (GTK_WINDOW (window_note), GTK_WIN_POS_CENTER);
-        gtk_window_set_destroy_with_parent (GTK_WINDOW (window_note), TRUE);
-        gtk_window_set_resizable (GTK_WINDOW (window_note), FALSE);
-        gtk_window_set_title (GTK_WINDOW (window_note), _("Xnotebook-Calendar"));
+	calendar_xnote = gtk_dialog_new_with_buttons("Xnote-Calendar", 
+		GTK_WINDOW(main_window), GTK_DIALOG_DESTROY_WITH_PARENT,NULL);
+	gtk_window_set_position (GTK_WINDOW (calendar_xnote), GTK_WIN_POS_CENTER);
+	gtk_window_set_type_hint (GTK_WINDOW (calendar_xnote), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-        vbox_calendar = gtk_vbox_new (FALSE, 0);
-        gtk_widget_show (vbox_calendar);
-        gtk_container_add (GTK_CONTAINER (window_note), vbox_calendar);
+	dialog_vbox2 = GTK_DIALOG (calendar_xnote)->vbox;
+	gtk_widget_show (dialog_vbox2);
 
-        calendar_note = gtk_calendar_new ();
-        gtk_widget_show (calendar_note);
-        gtk_box_pack_start (GTK_BOX (vbox_calendar), calendar_note, TRUE, TRUE, 0);
-        gtk_widget_set_size_request (calendar_note, 227, 186);
-        gtk_calendar_display_options (GTK_CALENDAR (calendar_note),
-                                      GTK_CALENDAR_SHOW_HEADING
-                                      | GTK_CALENDAR_SHOW_DAY_NAMES);
+	xcalendar = gtk_calendar_new ();
+	gtk_widget_show (xcalendar);
+	gtk_box_pack_start (GTK_BOX (dialog_vbox2), xcalendar, TRUE, TRUE, 0);
+	gtk_calendar_display_options (GTK_CALENDAR (xcalendar),
+				GTK_CALENDAR_SHOW_HEADING
+				| GTK_CALENDAR_SHOW_DAY_NAMES
+				| GTK_CALENDAR_SHOW_WEEK_NUMBERS);
 
-        button_close = gtk_button_new ();
-        gtk_widget_show (button_close);
-        gtk_box_pack_start (GTK_BOX (vbox_calendar), button_close, FALSE, FALSE, 0);
+	dialog_action_area2 = GTK_DIALOG (calendar_xnote)->action_area;
+	gtk_widget_show (dialog_action_area2);
+	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area2), GTK_BUTTONBOX_SPREAD);
 
-        alignment_colse = gtk_alignment_new (0.5, 0.5, 0, 0);
-        gtk_widget_show (alignment_colse);
-        gtk_container_add (GTK_CONTAINER (button_close), alignment_colse);
+	close_calendar = gtk_button_new_from_stock ("gtk-close");
+	gtk_widget_show (close_calendar);
+	gtk_dialog_add_action_widget (GTK_DIALOG (calendar_xnote), close_calendar, GTK_RESPONSE_CLOSE);
+	GTK_WIDGET_SET_FLAGS (close_calendar, GTK_CAN_DEFAULT);
 
-        hbox_colse = gtk_hbox_new (FALSE, 2);
-        gtk_widget_show (hbox_colse);
-        gtk_container_add (GTK_CONTAINER (alignment_colse), hbox_colse);
+	g_signal_connect ((gpointer) close_calendar, "clicked",
+										G_CALLBACK (on_close_calendar_clicked),
+										calendar_xnote);
 
-        image_colse = gtk_image_new_from_stock ("gtk-cancel", GTK_ICON_SIZE_BUTTON);
-        gtk_widget_show (image_colse);
-        gtk_box_pack_start (GTK_BOX (hbox_colse), image_colse, FALSE, FALSE, 0);
+	/* Store pointers to all widgets, for use by lookup_widget(). */
+	GLADE_HOOKUP_OBJECT_NO_REF (calendar_xnote, calendar_xnote, "calendar_xnote");
+	GLADE_HOOKUP_OBJECT_NO_REF (calendar_xnote, dialog_vbox2, "dialog_vbox2");
+	GLADE_HOOKUP_OBJECT (calendar_xnote, xcalendar, "xcalendar");
+	GLADE_HOOKUP_OBJECT_NO_REF (calendar_xnote, dialog_action_area2, "dialog_action_area2");
+	GLADE_HOOKUP_OBJECT (calendar_xnote, close_calendar, "close_calendar");
 
-        label_colse = gtk_label_new_with_mnemonic (_("Close"));
-        gtk_widget_show (label_colse);
-        gtk_box_pack_start (GTK_BOX (hbox_colse), label_colse, FALSE, FALSE, 0);
-
-        g_signal_connect ((gpointer) button_close, "clicked",
-                          G_CALLBACK (on_button_close_clicked),
-                          (gpointer)window_note);
-
-        /* Store pointers to all widgets, for use by lookup_widget(). */
-        GLADE_HOOKUP_OBJECT_NO_REF (window_note, window_note, "window_note");
-        GLADE_HOOKUP_OBJECT (window_note, vbox_calendar, "vbox_calendar");
-        GLADE_HOOKUP_OBJECT (window_note, calendar_note, "calendar_note");
-        GLADE_HOOKUP_OBJECT (window_note, button_close, "button_close");
-        GLADE_HOOKUP_OBJECT (window_note, alignment_colse, "alignment_colse");
-        GLADE_HOOKUP_OBJECT (window_note, hbox_colse, "hbox_colse");
-        GLADE_HOOKUP_OBJECT (window_note, image_colse, "image_colse");
-        GLADE_HOOKUP_OBJECT (window_note, label_colse, "label_colse");
-
-        return window_note;
+	gtk_widget_grab_focus (close_calendar);
+	return calendar_xnote;
 }
 
+
 void
-on_button_close_clicked (GtkButton *button, gpointer user_data)
+on_close_calendar_clicked (GtkButton *button, gpointer user_data)
 {
-        GtkWidget *window_note = ( GtkWidget *)user_data;
-        gtk_widget_destroy(GTK_WIDGET(window_note));
-        return;
+				GtkWidget *window_note = ( GtkWidget *)user_data;
+				gtk_widget_destroy(GTK_WIDGET(window_note));
+				return;
 }

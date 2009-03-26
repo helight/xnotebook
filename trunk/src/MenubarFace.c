@@ -260,10 +260,10 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
 	              (gpointer)clist);
 	  g_signal_connect ((gpointer) calendar_note, "activate",
 	              G_CALLBACK (on_calendar_note_activate),
-	              NULL);
+	              (gpointer)main_windown);
 	  g_signal_connect ((gpointer) about_me, "activate",
 	              G_CALLBACK (on_about_me_activate),
-	              (gpointer)clist);
+	              (gpointer)main_windown);
 
 	  GLADE_HOOKUP_OBJECT (main_windown, menuitem_file, "menuitem_file");
 	  GLADE_HOOKUP_OBJECT (main_windown, menuitem_file, "menuitem_file");
