@@ -2,7 +2,7 @@
  * AboutFace.c
  *
  *	Created on: Feb 19, 2009
- *	    Author: helight
+ *			Author: helight
  */
 #ifdef HAVE_CONFIG_H
 #	include <config.h>
@@ -11,105 +11,85 @@
 #include <gtk/gtk.h>
 #include "About.h"
 
-
 GtkWidget*
-create_window_about (void)
+create_about_xnote (GtkWidget *main_window)
 {
-	GdkPixbuf *window_main_icon_pixbuf;
-	GtkWidget *window_about;                                                                                                                                                                                                                                                                                          
-	GtkWidget *vbox_about;
-	GtkWidget *image_zhwen;
-	GtkWidget *label_zhwen;
-	GtkWidget *label_xnote;
-	GtkWidget *button_link;
-	GtkWidget *button_about_close;
-	GtkWidget *alignment_close;
-	GtkWidget *hbox_close;
-	GtkWidget *image_close;
-	GtkWidget *label_close;
+	GtkWidget *about_xnote;
+	GdkPixbuf *about_xnote_icon_pixbuf;
+	GtkWidget *dialog_vbox3;
+	GtkWidget *vbox5;
+	GtkWidget *image6;
+	GtkWidget *label15;
+	GtkWidget *label16;
+	GtkWidget *button3;
+	GtkWidget *dialog_action_area3;
+	GtkWidget *close_about;
 
-	window_about = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_title (GTK_WINDOW (window_about), _("About Xnotebook"));
-	gtk_window_set_default_size (GTK_WINDOW (window_about), 300, 310);
-	gtk_window_set_position (GTK_WINDOW (window_about), GTK_WIN_POS_CENTER);
-	gtk_window_set_destroy_with_parent (GTK_WINDOW (window_about), TRUE);
-	gtk_window_set_type_hint (GTK_WINDOW (window_about), GDK_WINDOW_TYPE_HINT_DIALOG);
-	window_main_icon_pixbuf = create_pixbuf ("zhwen.png");
-	if (window_main_icon_pixbuf)
+	about_xnote = gtk_dialog_new_with_buttons("About Xnotebook", 
+		GTK_WINDOW(main_window), GTK_DIALOG_DESTROY_WITH_PARENT,NULL);
+	gtk_window_set_type_hint (GTK_WINDOW (about_xnote), GDK_WINDOW_TYPE_HINT_DIALOG);
+	
+	about_xnote_icon_pixbuf = create_pixbuf ("zhwen.png");
+	if (about_xnote_icon_pixbuf)
 	{
-		gtk_window_set_icon (GTK_WINDOW (window_about), window_main_icon_pixbuf);
-		gdk_pixbuf_unref (window_main_icon_pixbuf);
+		gtk_window_set_icon (GTK_WINDOW (about_xnote), about_xnote_icon_pixbuf);
+		gdk_pixbuf_unref (about_xnote_icon_pixbuf);
 	}
-	
-        vbox_about = gtk_vbox_new (FALSE, 0);
-        gtk_widget_show (vbox_about);
-        gtk_container_add (GTK_CONTAINER (window_about), vbox_about);
 
-        image_zhwen = create_pixmap (window_about, "zhwen.png");
-        gtk_widget_show (image_zhwen);
-        gtk_box_pack_start (GTK_BOX (vbox_about), image_zhwen, FALSE, TRUE, 0);
+	dialog_vbox3 = GTK_DIALOG (about_xnote)->vbox;
+	gtk_widget_show (dialog_vbox3);
 
-        label_zhwen = gtk_label_new (_("<b>Xnotebook (V0.04)</b>"));
-        gtk_widget_show (label_zhwen);
-        gtk_box_pack_start (GTK_BOX (vbox_about), label_zhwen, FALSE, TRUE, 0);
-        gtk_label_set_use_markup (GTK_LABEL (label_zhwen), TRUE);
+	vbox5 = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (vbox5);
+	gtk_box_pack_start (GTK_BOX (dialog_vbox3), vbox5, TRUE, TRUE, 0);
 
-        label_xnote = gtk_label_new (_("Xnotebook is a open source software.\nCopyright \302\251 Helight.xu@gmail.com"));
-        gtk_widget_show (label_xnote);
-        gtk_box_pack_start (GTK_BOX (vbox_about), label_xnote, TRUE, TRUE, 0);
+	image6 = create_pixmap (about_xnote, "zhwen.png");
+	gtk_widget_show (image6);
+	gtk_box_pack_start (GTK_BOX (vbox5), image6, TRUE, TRUE, 0);
 
-        
-        button_about_close = gtk_button_new ();
-        gtk_widget_show (button_about_close);
-        gtk_box_pack_end (GTK_BOX (vbox_about), button_about_close, TRUE, FALSE, 0);
+	label15 = gtk_label_new (_("<b>Xnotebook (0.06)</b>"));
+	gtk_widget_show (label15);
+	gtk_box_pack_start (GTK_BOX (vbox5), label15, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (label15), TRUE);
 
-        alignment_close = gtk_alignment_new (0.5, 0.5, 0, 0);
-        gtk_widget_show (alignment_close);
-        gtk_container_add (GTK_CONTAINER (button_about_close), alignment_close);
+	label16 = gtk_label_new (_("Xnotebook is a open source software.\nCopyright \302\251 Helight.xu@gmail.com"));
+	gtk_widget_show (label16);
+	gtk_box_pack_start (GTK_BOX (vbox5), label16, FALSE, FALSE, 0);
 
-        hbox_close = gtk_hbox_new (FALSE, 2);
-        gtk_widget_show (hbox_close);
-        gtk_container_add (GTK_CONTAINER (alignment_close), hbox_close);
+	button3 = gtk_button_new_with_mnemonic (_("http://zhwen.org"));
+	gtk_widget_show (button3);
+	gtk_box_pack_start (GTK_BOX (vbox5), button3, FALSE, FALSE, 0);
+	gtk_button_set_relief (GTK_BUTTON (button3), GTK_RELIEF_NONE);
 
-        image_close = gtk_image_new_from_stock ("gtk-close", GTK_ICON_SIZE_BUTTON);
-        gtk_widget_show (image_close);
-        gtk_box_pack_start (GTK_BOX (hbox_close), image_close, FALSE, FALSE, 0);
+	dialog_action_area3 = GTK_DIALOG (about_xnote)->action_area;
+		gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area3), GTK_BUTTONBOX_SPREAD);
+	gtk_widget_show (dialog_action_area3);
 
-        label_close = gtk_label_new_with_mnemonic (_("Close"));
-        gtk_widget_show (label_close);
-        gtk_box_pack_start (GTK_BOX (hbox_close), label_close, FALSE, FALSE, 0);
+	close_about = gtk_button_new_from_stock ("gtk-close");
+	gtk_widget_show (close_about);
+	gtk_dialog_add_action_widget (GTK_DIALOG (about_xnote), close_about, GTK_RESPONSE_CLOSE);
+	GTK_WIDGET_SET_FLAGS (close_about, GTK_CAN_DEFAULT);
 
-        button_link = gtk_button_new_with_mnemonic (_("http://zhwen.org"));
-        gtk_widget_show (button_link);
-        gtk_box_pack_end (GTK_BOX (vbox_about), button_link, TRUE, FALSE, 0);
-	gtk_button_set_relief (GTK_BUTTON (button_link), GTK_RELIEF_NONE);
-	
-        g_signal_connect ((gpointer) image_zhwen, "button_press_event",
-                          G_CALLBACK (on_image_zhwen_button_press_event),
-                          NULL);
-        g_signal_connect ((gpointer) button_about_close, "clicked",
-                          G_CALLBACK (on_button_about_close_clicked),
-                          (gpointer)window_about);
-        g_signal_connect ((gpointer) button_link, "clicked",
-                          G_CALLBACK (on_button_link_clicked),
-                          NULL);
+	g_signal_connect ((gpointer) button3, "clicked",
+										G_CALLBACK (on_button_link_clicked),
+										NULL);
+	g_signal_connect ((gpointer) close_about, "clicked",
+										G_CALLBACK (on_close_about_clicked),
+										about_xnote);
 
-        /* Store pointers to all widgets, for use by lookup_widget(). */
-        GLADE_HOOKUP_OBJECT_NO_REF (window_about, window_about, "window_about");
-        GLADE_HOOKUP_OBJECT (window_about, vbox_about, "vbox_about");
-        GLADE_HOOKUP_OBJECT (window_about, image_zhwen, "image_zhwen");
-        GLADE_HOOKUP_OBJECT (window_about, label_zhwen, "label_zhwen");
-        GLADE_HOOKUP_OBJECT (window_about, label_xnote, "label_xnote");
-	GLADE_HOOKUP_OBJECT (window_about, button_link, "button_link");
-        GLADE_HOOKUP_OBJECT (window_about, button_about_close, "button_about_close");
-        GLADE_HOOKUP_OBJECT (window_about, alignment_close, "alignment_close");
-        GLADE_HOOKUP_OBJECT (window_about, hbox_close, "hbox_close");
-        GLADE_HOOKUP_OBJECT (window_about, image_close, "image_close");
-        GLADE_HOOKUP_OBJECT (window_about, label_close, "label_close");
+	/* Store pointers to all widgets, for use by lookup_widget(). */
+	GLADE_HOOKUP_OBJECT_NO_REF (about_xnote, about_xnote, "about_xnote");
+	GLADE_HOOKUP_OBJECT_NO_REF (about_xnote, dialog_vbox3, "dialog_vbox3");
+	GLADE_HOOKUP_OBJECT (about_xnote, vbox5, "vbox5");
+	GLADE_HOOKUP_OBJECT (about_xnote, image6, "image6");
+	GLADE_HOOKUP_OBJECT (about_xnote, label15, "label15");
+	GLADE_HOOKUP_OBJECT (about_xnote, label16, "label16");
+	GLADE_HOOKUP_OBJECT (about_xnote, button3, "button3");
+	GLADE_HOOKUP_OBJECT_NO_REF (about_xnote, dialog_action_area3, "dialog_action_area3");
+	GLADE_HOOKUP_OBJECT (about_xnote, close_about, "close_about");
 
-        gtk_widget_grab_focus (button_link);
-        
-        return window_about;
-
+	gtk_widget_grab_focus (button3);
+	return about_xnote;
 }
-  
+
+	

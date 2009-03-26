@@ -13,9 +13,9 @@
 #include "Debug.h"
 
 GtkWidget*
-create_window_note (void);
+create_calendar_note(GtkWidget* main_window);
 
 void
-on_button_close_clicked (GtkButton *button, gpointer user_data);
+on_close_calendar_clicked (GtkButton *button, gpointer user_data);
 
 #endif /* CALENDAR_H_ */

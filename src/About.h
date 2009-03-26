@@ -12,20 +12,13 @@
 #include "Support.h"
 #include "Debug.h"
 
-GtkWidget* create_window_about (void);
+GtkWidget *create_about_xnote (GtkWidget *mainwindow);
 
-
-gboolean
-on_image_zhwen_button_press_event      (GtkWidget       *widget,
-                                        GdkEventButton  *event,
-                                        gpointer         user_data);
 
 void
-on_button_about_close_clicked                (GtkButton       *button,
-                                        gpointer         user_data);
+on_close_about_clicked (GtkButton *button, gpointer user_data);
 
 void
-on_button_link_clicked                 (GtkButton       *button,
-                                        gpointer         user_data);
+on_button_link_clicked (GtkButton *button, gpointer user_data);
 
 #endif /* TOOLBAR_H_ */
