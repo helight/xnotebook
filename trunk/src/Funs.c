@@ -27,7 +27,6 @@
 void show_folders(struct clist_struct *cclist)
 {
 	gchar *fname[1][1] = {NULL};
-	gchar msg[64];
 	gint num = 0;
 	char *ch=NULL;
 	DIR *dir;
@@ -62,9 +61,7 @@ opendir:if((dir = opendir(cclist->root_path)) == NULL){
 	cclist->folder_row = 0;
 	closedir(dir);
 	
-	memset(msg, '\0', sizeof(msg));
-	g_snprintf(msg, 80, "Folder : %d", num);
-	show_status(cclist->statusbar.status_folder, msg);
+	cclist->folder_num = num;
 	
 	return;
 }
@@ -72,7 +69,6 @@ opendir:if((dir = opendir(cclist->root_path)) == NULL){
 void show_rss(struct clist_struct *cclist)
 {
 	gchar *fname[1][1] = {NULL};
-	gchar msg[64];
 	gint num = 0;
 	char *ch=NULL;
 	DIR *dir;
@@ -106,10 +102,6 @@ opendir:if((dir = opendir(cclist->rss_path)) == NULL){
 	//gtk_clist_select_row((GtkCList*)cclist->clist_rss,0,0);
 	cclist->rss_row = 0;
 	closedir(dir);
-	
-	memset(msg, '\0', sizeof(msg));
-	g_snprintf(msg, 80, "Folder : %d", num);
-	show_status(cclist->statusbar.status_folder, msg);
 	
 	return;
 }
@@ -238,9 +230,8 @@ void show_notes(struct clist_struct *cclist)
 		
 	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), FALSE);
-	memset(msg, '\0', sizeof(msg));
-	g_snprintf(msg, sizeof(msg), "Total Notes : %d", num);
-	show_status(cclist->statusbar.status_note, msg);
+	cclist->note_num = num;
+
 	return;
 }
 
@@ -249,7 +240,7 @@ void show_file(struct clist_struct *cclist)
 	gint i = 0, n = 0, row = -1;
 	gchar *fname[1][2] = {"file name","time"};
 	gchar file_path[512];
-	gchar msg[128];
+	gchar msg[512];
 	char *ch=NULL;
 	DIR *dir;
 	struct dirent *ptr;
@@ -297,16 +288,16 @@ void show_file(struct clist_struct *cclist)
 		return;
 	}
 	memset(msg, '\0', sizeof(msg));
-	g_snprintf(msg, sizeof(msg), "Note:%s Size:%6d bytes --- Can't Edit: Locked", 
-		file_path + strlen(cclist->sub_path) + 1, stat.st_size);
-	show_status(cclist->statusbar.status_file, msg);
+	g_snprintf(msg, sizeof(msg), "Folder: %d --- Total Note: %d --- Note: %s --- Size: %6d bytes --- Can't Edit: Locked", 
+		cclist->folder_num, cclist->note_num, file_path + strlen(cclist->sub_path) + 1, stat.st_size);
+	show_status(cclist->statusbar.status_xnote, msg);
 	
 	return;	
 }
 
 gboolean enable_edit(struct clist_struct *cclist)
 {
-	gchar msg[128];
+	gchar msg[512];
 	struct stat stat;
 	
 	if(cclist->note_row >= 0){
@@ -314,13 +305,13 @@ gboolean enable_edit(struct clist_struct *cclist)
 			perror("stat:");
 			return;
 		}
+		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), TRUE);
 		
 		memset(msg, '\0', sizeof(msg));
-		g_snprintf(msg, sizeof(msg), "Note:%s Size:%6d bytes --- Editable", 
-		cclist->doc_path + strlen(cclist->sub_path) + 1, stat.st_size);
-		show_status(cclist->statusbar.status_file, msg);
-
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), TRUE);
+		g_snprintf(msg, sizeof(msg), "Folder: %d --- Total Note: %d --- Note: %s --- Size: %6d bytes --- Editable", 
+		cclist->folder_num, cclist->note_num, cclist->doc_path + strlen(cclist->sub_path) + 1, stat.st_size);
+		show_status(cclist->statusbar.status_xnote, msg);
+				
 		debug_p("enable edit\n");		
 		return TRUE;
 	}

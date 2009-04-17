@@ -24,6 +24,8 @@ void init_global_clist(struct clist_struct *clist)
 	memset(clist->sub_path, '\0', sizeof(clist->sub_path));
 	memset(clist->doc_path, '\0', sizeof(clist->doc_path));
 	memset(clist->rss_file_path, '\0', sizeof(clist->rss_file_path));
+	clist->folder_num = 0;
+	clist->note_num = 0;
 	clist->is_rss = 0;
 	clist->buffer = NULL;
 	clist->creat = NOTHING;
@@ -42,7 +44,7 @@ void init_global_clist(struct clist_struct *clist)
 	clist->dialog.label_text = NULL;
 	clist->statusbar.status_folder = NULL;
 	clist->statusbar.status_file = NULL;
-	clist->statusbar.status_note = NULL;
+	clist->statusbar.status_xnote = NULL;
 }
 
 

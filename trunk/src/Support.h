@@ -58,7 +58,7 @@ struct wdialog{
 struct statusbar{
 	GtkWidget *status_folder;
 	GtkWidget *status_file;
-	GtkWidget *status_note;
+	GtkWidget *status_xnote;
 	};
 	
 enum deal{
@@ -69,25 +69,27 @@ enum deal{
 	};
 	
 struct clist_struct {
-	gchar root_path[128];
-	gchar rss_path[128];
-	gchar sub_path[128];
-	gchar rss_file_path[256];
-	gchar doc_path[256];
-	GtkTextBuffer *buffer;
-	gint is_rss;
-	enum deal creat;
-	enum deal del;
-	enum deal xname;
-	GtkWidget *clist_folder;
-	gint folder_row;
-	GtkWidget *clist_note;
-	gint note_row;
-	GtkWidget *clist_rss;
-	gint rss_row;
-	GtkWidget *note_text;
+	gchar		root_path[128];
+	gchar		rss_path[128];
+	gchar		sub_path[128];
+	gchar		rss_file_path[256];
+	gchar		doc_path[256];
+	GtkTextBuffer	*buffer;
+	gint		folder_num;
+	gint		note_num;
+	gint		is_rss;
+	enum deal 	creat;
+	enum deal 	del;
+	enum deal 	xname;
+	GtkWidget 	*clist_folder;
+	gint 		folder_row;
+	GtkWidget 	*clist_note;
+	gint 		note_row;
+	GtkWidget 	*clist_rss;
+	gint 		rss_row;
+	GtkWidget 	*note_text;
 	struct add_entry other;
-	struct wdialog dialog;
+	struct wdialog 	dialog;
 	struct statusbar statusbar;
 };
 
