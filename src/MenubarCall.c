@@ -69,11 +69,8 @@ void
 on_edit_note_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
-	if(cclist->note_row >= 0){
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (
-					cclist->note_text), TRUE);
-		debug_p("enable edit\n");
-	}
+	
+	enable_edit(cclist);
 	return;
 }
 
