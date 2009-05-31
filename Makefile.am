@@ -4,8 +4,6 @@ SUBDIRS = src po
 
 EXTRA_DIST = \
 	autogen.sh \
-	notebook.glade \
-	notebook.gladep
 
 install-data-local:
 	@$(NORMAL_INSTALL)
