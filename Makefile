@@ -175,9 +175,7 @@ top_builddir = .
 top_srcdir = .
 SUBDIRS = src po
 EXTRA_DIST = \
-	autogen.sh \
-	notebook.glade \
-	notebook.gladep
+	autogen.sh 
 
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
