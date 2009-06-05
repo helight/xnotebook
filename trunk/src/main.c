@@ -14,10 +14,26 @@
 #include "Funs.h"
 
 struct clist_struct clist;
+static int sta = 0;
+
+void callback_icon(GtkStatusIcon *status_icon,gpointer data)
+{
+	GtkWidget *main = (GtkWidget *)data;
+	if (sta == 0) {
+		gtk_widget_hide(main);
+		sta = 1;
+	} else {
+		gtk_widget_show (main);
+		sta = 0;
+	}
+}
+
 
 int main (int argc, char *argv[])
 {
+	GdkPixbuf *panel_icon_pixbuf;
 	GtkWidget *main_windown;
+	GtkStatusIcon* icon;
 
 #ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
@@ -40,6 +56,11 @@ int main (int argc, char *argv[])
 	init_global_clist(&clist);
 	
 	main_windown = create_main_windown (&clist);
+	panel_icon_pixbuf = create_pixbuf ("zhwen.png");
+	icon = gtk_status_icon_new_from_pixbuf (panel_icon_pixbuf);
+	gtk_status_icon_set_tooltip(icon,"Xnotebook");
+	g_signal_connect((gpointer)icon, "activate", G_CALLBACK(callback_icon), main_windown);
+	
 	gtk_widget_show (main_windown);
 	
 	show_folders(&clist);

@@ -61,9 +61,29 @@ $(POFILES) $(GMOFILES) $(SOURCES)
 
 POTFILES = \
 	../src/main.c \
-	../src/interface.c \
-	../src/callbacks.c \
-	../src/support.c
+	../src/Support.c \
+	../src/Mainwindow.c  \
+	../src/AddFolderFace.c \
+	../src/Callbacks.c \
+	../src/MenubarFace.c \
+	../src/MenubarCall.c \
+	../src/Rss.c \
+	../src/AddRssFace.c \
+	../src/AddRssCall.c \
+	../src/PopmenuFace.c \
+	../src/PopmenuCall.c \
+	../src/MainbodyFace.c \
+	../src/MainbodyCall.c \
+	../src/ToolbarFace.c \
+	../src/ToolbarCall.c \
+	../src/StatusbarFace.c \
+	../src/CalendarFace.c \
+	../src/DialogFace.c \
+	../src/DialogCall.c \
+	../src/AboutFace.c \
+	../src/AboutCall.c \
+	../src/Funs.c \
+	../src/Init.c \
 
 CATALOGS = 
 CATOBJEXT = .gmo
