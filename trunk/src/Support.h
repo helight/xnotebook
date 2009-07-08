@@ -65,7 +65,8 @@ enum deal{
 	NOTHING,
 	FOLDER,
 	NOTE_FILE,
-	RSS_ITEM
+	RSS_ITEM,
+	BACKUP
 	};
 	
 struct clist_struct {

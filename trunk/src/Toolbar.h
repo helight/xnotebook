@@ -39,6 +39,9 @@ void
 on_button_dn_clicked (GtkButton *button, gpointer user_data);
 
 void
+on_button_bk_clicked (GtkButton *button, gpointer user_data);
+
+void
 on_button_about_clicked (GtkButton *button, gpointer user_data);
 
 void

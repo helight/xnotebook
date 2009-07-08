@@ -39,9 +39,8 @@ void
 on_button_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
-	
+		
 	del_folder_or_note(cclist);
-
 	cclist->del = NOTHING;
 	GtkWidget *dialog_del = cclist->dialog.dialog;
 	gtk_widget_destroy(GTK_WIDGET(dialog_del));

@@ -481,6 +481,14 @@ void del_folder_or_note(struct clist_struct *cclist)
 		gtk_clist_clear(GTK_CLIST(cclist->clist_rss));
 		show_rss(cclist);
 		return;
+	} else if(cclist->del == BACKUP){
+		gchar backup_cmd[512];
+
+		memset(backup_cmd, '\0', sizeof(backup_cmd));
+		sprintf(backup_cmd, "tar czf %s/xnotebook.tar.gz %s",
+			       	getenv("HOME"), cclist->root_path);
+		printf("backup_cmd: %s\n", backup_cmd);
+		system(backup_cmd);
 	} else {
 		debug_p("Nothing will be deleted...\n");
 		return;

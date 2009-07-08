@@ -104,6 +104,20 @@ on_button_dn_clicked (GtkButton *button, gpointer user_data)
 }
 
 void
+on_button_bk_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkWidget *dialog_del;
+	gchar msg[] = "Backup all files to home folder";
+	struct clist_struct *cclist = (struct clist_struct *)user_data;
+	
+	cclist->del = BACKUP;
+	cclist->creat = NOTHING;
+	cclist->xname = NOTHING;	
+	dialog_del = create_dialog(cclist, msg);
+	gtk_widget_show (dialog_del);
+}
+
+void
 on_button_quit_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *main_windown = (GtkWidget *)user_data;
