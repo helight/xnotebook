@@ -57,6 +57,9 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
 	  GtkWidget *menu_tools;
 	  GtkWidget *calendar_note;
 	  GtkWidget *image_calendar;
+
+	  GtkWidget *backup_note;
+	  GtkWidget *image_backup;
 	  /*---------help-----------*/
 	  GtkWidget *menuitem_about;
 	  GtkWidget *menu_about;
@@ -186,9 +189,7 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
           gtk_container_add (GTK_CONTAINER (menu_edit), del_note);
           gtk_tooltips_set_tip (tooltips, del_note, _("Delete A Note"), NULL);
           gtk_widget_add_accelerator (del_note, "activate", accel_group,
-                                                    GDK_D, (GdkModifierType) GDK_CONTROL_MASK,
-                                                     GTK_ACCEL_VISIBLE);
-                                                     
+                   GDK_D, (GdkModifierType) GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
           image_del_note = gtk_image_new_from_stock ("gtk-delete", GTK_ICON_SIZE_MENU);
 	  gtk_widget_show (image_del_note);
           gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (del_note), image_del_note);
@@ -199,6 +200,16 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
  /*------------------------------------------------------------------------------------*/	
 	  menu_tools = gtk_menu_new ();
 	  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem_tools), menu_tools);
+ /*------------------------------------------------------------------------------------*/
+ 	  backup_note = gtk_image_menu_item_new_with_mnemonic (_("Backup"));
+	  gtk_widget_show (backup_note);
+          gtk_container_add (GTK_CONTAINER (menu_tools), backup_note);
+          gtk_tooltips_set_tip (tooltips, backup_note, _("Backup"), NULL);
+          gtk_widget_add_accelerator (backup_note, "activate", accel_group,
+                   GDK_D, (GdkModifierType) GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+          image_backup = gtk_image_new_from_stock ("gtk-dialog-info", GTK_ICON_SIZE_MENU);
+	  gtk_widget_show (image_backup);
+          gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (backup_note), image_backup);
  /*------------------------------------------------------------------------------------*/
  	  calendar_note = gtk_image_menu_item_new_with_mnemonic (_("Calendar"));
 	  gtk_widget_show (calendar_note);
@@ -257,6 +268,9 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
 	              (gpointer)clist);
 	  g_signal_connect ((gpointer) del_note, "activate",
 	              G_CALLBACK (on_del_note_activate),
+	              (gpointer)clist);
+	  g_signal_connect ((gpointer) backup_note, "activate",
+	              G_CALLBACK (on_backup_note_activate),
 	              (gpointer)clist);
 	  g_signal_connect ((gpointer) calendar_note, "activate",
 	              G_CALLBACK (on_calendar_note_activate),

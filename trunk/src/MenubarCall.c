@@ -128,6 +128,7 @@ on_del_note_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkWidget *dialog;
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
+
 	if(cclist->note_row < 0)
 		cclist->del = NOTHING;
 	else
@@ -138,6 +139,20 @@ on_del_note_activate (GtkMenuItem *menuitem, gpointer user_data)
 	debug_p("del note\n");
 }
 
+
+void
+on_backup_note_activate (GtkMenuItem *menuitem, gpointer user_data)
+{
+        GtkWidget *dialog_del;
+        gchar msg[] = "Backup all files to home folder";
+        struct clist_struct *cclist = (struct clist_struct *)user_data;
+
+	cclist->del = BACKUP;
+        cclist->creat = NOTHING;                                                                
+        cclist->xname = NOTHING;        
+        dialog_del = create_dialog(cclist, msg);
+        gtk_widget_show (dialog_del);
+}
 void
 on_calendar_note_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
@@ -149,6 +164,7 @@ void
 on_about_me_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkWidget *window_about;
+
 	window_about = create_about_xnote (user_data);
 	gtk_widget_show (window_about);
 
