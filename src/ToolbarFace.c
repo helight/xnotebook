@@ -20,7 +20,7 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
 	GtkWidget *toolbar;
 	GtkIconSize tmp_toolbar_icon_size;
 /*-----------------button_nf-----------------------*/
-        GtkWidget *toolitem1;                                                                                                                                                                                                                                                                                             
+        GtkWidget *toolitem1; 
         GtkWidget *button_nf;
         GtkWidget *alignment6;
         GtkWidget *hbox7;
@@ -61,6 +61,13 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         GtkWidget *hbox12;
         GtkWidget *image_dn;
         GtkWidget *label_dn;
+/*-----------------button_bk-----------------------*/
+        GtkWidget *toolitem7;
+        GtkWidget *button_bk;
+        GtkWidget *alignment12;
+        GtkWidget *hbox13;
+        GtkWidget *image_bk;
+        GtkWidget *label_bk;
 /*-----------------button_quit-----------------------*/
         GtkWidget *toolitem8;
         GtkWidget *button_quit;
@@ -224,7 +231,32 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         label_dn = gtk_label_new_with_mnemonic (_("Note"));
         gtk_widget_show (label_dn);
         gtk_box_pack_start (GTK_BOX (hbox12), label_dn, FALSE, FALSE, 0);
+/***********************************backup**************************************/
+        toolitem7 = (GtkWidget*) gtk_tool_item_new ();
+        gtk_widget_show (toolitem7);
+        gtk_container_add (GTK_CONTAINER (toolbar), toolitem7);
 
+        button_bk = gtk_button_new ();
+        gtk_widget_show (button_bk);
+        gtk_container_add (GTK_CONTAINER (toolitem7), button_bk);
+	gtk_button_set_relief (GTK_BUTTON (button_bk), GTK_RELIEF_NONE);
+
+        alignment12 = gtk_alignment_new (0.5, 0.5, 0, 0);
+        gtk_widget_show (alignment12);
+        gtk_container_add (GTK_CONTAINER (button_bk), alignment12);
+
+        hbox13 = gtk_hbox_new (FALSE, 2);
+        gtk_widget_show (hbox13);
+        gtk_container_add (GTK_CONTAINER (alignment12), hbox13);
+
+        image_bk = gtk_image_new_from_stock ("gtk-harddisk", GTK_ICON_SIZE_BUTTON);
+        gtk_widget_show (image_bk);
+        gtk_box_pack_start (GTK_BOX (hbox13), image_bk, FALSE, FALSE, 0);
+
+        label_bk = gtk_label_new_with_mnemonic (_("Backup"));
+        gtk_widget_show (label_bk);
+        gtk_box_pack_start (GTK_BOX (hbox13), label_bk, FALSE, FALSE, 0);
+/***********************************quit************************************/
         
         toolitem8 = (GtkWidget*) gtk_tool_item_new ();
         gtk_widget_show (toolitem8);
@@ -269,6 +301,9 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
 	g_signal_connect ((gpointer) button_dn, "clicked",
 	                  G_CALLBACK (on_button_dn_clicked),
 	                  (gpointer *)clist);
+	g_signal_connect ((gpointer) button_bk, "clicked",
+	                  G_CALLBACK (on_button_bk_clicked),
+	                  (gpointer *)clist);
 	g_signal_connect ((gpointer) button_quit, "clicked",
 	                  G_CALLBACK (on_button_quit_clicked),
 	                  (gpointer *)main_windown);	
@@ -280,18 +315,21 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         GLADE_HOOKUP_OBJECT (main_windown, hbox7, "hbox7");
         GLADE_HOOKUP_OBJECT (main_windown, image_nf, "image_nf");
         GLADE_HOOKUP_OBJECT (main_windown, label_nf, "label_nf");
+/*-----------------------------------------------------------------------*/
         GLADE_HOOKUP_OBJECT (main_windown, toolitem2, "toolitem2");
         GLADE_HOOKUP_OBJECT (main_windown, button_nn, "button_nn");
         GLADE_HOOKUP_OBJECT (main_windown, alignment7, "alignment7");
         GLADE_HOOKUP_OBJECT (main_windown, hbox8, "hbox8");
         GLADE_HOOKUP_OBJECT (main_windown, image_nn, "image_nn");
         GLADE_HOOKUP_OBJECT (main_windown, label_nn, "label_nn");
+/*-----------------------------------------------------------------------*/
         GLADE_HOOKUP_OBJECT (main_windown, toolitem3, "toolitem3");
         GLADE_HOOKUP_OBJECT (main_windown, button_edit, "button_edit");
         GLADE_HOOKUP_OBJECT (main_windown, alignment8, "alignment8");
         GLADE_HOOKUP_OBJECT (main_windown, hbox9, "hbox9");
         GLADE_HOOKUP_OBJECT (main_windown, image_edit, "image_edit");
         GLADE_HOOKUP_OBJECT (main_windown, label_edit, "label_edit");
+/*-----------------------------------------------------------------------*/
         GLADE_HOOKUP_OBJECT (main_windown, toolitem4, "toolitem4");
         GLADE_HOOKUP_OBJECT (main_windown, button_save, "button_save");
         GLADE_HOOKUP_OBJECT (main_windown, alignment9, "alignment9");
@@ -305,12 +343,21 @@ create_toolbar(GtkWidget *main_windown, GtkWidget *vbox,
         GLADE_HOOKUP_OBJECT (main_windown, hbox11, "hbox11");
         GLADE_HOOKUP_OBJECT (main_windown, image_df, "image_df");
         GLADE_HOOKUP_OBJECT (main_windown, label1_df, "label1_df");
+/*-----------------------------------------------------------------------*/
         GLADE_HOOKUP_OBJECT (main_windown, toolitem6, "toolitem6");
         GLADE_HOOKUP_OBJECT (main_windown, button_dn, "button_dn");
         GLADE_HOOKUP_OBJECT (main_windown, alignment11, "alignment11");
         GLADE_HOOKUP_OBJECT (main_windown, hbox12, "hbox12");
         GLADE_HOOKUP_OBJECT (main_windown, image_dn, "image_dn");
         GLADE_HOOKUP_OBJECT (main_windown, label_dn, "label_dn");
+/*-----------------------------------------------------------------------*/
+        GLADE_HOOKUP_OBJECT (main_windown, toolitem7, "toolitem7");
+        GLADE_HOOKUP_OBJECT (main_windown, button_bk, "button_bk");
+        GLADE_HOOKUP_OBJECT (main_windown, alignment12, "alignment12");
+        GLADE_HOOKUP_OBJECT (main_windown, hbox13, "hbox13");
+        GLADE_HOOKUP_OBJECT (main_windown, image_bk, "image_bk");
+        GLADE_HOOKUP_OBJECT (main_windown, label_bk, "label_bk");
+/*-----------------------------------------------------------------------*/        
         GLADE_HOOKUP_OBJECT (main_windown, toolitem8, "toolitem8");
         GLADE_HOOKUP_OBJECT (main_windown, button_quit, "button_quit");
         GLADE_HOOKUP_OBJECT (main_windown, alignment13, "alignment13");

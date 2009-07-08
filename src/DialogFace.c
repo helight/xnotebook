@@ -15,7 +15,7 @@
 GtkWidget*
 create_dialog (struct clist_struct *cclist, gchar *titles)
 {
-        GtkWidget *dialog_del;                                                                                                                                                                                                                             
+        GtkWidget *dialog_del; 
         GtkWidget *dialog_vbox1;
         GtkWidget *label_note;
         GtkWidget *dialog_action_area1;
@@ -38,6 +38,11 @@ create_dialog (struct clist_struct *cclist, gchar *titles)
 		msg = cclist->sub_path + strlen(cclist->root_path) +1;
 	} else if(cclist->del == NOTE_FILE){
 		msg = cclist->doc_path + strlen(cclist->root_path) +1;
+	} else if(cclist->del == BACKUP){
+		gchar mmsg[512];
+                memset(mmsg, '\0', sizeof(mmsg));
+                sprintf(mmsg, "<b>back file to %s/xnotebook.tar.gz</b>", getenv("HOME"));
+		msg = mmsg;
 	} else {
 		gchar mmsg[]="<b>You Select Nothing TO Del...</b>";
 		msg = mmsg;
