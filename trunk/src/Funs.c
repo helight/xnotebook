@@ -276,8 +276,7 @@ void show_file(struct clist_struct *cclist)
 		while ((buff[i] = fgetc(fd)) != EOF)
 			i++;
 		buff[i]='\0';
-        gtk_text_buffer_set_text (GTK_TEXT_BUFFER(cclist->buffer),
-        						 _(buff), -1);
+        gtk_text_buffer_set_text (GTK_TEXT_BUFFER(cclist->buffer), _(buff), -1);
 		fclose(fd);
 	}
 	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))

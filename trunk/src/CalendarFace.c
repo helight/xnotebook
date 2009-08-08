@@ -49,13 +49,6 @@ create_calendar_note (GtkWidget *main_window)
 										G_CALLBACK (on_close_calendar_clicked),
 										calendar_xnote);
 
-	/* Store pointers to all widgets, for use by lookup_widget(). */
-	GLADE_HOOKUP_OBJECT_NO_REF (calendar_xnote, calendar_xnote, "calendar_xnote");
-	GLADE_HOOKUP_OBJECT_NO_REF (calendar_xnote, dialog_vbox2, "dialog_vbox2");
-	GLADE_HOOKUP_OBJECT (calendar_xnote, xcalendar, "xcalendar");
-	GLADE_HOOKUP_OBJECT_NO_REF (calendar_xnote, dialog_action_area2, "dialog_action_area2");
-	GLADE_HOOKUP_OBJECT (calendar_xnote, close_calendar, "close_calendar");
-
 	gtk_widget_grab_focus (close_calendar);
 	return calendar_xnote;
 }

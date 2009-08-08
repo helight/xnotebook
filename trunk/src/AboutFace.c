@@ -70,23 +70,10 @@ create_about_xnote (GtkWidget *main_window)
 	gtk_dialog_add_action_widget (GTK_DIALOG (about_xnote), close_about, GTK_RESPONSE_CLOSE);
 	GTK_WIDGET_SET_FLAGS (close_about, GTK_CAN_DEFAULT);
 
-	g_signal_connect ((gpointer) button3, "clicked",
-										G_CALLBACK (on_button_link_clicked),
-										NULL);
-	g_signal_connect ((gpointer) close_about, "clicked",
-										G_CALLBACK (on_close_about_clicked),
-										about_xnote);
-
-	/* Store pointers to all widgets, for use by lookup_widget(). */
-	GLADE_HOOKUP_OBJECT_NO_REF (about_xnote, about_xnote, "about_xnote");
-	GLADE_HOOKUP_OBJECT_NO_REF (about_xnote, dialog_vbox3, "dialog_vbox3");
-	GLADE_HOOKUP_OBJECT (about_xnote, vbox5, "vbox5");
-	GLADE_HOOKUP_OBJECT (about_xnote, image6, "image6");
-	GLADE_HOOKUP_OBJECT (about_xnote, label15, "label15");
-	GLADE_HOOKUP_OBJECT (about_xnote, label16, "label16");
-	GLADE_HOOKUP_OBJECT (about_xnote, button3, "button3");
-	GLADE_HOOKUP_OBJECT_NO_REF (about_xnote, dialog_action_area3, "dialog_action_area3");
-	GLADE_HOOKUP_OBJECT (about_xnote, close_about, "close_about");
+	g_signal_connect ((gpointer) button3, "clicked", 
+		G_CALLBACK (on_button_link_clicked), NULL);
+	g_signal_connect ((gpointer) close_about, "clicked", 
+		G_CALLBACK (on_close_about_clicked), about_xnote);
 
 	gtk_widget_grab_focus (button3);
 	return about_xnote;

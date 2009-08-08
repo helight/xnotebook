@@ -191,32 +191,10 @@ create_new_add_window (struct clist_struct *clist)
                           G_CALLBACK (on_button_add_folder_help_clicked),
                           NULL);
 
-        /* Store pointers to all widgets, for use by lookup_widget(). */
-        GLADE_HOOKUP_OBJECT_NO_REF (window, window, "window");
-        GLADE_HOOKUP_OBJECT (window, vbox_top, "vbox_top");
-        GLADE_HOOKUP_OBJECT (window, label_title, "label_title");
-        GLADE_HOOKUP_OBJECT (window, entry_text, "entry_text");
-        GLADE_HOOKUP_OBJECT (window, hbox_bottom, "hbox_bottom");
-        GLADE_HOOKUP_OBJECT (window, button_help, "button_help");
-        GLADE_HOOKUP_OBJECT (window, alignment2, "alignment2");
-        GLADE_HOOKUP_OBJECT (window, hbox3, "hbox3");
-        GLADE_HOOKUP_OBJECT (window, image_help, "image_help");
-        GLADE_HOOKUP_OBJECT (window, label_help, "label_help");
-        GLADE_HOOKUP_OBJECT (window, button_cancel, "button_cancel");
-        GLADE_HOOKUP_OBJECT (window, alignment1, "alignment1");
-        GLADE_HOOKUP_OBJECT (window, hbox2, "hbox2");
-        GLADE_HOOKUP_OBJECT (window, image_cancel, "image_cancel");
-        GLADE_HOOKUP_OBJECT (window, label_cancel, "label_cancel");
-        GLADE_HOOKUP_OBJECT (window, button_ok, "button_ok");
-        GLADE_HOOKUP_OBJECT (window, alignment3, "alignment3");
-        GLADE_HOOKUP_OBJECT (window, hbox4, "hbox4");
-        GLADE_HOOKUP_OBJECT (window, image_apply, "image_apply");
-        GLADE_HOOKUP_OBJECT (window, label_apply, "label_apply");
-        
         gtk_widget_grab_focus (entry_text);
         clist->other.window = window;
         clist->other.entry_name = entry_text;
-        return window;                                                                                                        
+        return window; 
 }
 
 void

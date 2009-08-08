@@ -58,15 +58,6 @@ create_folder_list_popmenu (struct clist_struct *clist)
 			G_CALLBACK (on_delete_folder_pop_activate),
 			clist);
 
-	/* Store pointers to all widgets, for use by lookup_widget(). */
-	GLADE_HOOKUP_OBJECT_NO_REF (folder_popmenu, folder_popmenu, "folder_popmenu");
-	GLADE_HOOKUP_OBJECT (folder_popmenu, Add_Folder, "Add_Folder");
-	GLADE_HOOKUP_OBJECT (folder_popmenu, image_add, "image_add");
-	GLADE_HOOKUP_OBJECT (folder_popmenu, Rename, "Rename");
-	GLADE_HOOKUP_OBJECT (folder_popmenu, image_rename, "image_rename");
-	GLADE_HOOKUP_OBJECT (folder_popmenu, Delete, "Delete");
-	GLADE_HOOKUP_OBJECT (folder_popmenu, image6, "image6");
-
 	return folder_popmenu;
 }
 
@@ -117,15 +108,6 @@ create_note_list_popmenu (struct clist_struct *clist)
 			G_CALLBACK (on_delete_note_pop_activate),
 			clist);
 
-	/* Store pointers to all widgets, for use by lookup_widget(). */
-	GLADE_HOOKUP_OBJECT_NO_REF (note_list_popmenu, note_list_popmenu, "note_list_popmenu");
-	GLADE_HOOKUP_OBJECT (note_list_popmenu, add_note_pop, "add_note_pop");
-	GLADE_HOOKUP_OBJECT (note_list_popmenu, image_add_note_pop, "image_add_note_pop");
-	GLADE_HOOKUP_OBJECT (note_list_popmenu, rename_note_pop, "rename_note_pop");
-	GLADE_HOOKUP_OBJECT (note_list_popmenu, image_rename_note_pop, "image_rename_note_pop");
-	GLADE_HOOKUP_OBJECT (note_list_popmenu, delete_note_pop, "delete_note_pop");
-	GLADE_HOOKUP_OBJECT (note_list_popmenu, image_delete_note_pop, "image_delete_note_pop");
-
 	return note_list_popmenu;
 }
 
@@ -175,15 +157,6 @@ create_clist_rss_popmenu (struct clist_struct *clist)
 	g_signal_connect ((gpointer) delete_rss_pop, "activate",
 			G_CALLBACK (on_delete_rss_pop_activate),
 			clist);
-
-	/* Store pointers to all widgets, for use by lookup_widget(). */
-	GLADE_HOOKUP_OBJECT_NO_REF (clist_rss_popmenu, clist_rss_popmenu, "clist_rss_popmenu");
-	GLADE_HOOKUP_OBJECT (clist_rss_popmenu, add_rss_pop, "add_rss_pop");
-	GLADE_HOOKUP_OBJECT (clist_rss_popmenu, image_add_rss_pop, "image_add_rss_pop");
-	GLADE_HOOKUP_OBJECT (clist_rss_popmenu, rename_rss_pop, "rename_rss_pop");
-	GLADE_HOOKUP_OBJECT (clist_rss_popmenu, image_rename_rss_pop, "image_rename_rss_pop");
-	GLADE_HOOKUP_OBJECT (clist_rss_popmenu, delete_rss_pop, "delete_rss_pop");
-	GLADE_HOOKUP_OBJECT (clist_rss_popmenu, image_delete_rss_pop, "image_delete_rss_pop");
 
 	return clist_rss_popmenu;
 }

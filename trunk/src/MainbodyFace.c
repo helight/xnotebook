@@ -173,28 +173,7 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
 	g_signal_connect((gpointer) clist_rss,"select_row",
         		G_CALLBACK(clist_rss_get_selection_row),
         		(gpointer *)clist);
-        						
-	GLADE_HOOKUP_OBJECT (main_windown, scrolledwindow_folder, "scrolledwindow_folder");
-	GLADE_HOOKUP_OBJECT (main_windown, main_tab, "main_tab");
-	GLADE_HOOKUP_OBJECT (main_windown, label_folder, "label_folder");
-	GLADE_HOOKUP_OBJECT (main_windown, label_rss, "flabel_rss");
-	GLADE_HOOKUP_OBJECT (main_windown, folder_list, "folder_list");
-	GLADE_HOOKUP_OBJECT (main_windown, scrolledwindow_rss, "scrolledwindow_rss");
-	GLADE_HOOKUP_OBJECT (main_windown, label_folder, "label_folder");
-	GLADE_HOOKUP_OBJECT (main_windown, clist_rss, "clist_rss");
-	GLADE_HOOKUP_OBJECT (main_windown, title_rss, "title_rss");
-	
-	GLADE_HOOKUP_OBJECT (main_windown, label_rss, "label_rss");
-	GLADE_HOOKUP_OBJECT (main_windown, folder_list_title, "folder_list_title");
-	GLADE_HOOKUP_OBJECT (main_windown, vpaned1, "vpaned1");
-	GLADE_HOOKUP_OBJECT (main_windown, alignment6, "alignment6");
-	GLADE_HOOKUP_OBJECT (main_windown, scrolledwindow5, "scrolledwindow5");
-	GLADE_HOOKUP_OBJECT (main_windown, note_list, "note_list");
-	GLADE_HOOKUP_OBJECT (main_windown, note_title, "note_title");
-	GLADE_HOOKUP_OBJECT (main_windown, note_time, "note_time");
-	GLADE_HOOKUP_OBJECT (main_windown, scrolledwindow6, "scrolledwindow6");
-	GLADE_HOOKUP_OBJECT (main_windown, note_text, "note_text");
-	
+ 	
 	clist->buffer = buffer;
 	clist->clist_folder = folder_list;
 	clist->clist_note = note_list;

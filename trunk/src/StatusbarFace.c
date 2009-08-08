@@ -29,10 +29,6 @@ create_status(GtkWidget *main_windown, GtkWidget *vbox,
         gtk_widget_show (status_xnote);
         gtk_box_pack_start (GTK_BOX (hbox_status), status_xnote, FALSE, TRUE, 0);
         
-	GLADE_HOOKUP_OBJECT (main_windown, hbox_status, "hbox_status");
-	GLADE_HOOKUP_OBJECT (main_windown, status_xnote, "status_xnote");
-
-	
 	clist->statusbar.status_xnote = status_xnote;
 	
   return hbox_status;

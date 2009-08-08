@@ -62,14 +62,6 @@ create_main_windown (struct clist_struct *clist)
 	g_signal_connect ((gpointer) main_windown, "delete_event",
 	                  G_CALLBACK (on_main_windown_delete_event),
 	                  NULL);
-
-	/* Store pointers to all widgets, for use by lookup_widget(). */
-	GLADE_HOOKUP_OBJECT_NO_REF (main_windown, main_windown, "main_windown");
-	GLADE_HOOKUP_OBJECT (main_windown, vbox_body, "vbox_body");
-	GLADE_HOOKUP_OBJECT (main_windown, menubar, "menubar");
-	GLADE_HOOKUP_OBJECT (main_windown, toolbar, "toolbar");  
-	GLADE_HOOKUP_OBJECT (main_windown, hpaned, "hpaned");  
-	GLADE_HOOKUP_OBJECT (main_windown, hbox_status, "hbox_status");  
 	
 	gtk_window_add_accel_group (GTK_WINDOW (main_windown), accel_group);
 		
