@@ -153,31 +153,6 @@ create_add_rss_window (struct clist_struct *clist)
 	g_signal_connect ((gpointer) button_cancel, "clicked",
 		G_CALLBACK (on_button_add_rss_cancel_clicked), (gpointer)add_rss_window);
 
-	/* Store pointers to all widgets, for use by lookup_widget(). */
-	GLADE_HOOKUP_OBJECT_NO_REF (add_rss_window, add_rss_window, "add_rss_window");
-	GLADE_HOOKUP_OBJECT (add_rss_window, vbox4, "vbox4");
-	GLADE_HOOKUP_OBJECT (add_rss_window, label_add, "label_add");
-	
-/*	GLADE_HOOKUP_OBJECT (add_rss_window, hbox4, "hbox4");
-	GLADE_HOOKUP_OBJECT (add_rss_window, label_title, "label_title");
-	GLADE_HOOKUP_OBJECT (add_rss_window, entry_title, "entry_title");
-*/
-	GLADE_HOOKUP_OBJECT (add_rss_window, hbox5, "hbox5");
-	GLADE_HOOKUP_OBJECT (add_rss_window, hbox6, "hbox6");
-	GLADE_HOOKUP_OBJECT (add_rss_window, label_url, "label_url");
-	GLADE_HOOKUP_OBJECT (add_rss_window, entry_url, "entry_url");
-	GLADE_HOOKUP_OBJECT (add_rss_window, hbox7, "hbox7");
-	GLADE_HOOKUP_OBJECT (add_rss_window, button_cancel, "button_cancel");
-	GLADE_HOOKUP_OBJECT (add_rss_window, alignment4, "alignment4");
-	GLADE_HOOKUP_OBJECT (add_rss_window, hbox9, "hbox9");
-	GLADE_HOOKUP_OBJECT (add_rss_window, image5, "image5");
-	GLADE_HOOKUP_OBJECT (add_rss_window, label14, "label14");
-	GLADE_HOOKUP_OBJECT (add_rss_window, button_ok, "button_ok");
-	GLADE_HOOKUP_OBJECT (add_rss_window, alignment3, "alignment3");
-	GLADE_HOOKUP_OBJECT (add_rss_window, hbox8, "hbox8");
-	GLADE_HOOKUP_OBJECT (add_rss_window, image4, "image4");
-	GLADE_HOOKUP_OBJECT (add_rss_window, label13, "label13");
-	
 	clist->other.window = add_rss_window;
 	//clist->other.entry_name = entry_title;
 	clist->other.entry_url = entry_url;	

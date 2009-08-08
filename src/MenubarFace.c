@@ -279,38 +279,6 @@ create_menubar(GtkWidget *main_windown,GtkWidget *vbox,
 	              G_CALLBACK (on_about_me_activate),
 	              (gpointer)main_windown);
 
-	  GLADE_HOOKUP_OBJECT (main_windown, menuitem_file, "menuitem_file");
-	  GLADE_HOOKUP_OBJECT (main_windown, menuitem_file, "menuitem_file");
-	  GLADE_HOOKUP_OBJECT (main_windown, new_folder, "new_folder");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_new_folder, "image_new_folder");
-	  GLADE_HOOKUP_OBJECT (main_windown, new_note, "new_note");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_new_note, "image_new_note");
-	  GLADE_HOOKUP_OBJECT (main_windown, save_note, "save_note");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_save, "image_save");
-	  GLADE_HOOKUP_OBJECT (main_windown, separatormenuitem_file, "separatormenuitem_file");
-	  GLADE_HOOKUP_OBJECT (main_windown, quit, "quit");	  
-	  GLADE_HOOKUP_OBJECT (main_windown, menuitem_edit, "menuitem_edit");
-	  GLADE_HOOKUP_OBJECT (main_windown, menu_edit, "menu_edit");
-	  GLADE_HOOKUP_OBJECT (main_windown, edit_note, "edit_note");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_edit, "image_edit");
-	  GLADE_HOOKUP_OBJECT (main_windown, rename_folder, "rename_folder");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_ref, "image_ref");
-	  GLADE_HOOKUP_OBJECT (main_windown, rename_note, "rename_note");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_ren, "image_ren");
-	  GLADE_HOOKUP_OBJECT (main_windown, separatormenuitem_edit, "separatormenuitem_edit");
-	  GLADE_HOOKUP_OBJECT (main_windown, del_folder, "del_folder");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_del_folder, "image_del_folder");
-	  GLADE_HOOKUP_OBJECT (main_windown, del_note, "del_note");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_del_note, "image_del_note");	  	  
-	  GLADE_HOOKUP_OBJECT (main_windown, menuitem_tools, "menuitem_tools");
-	  GLADE_HOOKUP_OBJECT (main_windown, menu_tools, "menu_tools");	  
-	  GLADE_HOOKUP_OBJECT (main_windown, menuitem_about, "menuitem_about");
-	  GLADE_HOOKUP_OBJECT (main_windown, menu_about, "menu_about");
-	  GLADE_HOOKUP_OBJECT (main_windown, calendar_note, "calendar_note");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_calendar, "image_calendar");
-	  GLADE_HOOKUP_OBJECT (main_windown, about_me, "about_me");
-	  GLADE_HOOKUP_OBJECT (main_windown, image_about, "image_about");
-
 	  return menubar;
 }
 

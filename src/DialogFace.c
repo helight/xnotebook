@@ -76,13 +76,7 @@ create_dialog (struct clist_struct *cclist, gchar *titles)
         g_signal_connect ((gpointer) dialog_del, "delete_event",
                           G_CALLBACK (on_dialog_delete_event),
                           (gpointer)cclist);
-        /* Store pointers to all widgets, for use by lookup_widget(). */
-        GLADE_HOOKUP_OBJECT_NO_REF (dialog_del, dialog_del, "dialog_del");
-        GLADE_HOOKUP_OBJECT_NO_REF (dialog_del, dialog_vbox1, "dialog_vbox1");
-        GLADE_HOOKUP_OBJECT (dialog_del, label_note, "label_note");
-        GLADE_HOOKUP_OBJECT_NO_REF (dialog_del, dialog_action_area1, "dialog_action_area1");
-        GLADE_HOOKUP_OBJECT (dialog_del, button_cancel, "button_cancel");
-        GLADE_HOOKUP_OBJECT (dialog_del, button_ok, "button_ok");
+
         cclist->dialog.dialog = dialog_del;
         return dialog_del;
 
