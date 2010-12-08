@@ -8,6 +8,9 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksourcelanguage.h>
+#include <gtksourceview/gtksourcelanguagemanager.h>
 
 /*
  * Standard gettext macros.
@@ -68,7 +71,7 @@ struct clist_struct {
 	gchar		sub_path[128];
 	gchar		rss_file_path[256];
 	gchar		doc_path[256];
-	GtkTextBuffer	*buffer;
+	GtkSourceBuffer	*buffer;
 	gint		folder_num;
 	gint		note_num;
 	gint		is_rss;
@@ -85,6 +88,8 @@ struct clist_struct {
 	struct add_entry other;
 	struct wdialog 	dialog;
 	struct statusbar statusbar;
+
+    GtkSourceLanguageManager *lang_manager;
 };
 
 /*
