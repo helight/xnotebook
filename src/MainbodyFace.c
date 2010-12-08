@@ -17,10 +17,8 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
 		GtkTooltips *tooltips, GtkAccelGroup *accel_group,
 		struct clist_struct *clist)
 {
-	GtkTextBuffer *buffer;
 	PangoFontDescription *fontdesc_folder_list; 
 	PangoFontDescription *fontdesc_note_list;
-	PangoFontDescription *fontdesc_note_text; 
 	
 	GtkWidget *hpaned;
 	GtkWidget *main_tab;
@@ -41,6 +39,10 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
 	GtkWidget *note_time;
 	GtkWidget *scrolledwindow6;
 	GtkWidget *note_text;
+
+	GtkSourceLanguageManager *lang_manager;
+	GtkSourceLanguage *language;
+	GtkSourceBuffer *buffer;
 	
 	hpaned = gtk_hpaned_new ();
 	gtk_widget_show (hpaned);
@@ -141,15 +143,16 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow6), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow6), GTK_SHADOW_IN);
 
-	note_text = gtk_text_view_new ();
+	lang_manager = gtk_source_language_manager_get_default();
+	language = gtk_source_language_manager_get_language(lang_manager, "c");
+	buffer = gtk_source_buffer_new_with_language(language);
+	note_text = gtk_source_view_new_with_buffer(buffer);
+	gtk_source_view_set_auto_indent(GTK_SOURCE_VIEW(note_text), TRUE);
+	gtk_source_view_set_show_line_numbers(GTK_SOURCE_VIEW(note_text), TRUE);
 	gtk_widget_show (note_text);
 	gtk_container_add (GTK_CONTAINER (scrolledwindow6), note_text);	
-	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (note_text));	
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (note_text), TRUE);
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (note_text), GTK_WRAP_WORD);
-        fontdesc_note_text = pango_font_description_from_string("Sans 11"); 
-        gtk_widget_modify_font(note_text, fontdesc_note_text); 
-        pango_font_description_free(fontdesc_note_text); 
 	
 	g_signal_connect ((gpointer) vpaned1, "key_press_event",
 			G_CALLBACK (on_vpaned1_key_press_event),
@@ -174,10 +177,11 @@ create_mainbody(GtkWidget *main_windown, GtkWidget *vbox,
         		G_CALLBACK(clist_rss_get_selection_row),
         		(gpointer *)clist);
  	
-	clist->buffer = buffer;
 	clist->clist_folder = folder_list;
 	clist->clist_note = note_list;
 	clist->note_text = note_text;
+	clist->lang_manager = lang_manager;
+	clist->buffer = buffer;
 	clist->clist_rss = clist_rss;
 	return hpaned;
  }

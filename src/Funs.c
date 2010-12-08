@@ -33,7 +33,7 @@ void show_folders(struct clist_struct *cclist)
 	struct dirent *ptr;
 	debug_p("root_path:%s\n",cclist->root_path);
 opendir:if((dir = opendir(cclist->root_path)) == NULL){
-		perror("cann't open it\n");
+		perror("can't open it\n");
 		switch(errno){
 		case EACCES:
 			perror("Permission denied.\n");
@@ -75,7 +75,7 @@ void show_rss(struct clist_struct *cclist)
 	struct dirent *ptr;
 	debug_p("root_path:%s\n",cclist->rss_path);
 opendir:if((dir = opendir(cclist->rss_path)) == NULL){
-		perror("cann't open it\n");
+		perror("can't open it\n");
 		switch(errno){
 		case EACCES:
 			perror("Permission denied.\n");
@@ -119,7 +119,7 @@ void show_rss_item(struct clist_struct *cclist)
 	struct stat stat;
 	
 	if((dir = opendir(cclist->rss_path)) == NULL){
-		printf("cann't open it\n");
+		printf("can't open it\n");
 		return;
 	}	
 	row = cclist->rss_row;	
@@ -176,7 +176,7 @@ void show_notes(struct clist_struct *cclist)
 	struct stat stat;
 	
 	if((dir = opendir(cclist->root_path)) == NULL){
-		printf("cann't open it\n");
+		printf("can't open it\n");
 		return;
 	}	
 	row = cclist->folder_row;	
@@ -194,7 +194,7 @@ void show_notes(struct clist_struct *cclist)
 	closedir(dir);
 		
 	if((dir = opendir(cclist->sub_path)) == NULL){
-		printf("cann't open it\n");
+		printf("can't open it\n");
 		return;
 	}	
 	gtk_clist_clear(GTK_CLIST(cclist->clist_note));	
@@ -245,9 +245,12 @@ void show_file(struct clist_struct *cclist)
 	DIR *dir;
 	struct dirent *ptr;
 	struct stat stat;
+	GtkSourceLanguage *lang;
+	gchar *content_type;
+	gboolean result_uncertain;
 	
 	if((dir = opendir(cclist->sub_path)) == NULL){
-		perror("cann't opendir\n");
+		perror("can't opendir\n");
 		return;
 	}	
 	row = cclist->note_row;	
@@ -276,7 +279,17 @@ void show_file(struct clist_struct *cclist)
 		while ((buff[i] = fgetc(fd)) != EOF)
 			i++;
 		buff[i]='\0';
-        gtk_text_buffer_set_text (GTK_TEXT_BUFFER(cclist->buffer), _(buff), -1);
+
+		content_type = g_content_type_guess(file_path, NULL, 0, &result_uncertain);
+		lang = gtk_source_language_manager_guess_language(cclist->lang_manager, file_path, content_type);
+		g_free(content_type);
+		if (lang == NULL) {
+			lang = gtk_source_language_manager_get_language(cclist->lang_manager, "c");
+			debug_p("use default language: C\n");
+		}
+		debug_p("lang: %s (%s)\n", gtk_source_language_get_name(lang), gtk_source_language_get_id(lang));
+		gtk_source_buffer_set_language(cclist->buffer, lang);
+		gtk_text_buffer_set_text (GTK_TEXT_BUFFER(cclist->buffer), _(buff), -1);
 		fclose(fd);
 	}
 	if(gtk_text_view_get_editable (GTK_TEXT_VIEW (cclist->note_text)))
@@ -294,28 +307,37 @@ void show_file(struct clist_struct *cclist)
 	return;	
 }
 
-gboolean enable_edit(struct clist_struct *cclist)
+gboolean set_edit_enable(struct clist_struct *cclist, gboolean value)
 {
 	gchar msg[512];
 	struct stat stat;
 	
+	if (value == get_edit_enabled(cclist)) {
+		return TRUE;
+	}
+
 	if(cclist->note_row >= 0){
 		if(lstat(cclist->doc_path, &stat) == -1){
 			perror("stat:");
 			return;
 		}
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), TRUE);
+		gtk_text_view_set_editable (GTK_TEXT_VIEW (cclist->note_text), value);
 		
 		memset(msg, '\0', sizeof(msg));
-		g_snprintf(msg, sizeof(msg), "Folder: %d --- Total Note: %d --- Note: %s --- Size: %6d bytes --- Editable", 
-		cclist->folder_num, cclist->note_num, cclist->doc_path + strlen(cclist->sub_path) + 1, stat.st_size);
+		g_snprintf(msg, sizeof(msg), "Folder: %d --- Total Note: %d --- Note: %s --- Size: %6d bytes --- %s", 
+		cclist->folder_num, cclist->note_num, cclist->doc_path + strlen(cclist->sub_path) + 1, stat.st_size, value ? "Editable" : "Can't Edit: Locked");
 		show_status(cclist->statusbar.status_xnote, msg);
-				
+
 		debug_p("enable edit\n");		
 		return TRUE;
 	}
 	
 	return FALSE;
+}
+
+gboolean get_edit_enabled(struct clist_struct *cclist)
+{
+	return gtk_text_view_get_editable(GTK_TEXT_VIEW (cclist->note_text));
 }
 
 void show_status(GtkWidget *statusbar, gchar *msg)
@@ -344,7 +366,7 @@ void add_folder_or_note(struct clist_struct *cclist)
 				snprintf(creat_name, sizeof(creat_name), "%s/%s",
 				 cclist->sub_path, fp);
 			} else {
-				strcpy(msg, "Cann't creat....");
+				strcpy(msg, "Can't creat....");
 				goto out;
 				return;
 			}
@@ -352,7 +374,7 @@ void add_folder_or_note(struct clist_struct *cclist)
 		if(cclist->creat == FOLDER){
 			if(mkdir(creat_name, 0755) < 0){
 				perror("mkdir:\n");
-				strcpy(msg, "Cann't Creat Folder....");
+				strcpy(msg, "Can't Creat Folder....");
 				goto out;
 			}
 			gtk_clist_clear(GTK_CLIST(cclist->clist_folder));	
@@ -364,7 +386,7 @@ void add_folder_or_note(struct clist_struct *cclist)
 			int fd = 0;
 			if ((fd = open(creat_name, O_CREAT, 0644)) < 0){
 				perror("open:");
-				strcpy(msg, "Cann't Creat NoteFile....");
+				strcpy(msg, "Can't Creat NoteFile....");
 				close(fd);
 				goto out;
 			}
@@ -373,7 +395,8 @@ void add_folder_or_note(struct clist_struct *cclist)
 			show_notes(cclist);
 		}
 		strcpy(msg, "Add OK");
-out:		message_box_for_add_folder(cclist->other.window,msg);
+out:
+		message_box_for_add_folder(cclist->other.window,msg);
 		debug_p("root_path:%s \n", creat_name);	
 		gtk_widget_destroy(GTK_WIDGET(cclist->other.window));
 		cclist->other.window = NULL;
@@ -427,7 +450,7 @@ void rename_folder_or_note(struct clist_struct *cclist)
 				show_notes(cclist);
 				strcpy(msg, "Reame OK");
 			} else {
-				strcpy(msg, "Cann't Rename....");
+				strcpy(msg, "Can't Rename....");
 			}
 		message_box_for_add_folder(cclist->other.window,msg);
 		debug_p("root_path:%s \n", creat_name);	
@@ -504,13 +527,18 @@ void save_note(struct clist_struct *cclist)
 	//int fd = 0;
 	FILE *fd = NULL;
 
+	if (cclist == NULL || cclist->doc_path == NULL || cclist->doc_path[0] == '\0') {
+		g_print("some thing is wrong in %s()?\n", __func__);
+		return;
+	}
+
 	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER(cclist->buffer), 
-        					&start, &end);
+							&start, &end);
 	text = gtk_text_buffer_get_text(GTK_TEXT_BUFFER(cclist->buffer), 
-    						&start,&end,FALSE);
+							&start,&end,FALSE);
 	if((fd = fopen(cclist->doc_path, "w")) == NULL)
 		perror("open\n");
-    	
+
 	len = strlen(text);
 	debug_p("save:%s len :%d\n", text, len);
 	//printf("save:%s len :%d\n", text, len);
@@ -518,4 +546,6 @@ void save_note(struct clist_struct *cclist)
 		perror("fweite:");
  
 	fclose(fd);
+
+	set_edit_enable(cclist, FALSE);
 }

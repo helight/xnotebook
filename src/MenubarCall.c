@@ -70,7 +70,7 @@ on_edit_note_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
 	struct clist_struct *cclist = (struct clist_struct *)user_data;
 	
-	enable_edit(cclist);
+	set_edit_enable(cclist, TRUE);
 	return;
 }
 

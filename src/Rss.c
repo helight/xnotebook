@@ -45,7 +45,7 @@ void init_rss(struct clist_struct *clist)
 	struct dirent *ptr;
 	debug_p("root_path:%s\n",clist->rss_path);
 opendir:if((dir = opendir(clist->rss_path)) == NULL){
-		perror("cann't open it\n");
+		perror("can't open it\n");
 		switch(errno){
 		case EACCES:
 			perror("Permission denied.\n");

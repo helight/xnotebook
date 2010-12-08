@@ -35,4 +35,4 @@ static inline void debug_p(const char * format, ...)
 #endif
 
 
-#endif /* TOOLBAR_H_ */
+#endif /* DEBUG_H_ */
