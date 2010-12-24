@@ -47,7 +47,7 @@ create_about_xnote (GtkWidget *main_window)
 	gtk_widget_show (image6);
 	gtk_box_pack_start (GTK_BOX (vbox5), image6, TRUE, TRUE, 0);
 
-	label15 = gtk_label_new (_("<b>Xnotebook (0.06)</b>"));
+	label15 = gtk_label_new (_("<b>Xnotebook (0.08)</b>"));
 	gtk_widget_show (label15);
 	gtk_box_pack_start (GTK_BOX (vbox5), label15, FALSE, FALSE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (label15), TRUE);
