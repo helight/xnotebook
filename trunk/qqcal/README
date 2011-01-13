@@ -1,0 +1,5 @@
+create tables:
+create table xcal(id integer primary key, event text, moreinfo text, fin integer, rtime time, xdate date, xtime timestamp);
+
+insert tables:
+insert into xcal (fin, event, moreinfo, rtime, xdate, xtime) values(1, 'xcalendar v0.01', 'v0.01', '12:50', '20100817', '12:30');
